@@ -1,3 +1,3 @@
 # Código
 
-En esta carpeta se incluirá el código utilizado para el proyecto.
+En esta carpeta se incluye el código utilizado para el proyecto.
