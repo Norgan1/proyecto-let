@@ -2,6 +2,8 @@
 title: "Análisis Exploratorio de las mejores 1000 películas/series según IMBD"
 format: html
 editor: visual
+theme: darkly
+toc: true
 ---
 
 ## Introducción
@@ -22,4 +24,4 @@ El análisis tiene como enfoque resolver principalmente las siguientes preguntas
 
 Las preguntas anteriores tienen el objetivo principal de darnos a entender de mejor forma que cosas nosotros como espectadores valoramos más en las películas/series que vemos, lo cual puede llevarnos a comprender cómo los creadores de las películas y series se aprovechan de esto para obtener mejores calificaciones y/o ganancias.
 
-Para lo anterior, se comenzará con una descripción de las variables a utilizar en el proyecto para ya luego ir resolviendo las preguntas establecidas a través del análisis de gráficos y variables, y así presentar los resultados y conclusiones obtenidas correspondientes. Se finalizará con una conclusión, donde se discutirá como los creadores de películas/series pueden aprovecharse del comportamiento de los espectadores para obtener mejores resultados en términos de calificaciones y/o ganancias.
+Se comenzará con una descripción de las variables a utilizar en el proyecto para ya luego ir resolviendo las preguntas establecidas a través del análisis de gráficos y variables, y así presentar los resultados y conclusiones obtenidas correspondientes. Se finalizará con una conclusión, donde se discutirá como los creadores de películas/series pueden aprovecharse del comportamiento de los espectadores para obtener mejores resultados en términos de calificaciones y/o ganancias.
