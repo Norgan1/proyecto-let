@@ -14,14 +14,146 @@ IMBD corresponde a una página web principalmente de películas y series, donde 
 
 El análisis tiene como enfoque resolver principalmente las siguientes preguntas:
 
--   ¿Qué género es mas popular en términos de ganancias?
+-   ¿Cómo han ido variando las ganancias a través de las décadas?
 
--   ¿Existe alguna relación entre la ganancia y la calificación?
+-   ¿Cómo han ido variando la duración a través de las décadas?
 
--   ¿Son las películas/series mas antiguas las que tienen mejor calificación?
+-   ¿Son las películas más antiguas las que tienen mejor calificación?
 
--   Las películas/series con mejor calificación ¿tienen en general menor número de votos?
+-   ¿Qué géneros son los mas populares a través de las décadas?
 
 Las preguntas anteriores tienen el objetivo principal de darnos a entender de mejor forma que cosas nosotros como espectadores valoramos más en las películas/series que vemos, lo cual puede llevarnos a comprender cómo los creadores de las películas y series se aprovechan de esto para obtener mejores calificaciones y/o ganancias.
 
 Se comenzará con una descripción de las variables a utilizar en el proyecto para ya luego ir resolviendo las preguntas establecidas a través del análisis de gráficos y variables, y así presentar los resultados y conclusiones obtenidas correspondientes. Se finalizará con una conclusión, donde se discutirá como los creadores de películas/series pueden aprovecharse del comportamiento de los espectadores para obtener mejores resultados en términos de calificaciones y/o ganancias.
+
+## Descripción de las variables
+
+Las variables a utilizar en el reporte son las siguientes:
+
+| Variable          | Tipo     | Descripción                                                          |
+|----------------|----------------|-----------------------------------------|
+| `Nombre_serie`    | caracter | Nombre de la película                                                |
+| `Año_lanzamiento` | numérica | Año de lanzamiento de la película                                    |
+| `Duracion`        | numérica | Duración en minutos de la película                                   |
+| `Genero`          | caracter | Género de la película                                                |
+| `IMBD_Rating`     | numérica | Calificación o "rating" de la película recibida en el sitio web IMBD |
+| `Director`        | caracter | Director de la película                                              |
+| `Actor_1`         | caracter | Actor principal de la película                                       |
+| `Numero_de_votos` | numérica | Número de personas que calificaron la película                       |
+| `Ganancias`       | numérica | Dinero recaudado por la película en dólares                          |
+
+## Análisis Exploratorio
+
+### Análisis a través de las décadas
+
+Ya que contamos con los años de lanzamiento de las películas, un buen punto de partida para este análisis exploratorio es ver como han variado las ganancias, duración y rating promedio a través del tiempo. Empezaremos con las ganancias, la cual se muestra en la figura 1. Hay que tener en consideración que para este gráfico en específico no se tomo en cuenta el año 2020 ya que en la base de datos las ganancias no se registraron.
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(scales)
+library(here)
+data = read_csv(here("datos/datos-sin-procesar/imdb_top_1000.csv"))
+
+
+### Limpiamos la base de datos ###
+
+# Eliminamos columnas sin utilizar.
+data = data[c(-1,-4,-8,-9,-12,-13,-14)]
+
+# Runtime es caracter, lo cambiamos a numérico. 
+data$Runtime = as.numeric(strsplit(data$Runtime,split = " min"))
+
+# Cambio de nombre de las columnas a español.
+colnames(data) = c("Nombre_serie","Año_lanzamiento","Duracion","Genero","IMBD_Rating","Director",
+                   "Actor_1", "Numero_de_votos", "Ganancias")
+
+# Cambiamos "PG" por 1995, año de lanzamiento de la película. Hacemos numérica la variable.
+data$Año_lanzamiento[data$Año_lanzamiento=="PG"] = 1995
+data$Año_lanzamiento = as.numeric(data$Año_lanzamiento)
+
+ data_decada_grossmean = data %>% 
+  mutate(decada = floor(Año_lanzamiento/10)*10) %>% 
+  group_by(decada) %>% 
+  summarise(mean(Ganancias,na.rm = TRUE)) 
+
+data_decada_grossmean = data_decada_grossmean[-11,]
+
+# Creamos el gráfico y guardamos el tema personalizado
+my_theme = theme(panel.background = element_rect(fill = "#121212"),
+                 plot.background = element_rect(fill = "#121212"),
+                 panel.grid.major = element_blank(),panel.grid.minor = element_blank(),
+                 title = element_text(color = "white"), axis.line = element_line(color="white"),
+                 axis.text = element_text(color = "white"), axis.ticks = element_blank())
+ 
+ggplot(data_decada_grossmean,aes(decada,
+                                 round(`mean(Ganancias, na.rm = TRUE)`),4)) +
+  geom_bar(stat = "identity") + 
+  geom_col(fill = "#f5c518")+
+  geom_text(aes(label = label_number_si()(`mean(Ganancias, na.rm = TRUE)`)),
+            vjust = -0.5,
+            color = "white",
+            fontface = "bold")+
+  scale_x_continuous(breaks = seq(1920,2020,10))+
+  scale_y_continuous(labels = label_number_si())+
+  labs(title = "Figura 1.Ganancia media por década",
+         subtitle = "(1920-2010)",
+         x = NULL, y = "Ganancia media en millones de dólares")+
+  my_theme
+
+
+
+```
+
+Tal y como vemos en la figura 1, notamos que en general a medida que han pasado las décadas las ganancias han aumentado considerablemente, especialmente si notamos que de la década del 1920 al 2010 las ganancias han aumentado casi 100 veces mas. También podemos ver que de 1920 a 1930 existe un gran salto en las ganancias, para luego en 1940 decaer nuevamente. Cabe mencionar que las ganancias de estos años pueden estar mal representadas ya que estamos hablando de películas de hace bastante tiempo por lo cual no se tienen sus ganancias exactas o simplemente no se registraron en la base de datos.
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+# Esto crea duración media por décadas.
+data_decada_duracion = data %>% 
+  mutate(decada = floor(Año_lanzamiento/10)*10) %>% 
+  group_by(decada) %>% 
+  summarise(mean(Duracion,na.rm = TRUE))
+
+colnames(data_decada_duracion) = c("decada","duracion") # Cambio de nombres a las columnas.
+
+# Creamos el gráfico.
+ggplot(data_decada_duracion,aes(x = decada ,y = duracion ))+
+  geom_bar(stat = "identity")+
+  geom_col(fill = "#f5c518")+
+  geom_text(aes(label = round(duracion)), vjust = -0.5, color = "white", fontface = "bold")+
+  scale_x_continuous(breaks = seq(1920,2020,10))+
+  labs(title = "Duración media por década", subtitle = "(1920 - 2020)",
+       x = NULL, y = "Duración media en minutos")+
+  my_theme
+```
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+# Esto crea rating medio por décadas.
+data_decada_rating = data %>% 
+  mutate(decada = floor(Año_lanzamiento/10)*10) %>% 
+  group_by(decada) %>% 
+  summarise(mean(IMBD_Rating,na.rm = TRUE)) 
+
+colnames(data_decada_rating) = c("decada","rating") # Cambio de nombres a las columnas.
+
+# Creamos el gráfico.
+ggplot(data_decada_rating,aes(x = decada ,y = rating ))+
+  geom_line(color = "#f5c518", size = 1.5 )+
+  geom_point(color = "white", size = 1.7)+
+  geom_text(aes(label = round(rating,2)), vjust = -1.5, color = "white", fontface = "bold")+
+  scale_x_continuous(breaks = seq(1920,2020,10))+
+  ylim(7.3,8.5)+
+  labs(title = "Rating medio por década", subtitle = "(1920 - 2020)",
+       x = NULL, y = "Rating medio")+
+  my_theme
+```
