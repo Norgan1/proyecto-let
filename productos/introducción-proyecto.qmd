@@ -111,6 +111,8 @@ ggplot(data_decada_grossmean,aes(decada,
 
 Tal y como vemos en la figura 1, notamos que en general a medida que han pasado las décadas las ganancias han aumentado considerablemente, especialmente si notamos que de la década del 1920 al 2010 las ganancias han aumentado casi 100 veces mas. También podemos ver que de 1920 a 1930 existe un gran salto en las ganancias, para luego en 1940 decaer nuevamente. Cabe mencionar que las ganancias de estos años pueden estar mal representadas ya que estamos hablando de películas de hace bastante tiempo por lo cual no se tienen sus ganancias exactas o simplemente no se registraron en la base de datos.
 
+*\*Los siguientes gráficos están en progreso de ser comentados:*
+
 ```{r}
 #| echo: false
 #| message: false
