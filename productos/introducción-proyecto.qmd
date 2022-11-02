@@ -31,7 +31,7 @@ Se comenzará con una descripción de las variables a utilizar en el proyecto pa
 Las variables a utilizar en el reporte son las siguientes:
 
 | Variable          | Tipo     | Descripción                                                          |
-|----------------|----------------|-----------------------------------------|
+|-------------------|----------|----------------------------------------------------------------------|
 | `Nombre_serie`    | caracter | Nombre de la película                                                |
 | `Año_lanzamiento` | numérica | Año de lanzamiento de la película                                    |
 | `Duracion`        | numérica | Duración en minutos de la película                                   |
