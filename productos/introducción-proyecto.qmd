@@ -20,7 +20,7 @@ El análisis tiene como enfoque resolver principalmente las siguientes preguntas
 
 -   ¿Son las películas más antiguas las que tienen mejor calificación?
 
--   ¿Qué géneros son los mas populares a través de las décadas?
+-   ¿Qué géneros son los más populares a través de las décadas?
 
 Las preguntas anteriores tienen el objetivo principal de darnos a entender de mejor forma que cosas nosotros como espectadores valoramos más en las películas/series que vemos, lo cual puede llevarnos a comprender cómo los creadores de las películas y series se aprovechan de esto para obtener mejores calificaciones y/o ganancias.
 
@@ -31,7 +31,7 @@ Se comenzará con una descripción de las variables a utilizar en el proyecto pa
 Las variables a utilizar en el reporte son las siguientes:
 
 | Variable          | Tipo     | Descripción                                                          |
-|-------------------|----------|----------------------------------------------------------------------|
+|--------------|--------------|---------------------------------------------|
 | `Nombre_serie`    | caracter | Nombre de la película                                                |
 | `Año_lanzamiento` | numérica | Año de lanzamiento de la película                                    |
 | `Duracion`        | numérica | Duración en minutos de la película                                   |
