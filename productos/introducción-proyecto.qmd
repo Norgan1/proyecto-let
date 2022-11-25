@@ -166,7 +166,7 @@ ggplot(data_decada_duracion,aes(x = decada ,y = duracion ))+
   my_theme
 ```
 
-Como vemos en la @fig-duracion-decada
+De la @fig-duracion-decada
 
 ```{r}
 #| echo: false
