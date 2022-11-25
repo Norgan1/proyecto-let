@@ -5,7 +5,6 @@ library(scales)
 library(gt)
 data = read_csv("datos/datos-sin-procesar/imdb_top_1000.csv")
 
-
 ### Limpiamos la base de datos ###
 
 # Eliminamos columnas sin utilizar.
@@ -102,6 +101,7 @@ ggplot(data_decada_duracion,aes(x = decada ,y = duracion ))+
        x = NULL, y = "Duración media en minutos")+
   my_theme
 
+
 # Esto crea número de votos medio por décadas
 
 data_decada_votos = data |> 
@@ -123,9 +123,12 @@ ggplot(data_decada_votos,aes(x = decada ,y = numero_de_votos))+
   my_theme
 
 
-  
+# Creación de gráfico de correlación con ganancias y votos
 
-
+ggplot(data = data, aes(data$Ganancias,data$Numero_de_votos,col = data$Genero))+
+  geom_point()+
+  scale_x_continuous(labels = label_number_si())+
+  my_theme
 
 
 
@@ -137,9 +140,10 @@ data_decada_genero = data %>%
   group_by(decada) %>% 
   count(Genero) |>
   slice_max(n) |> 
+  ungroup() |> 
   gt() |>
   tab_header(title = "Géneros más repetidos por década", subtitle = "(1920 - 2020)") |> 
-  cols_label(Genero = "Género", n = "Conteo") |>
+  cols_label(Genero = "Género", n = "Conteo", decada = "Década") |>
   tab_footnote(footnote = "Notar que la poca cantidad de géneros contados en 2020 es debido
                a la pandemia que afectó a la producción de películas",
                locations = cells_body(columns = Genero,rows = 12:13))|> 
@@ -173,7 +177,7 @@ gt(gan_rating_por_genero) |>
                locations = cells_body(columns = ganancia_media,rows = 9)) |> 
   tab_options(table.background.color = "#121212")
 
-# Dos películas en fantasía del año 1920 y 1922 (datos muy antiguos como para recolectar ganacias)
+# Dos películas en fantasía del año 1920 y 1922 (datos muy antiguos como para recolectar ganancias)
 
 # Rellenar filas de  Drama y Accion con color: #f5c518
 

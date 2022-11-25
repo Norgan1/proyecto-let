@@ -1,66 +1,79 @@
 ---
-title: "Análisis Exploratorio de las mejores 1000 películas/series según IMBD"
-format: html
+title: "Análisis exploratorio de las mejores 1000 películas según IMBD"
+format: html 
 editor: visual
 theme: darkly
 toc: true
+lang: es
 ---
 
 ## Introducción
 
-En tiempos de pandemia, cuando todo el mundo se encontraba bajo confinamiento para prevenir contagios, para muchas empresas esto significó pérdidas masivas pero una de las pocas que lograron generar ganancias récord fueron los servicios de streaming que, según datos de Motion Picture Association, lograron superar un billón de suscripciones, la cual se transformó como una de las principales fuentes de entretenimiento durante el covid-19.
+En tiempos de pandemia, debido a que todo el mundo se encontraba bajo confinamiento para prevenir contagios, muchas empresas sufrieron pérdidas masivas debido a la imposibilidad de trabajar con normalidad. Sin embargo existieron rubros que lograron generar ganancias récord, sobre todo aquellas que se convirtieron en las principales fuentes de entretenimiento durante el covid-19 como lo fueron los servicios de streaming. Según datos de Motion Picture Association, lograron superar un billón de suscripciones.
 
-A raíz de lo anterior, fueron que páginas como IMBD servían como principal fuente de búsqueda de películas o series para pasar nuestro aburrimiento encerrados en la casa, pero primero que todo ¿Qué es IMBD?
+A raíz de lo anterior, fueron que páginas como Internet Movie Database (IMBD) servían como principal fuente de búsqueda de películas o series para pasar nuestro aburrimiento encerrados en la casa, pero primero que todo ¿Qué es IMBD?
 
-IMBD corresponde a una página web principalmente de películas y series, donde la principal característica de esta es poder ver la calificación de estas, donde tanto los críticos profesionales como cualquier persona le pueden dar una nota del 1 al 10 para luego obtener el promedio de las calificaciones. También existen otros apartados como poder ver la trama, el elenco, reseñas de los usuarios y críticos, el equipo de producción y entre otros.
-
-En este proyecto se analizarán las mejores 1000 películas según IMBD, donde algunas variables de interés serán el género, ganancias, año de lanzamiento, número de votos, calificación, entre otros.
+En este proyecto se analizarán las mejores mil películas según IMBD, donde algunas variables de interés serán el género, ganancias, año de lanzamiento, número de votos, calificación, entre otros.
 
 El análisis tiene como enfoque resolver principalmente las siguientes preguntas:
 
 -   ¿Cómo han ido variando las ganancias a través de las décadas?
 
--   ¿Cómo han ido variando la duración a través de las décadas?
+-   ¿Cómo a ido variando la duración a través de las décadas?
 
 -   ¿Son las películas más antiguas las que tienen mejor calificación?
 
 -   ¿Qué géneros son los más populares a través de las décadas?
 
-Las preguntas anteriores tienen el objetivo principal de darnos a entender de mejor forma como han ido variando ciertos elementos de las películas a través de las décadas, ver si existe algún patrón que se mantiene durante el tiempo y obtener interesantes conclusiones a tráves de estas.
+Las preguntas anteriores tienen el objetivo principal de darnos a entender de mejor forma cómo han ido variando ciertos elementos de las películas a través de las décadas, ver si existe algún patrón que se mantiene durante el tiempo y obtener interesantes conclusiones a través de las décadas.
 
-Se comenzará con una descripción de las variables a utilizar en el proyecto para ya luego ir resolviendo las preguntas establecidas a través del análisis de gráficos y variables, y así presentar los resultados y conclusiones obtenidas correspondientes. Se finalizará con una conclusión resumiendo a grandes rasgos los resultados obtenidos durante el reporte.
+Se comenzará con una descripción de las variables a utilizar en el proyecto para ya luego ir resolviendo las preguntas establecidas a través del análisis de gráficos y tablas, y así presentar los resultados obtenidos. Se finalizará con una conclusión destacando los principales patrones encontrados.
 
-## Descripción de las variables
+## La base de datos de IMBD
+
+IMBD corresponde a una página web principalmente de películas y series, donde la principal característica de es poder ver la calificación de estas, donde tanto los críticos profesionales como cualquier persona le pueden dar una nota del 1 al 10 para luego obtener el promedio de las calificaciones. También existen otros apartados como poder ver la trama, el elenco, reseñas de los usuarios y críticos, el equipo de producción, entre otros.
+
+La base de datos a utilizar corresponde a las mejores mil películas de IMBD, la cual fue obtenida del sitio web Kaggle [\[Base de datos\]](https://www.kaggle.com/datasets/harshitshankhdhar/imdb-dataset-of-top-1000-movies-and-tv-shows) e incluye datos hasta el 2020. Antes de comenzar con el análisis exploratorio es importante hacer un preprocesamiento a la base de datos, para trabajar con las variables de nuestro interés y ver si existen datos extraños, NAs, hacer cambios a la base para nuestra comodidad, etc.
+
+### Preprocesamiento
+
+Lo primero que vamos a hacer es eliminar todas las variables que no son de nuestro interés, en nuestro caso serían: `Poster_Link`, `Certificate`, `Overview` y `Metascore` . Luego la variable `Runtime` es de tipo caracter ya que en la base de datos viene de la forma "89 min", "100 min","120 min", etc, por lo que eliminamos la palabra "min" para ya luego transformar la variable a numérica. Lo siguiente es cambiar el nombre de las variables del inglés al español para facilitar la comprensión de las variables.
+
+Existe también una película que esta etiquetada como "PG" en su año de lanzamiento, por lo que buscamos el año de lanzamiento en Google de la película y reemplazamos "PG" por 1995. Por último para la variable `Genero` tenemos películas que se agrupan de la forma "Action, Drama, Crime" o "Drama, Action". Para estos casos, donde existen mas de dos géneros que identifican a una película, tomamos el primer género del lado izquierdo es decir en el caso de "Action, Drama, Crime" tomamos solo "Action" y en el caso de "Drama, Action" tomamos solo "Drama".
 
 Las variables a utilizar en el reporte son las siguientes:
 
-| Variable          | Tipo     | Descripción                                                          |
-|----------------|----------------|-----------------------------------------|
-| `Nombre_serie`    | caracter | Nombre de la película                                                |
-| `Año_lanzamiento` | numérica | Año de lanzamiento de la película                                    |
-| `Duracion`        | numérica | Duración en minutos de la película                                   |
-| `Genero`          | caracter | Género de la película                                                |
-| `IMBD_Rating`     | numérica | Calificación o "rating" de la película recibida en el sitio web IMBD |
-| `Director`        | caracter | Director de la película                                              |
-| `Actor_1`         | caracter | Actor principal de la película                                       |
-| `Numero_de_votos` | numérica | Número de personas que calificaron la película                       |
-| `Ganancias`       | numérica | Dinero recaudado por la película en dólares                          |
+| Variable          | Tipo     | Descripción                                                                             |
+|------------------------|------------------------|------------------------|
+| `Nombre_pelicula` | caracter | Nombre de la película                                                                   |
+| `Año_lanzamiento` | numérica | Año de lanzamiento de la película                                                       |
+| `Duracion`        | numérica | Duración en minutos de la película                                                      |
+| `Genero`          | caracter | Género de la película                                                                   |
+| `IMBD_Rating`     | numérica | Calificación o "rating" de la película recibida en el sitio web IMBD (nota del 1 al 10) |
+| `Director`        | caracter | Director de la película                                                                 |
+| `Actor_1`         | caracter | Actor principal de la película                                                          |
+| `Numero_de_votos` | numérica | Número de personas que calificaron la película                                          |
+| `Ganancias`       | numérica | Dinero recaudado por la película en dólares sin ajustar por inflación                   |
 
 ## Análisis Exploratorio
 
 ### Análisis a través de las décadas
 
-Ya que contamos con los años de lanzamiento de las películas, un buen punto de partida para este análisis exploratorio es ver como han variado las ganancias, duración y rating promedio a través del tiempo. Empezaremos con las ganancias, la cual se muestra en la figura 1. Hay que tener en consideración que para este gráfico en específico no se tomo en cuenta el año 2020 ya que en la base de datos las ganancias no se registraron.
+Ya que contamos con los años de lanzamiento de las películas, un buen punto de partida para este análisis exploratorio es ver cómo han variado las ganancias, la duración y el rating promedio a través del tiempo agrupando los años en décadas. Empezaremos con las ganancias, que se muestra en la @fig-ganancia-decada. Hay que tener en consideración que para este gráfico en específico se toma en consideración solo hasta la década del 2010 (es decir de 2010 a 2019) ya que para las películas del año 2020 no se registraron sus ganancias.
 
 ```{r}
 #| echo: false
 #| message: false
 #| warning: false
+#| fig-cap: "Ganancia media por década (1920-2010)"
+#| label: fig-ganancia-decada
+
 library(readr)
 library(dplyr)
 library(ggplot2)
 library(scales)
 library(here)
+library(gt)
 data = read_csv(here("datos/datos-sin-procesar/imdb_top_1000.csv"))
 
 
@@ -73,12 +86,23 @@ data = data[c(-1,-4,-8,-9,-12,-13,-14)]
 data$Runtime = as.numeric(strsplit(data$Runtime,split = " min"))
 
 # Cambio de nombre de las columnas a español.
-colnames(data) = c("Nombre_serie","Año_lanzamiento","Duracion","Genero","IMBD_Rating","Director",
+colnames(data) = c("Nombre_pelicula","Año_lanzamiento","Duracion","Genero","IMBD_Rating","Director",
                    "Actor_1", "Numero_de_votos", "Ganancias")
 
 # Cambiamos "PG" por 1995, año de lanzamiento de la película. Hacemos numérica la variable.
 data$Año_lanzamiento[data$Año_lanzamiento=="PG"] = 1995
 data$Año_lanzamiento = as.numeric(data$Año_lanzamiento)
+
+# Género 
+a = strsplit(data$Genero,split = ",")
+d = c()
+for(i in 1:1000){
+  d = append(d,a[[i]][1])
+  
+}
+
+data$Genero = d # Ahora tenemos un género por película en vez de varios géneros
+
 
  data_decada_grossmean = data %>% 
   mutate(decada = floor(Año_lanzamiento/10)*10) %>% 
@@ -93,7 +117,7 @@ my_theme = theme(panel.background = element_rect(fill = "#121212"),
                  panel.grid.major = element_blank(),panel.grid.minor = element_blank(),
                  title = element_text(color = "white"), axis.line = element_line(color="white"),
                  axis.text = element_text(color = "white"), axis.ticks = element_blank())
- 
+
 ggplot(data_decada_grossmean,aes(decada,
                                  round(`mean(Ganancias, na.rm = TRUE)`),4)) +
   geom_bar(stat = "identity") + 
@@ -104,7 +128,7 @@ ggplot(data_decada_grossmean,aes(decada,
             fontface = "bold")+
   scale_x_continuous(breaks = seq(1920,2020,10))+
   scale_y_continuous(labels = label_number_si())+
-  labs(title = "Figura 1.Ganancia media por década",
+  labs(title = "Ganancia media por década",
          subtitle = "(1920-2010)",
          x = NULL, y = "Ganancia media en millones de dólares")+
   my_theme
@@ -113,7 +137,7 @@ ggplot(data_decada_grossmean,aes(decada,
 
 ```
 
-Tal y como vemos en la figura 1, notamos que en general a medida que han pasado las décadas las ganancias han aumentado considerablemente, especialmente si notamos que de la década del 1920 al 2010 las ganancias han aumentado casi 100 veces mas. También podemos ver que de 1920 a 1930 existe un gran salto en las ganancias, para luego en 1940 decaer nuevamente. Cabe mencionar que las ganancias de estos años pueden estar mal representadas ya que estamos hablando de películas de hace bastante tiempo por lo cual no se tienen sus ganancias exactas o simplemente no se registraron en la base de datos.
+Tal y como vemos en la @fig-ganancia-decada, notamos que en general a medida que han pasado las décadas las ganancias han aumentado considerablemente, especialmente si notamos que de la década del 1920 al 2010 las ganancias han aumentado casi 100 veces mas. También podemos ver que de 1920 a 1930 existe un gran salto en las ganancias, para luego en 1940 decaer nuevamente. Cabe mencionar que las ganancias de estos años pueden estar mal representadas ya que estamos hablando de películas de hace bastante tiempo por lo cual no se tienen sus ganancias exactas o simplemente no se registraron en la base de datos. Otra posibilidad es que durante estas décadas ocurrieron dos guerras mundiales lo cual pudo haber afectado a la producción de películas y las ganancias obtenidas.
 
 *\*Los siguientes gráficos están en progreso de ser comentados:*
 
@@ -121,6 +145,8 @@ Tal y como vemos en la figura 1, notamos que en general a medida que han pasado 
 #| echo: false
 #| message: false
 #| warning: false
+#| fig-cap: "Duración media por década (1920-2020)"
+#| label: fig-duracion-decada
 # Esto crea duración media por décadas.
 data_decada_duracion = data %>% 
   mutate(decada = floor(Año_lanzamiento/10)*10) %>% 
@@ -140,10 +166,14 @@ ggplot(data_decada_duracion,aes(x = decada ,y = duracion ))+
   my_theme
 ```
 
+Como vemos en la @fig-duracion-decada
+
 ```{r}
 #| echo: false
 #| message: false
 #| warning: false
+#| fig-cap: "Rating medio por década (1920-2020)"
+#| label: fig-rating-decada
 # Esto crea rating medio por décadas.
 data_decada_rating = data %>% 
   mutate(decada = floor(Año_lanzamiento/10)*10) %>% 
@@ -162,4 +192,118 @@ ggplot(data_decada_rating,aes(x = decada ,y = rating ))+
   labs(title = "Rating medio por década", subtitle = "(1920 - 2020)",
        x = NULL, y = "Rating medio")+
   my_theme
+```
+
+Como vemos en la @fig-rating-decada
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+# Esto crea número de votos medio por décadas
+
+data_decada_votos = data |> 
+  mutate(decada = floor(Año_lanzamiento/10)*10) |> 
+  group_by(decada) |> 
+  summarise(mean(Numero_de_votos,na.rm = TRUE))
+
+colnames(data_decada_votos) = c("decada","numero_de_votos") # Cambio de nombres a las columnas
+
+# Graficamos
+ggplot(data_decada_votos,aes(x = decada ,y = numero_de_votos))+
+  geom_bar(stat = "identity")+
+  geom_col(fill = "#f5c518")+
+  geom_text(aes(label = label_number_si()(numero_de_votos)), vjust = -0.5, color = "white", fontface = "bold")+
+  scale_x_continuous(breaks = seq(1920,2020,10))+
+  scale_y_continuous(labels = label_number_si())+
+  labs(title = "Número de votos medio por década", subtitle = "(1920 - 2020)",
+       x = NULL, y = "Número de votos medio")+
+  my_theme
+```
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+### Creación Tabla de Géneros más repetidos por década 
+
+data_decada_genero = data %>% 
+  mutate(decada = floor(Año_lanzamiento/10)*10) %>% 
+  group_by(decada) %>% 
+  count(Genero) |>
+  slice_max(n) |> 
+  ungroup() |> 
+  gt() |>
+  tab_header(title = "Géneros más repetidos por década", subtitle = "(1920 - 2020)") |> 
+  cols_label(Genero = "Género", n = "Conteo", decada = "Década") |>
+  tab_footnote(footnote = "Notar que la poca cantidad de géneros contados en 2020 es debido
+               a la pandemia que afectó a la producción de películas",
+               locations = cells_body(columns = Genero,rows = 12:13))|> 
+  tab_options(table.background.color = "#121212") 
+
+data_decada_genero
+
+```
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+data |> 
+  slice_max(Ganancias, n = 10) |> 
+  select(-c(Duracion,Director,Actor_1)) |> 
+  gt() |> 
+  tab_header(title = "Top 10 películas según sus ganancias") |> 
+  cols_label(Nombre_pelicula = "Película",Año_lanzamiento = "Año lanzamiento", Genero = "Género",
+             Numero_de_votos = "Número de votos", IMBD_Rating = "Rating") |>
+  tab_options(table.background.color = "#121212") 
+
+```
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+# Tabla de Ganancia media por Género y Rating medio
+
+gan_rating_por_genero = data |> 
+  group_by(Genero) |> 
+  summarise(mean(Ganancias,na.rm = TRUE),round(mean(IMBD_Rating,na.rm = TRUE),2))
+
+colnames(gan_rating_por_genero) = c("genero","ganancia_media","rating_medio") # Cambio nombre de las columnas
+
+# creación de la tabla
+gt(gan_rating_por_genero) |> 
+  tab_header(title = "Ganancias y rating medio según su género") |> 
+  cols_label(genero = "Género",rating_medio = "Rating", ganancia_media = "Ganancias") |>
+  tab_footnote(footnote = "Los datos faltantes corresponden a dos películas
+               de los años 1920 y 1922",
+               locations = cells_body(columns = ganancia_media,rows = 9)) |> 
+  tab_options(table.background.color = "#121212")
+
+```
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+
+gan_rating_voto_por_genero = data |> 
+  group_by(Genero) |> 
+  summarise(mean(Ganancias,na.rm = TRUE),round(mean(IMBD_Rating,na.rm = TRUE),2),round(mean(Numero_de_votos,na.rm = TRUE)))
+
+colnames(gan_rating_voto_por_genero) = c("genero","ganancia_media","rating_medio","voto_medio")
+
+gt(gan_rating_voto_por_genero) |> 
+  tab_header(title = "Ganancias,rating y número de votos medio según su género") |> 
+  cols_label(genero = "Género",rating_medio = "Rating", ganancia_media = "Ganancias",voto_medio = "Número de votos") |>
+  tab_footnote(footnote = "Los datos faltantes corresponden a dos películas
+               de los años 1920 y 1922",
+               locations = cells_body(columns = ganancia_media,rows = 9)) |> 
+  tab_options(table.background.color = "#121212")
 ```

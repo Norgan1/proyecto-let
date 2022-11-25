@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.1.189">
@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Análisis Exploratorio de las mejores 1000 películas/series según IMBD</title>
+<title>Análisis exploratorio de las mejores 1000 películas según IMBD</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -42,11 +42,14 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
 <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
   <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+    <h2 id="toc-title">Indice de contenidos</h2>
    
   <ul>
   <li><a href="#introducción" id="toc-introducción" class="nav-link active" data-scroll-target="#introducción">Introducción</a></li>
-  <li><a href="#descripción-de-las-variables" id="toc-descripción-de-las-variables" class="nav-link" data-scroll-target="#descripción-de-las-variables">Descripción de las variables</a></li>
+  <li><a href="#la-base-de-datos-de-imbd" id="toc-la-base-de-datos-de-imbd" class="nav-link" data-scroll-target="#la-base-de-datos-de-imbd">La base de datos de IMBD</a>
+  <ul class="collapse">
+  <li><a href="#preprocesamiento" id="toc-preprocesamiento" class="nav-link" data-scroll-target="#preprocesamiento">Preprocesamiento</a></li>
+  </ul></li>
   <li><a href="#análisis-exploratorio" id="toc-análisis-exploratorio" class="nav-link" data-scroll-target="#análisis-exploratorio">Análisis Exploratorio</a>
   <ul class="collapse">
   <li><a href="#análisis-a-través-de-las-décadas" id="toc-análisis-a-través-de-las-décadas" class="nav-link" data-scroll-target="#análisis-a-través-de-las-décadas">Análisis a través de las décadas</a></li>
@@ -58,7 +61,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Análisis Exploratorio de las mejores 1000 películas/series según IMBD</h1>
+<h1 class="title">Análisis exploratorio de las mejores 1000 películas según IMBD</h1>
 </div>
 
 
@@ -74,28 +77,33 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="introducción" class="level2">
 <h2 class="anchored" data-anchor-id="introducción">Introducción</h2>
-<p>En tiempos de pandemia, cuando todo el mundo se encontraba bajo confinamiento para prevenir contagios, para muchas empresas esto significó pérdidas masivas pero una de las pocas que lograron generar ganancias récord fueron los servicios de streaming que, según datos de Motion Picture Association, lograron superar un billón de suscripciones, la cual se transformó como una de las principales fuentes de entretenimiento durante el covid-19.</p>
-<p>A raíz de lo anterior, fueron que páginas como IMBD servían como principal fuente de búsqueda de películas o series para pasar nuestro aburrimiento encerrados en la casa, pero primero que todo ¿Qué es IMBD?</p>
-<p>IMBD corresponde a una página web principalmente de películas y series, donde la principal característica de esta es poder ver la calificación de estas, donde tanto los críticos profesionales como cualquier persona le pueden dar una nota del 1 al 10 para luego obtener el promedio de las calificaciones. También existen otros apartados como poder ver la trama, el elenco, reseñas de los usuarios y críticos, el equipo de producción y entre otros.</p>
-<p>En este proyecto se analizarán las mejores 1000 películas según IMBD, donde algunas variables de interés serán el género, ganancias, año de lanzamiento, número de votos, calificación, entre otros.</p>
+<p>En tiempos de pandemia, debido a que todo el mundo se encontraba bajo confinamiento para prevenir contagios, muchas empresas sufrieron pérdidas masivas debido a la imposibilidad de trabajar con normalidad. Sin embargo existieron rubros que lograron generar ganancias récord, sobre todo aquellas que se convirtieron en las principales fuentes de entretenimiento durante el covid-19 como lo fueron los servicios de streaming. Según datos de Motion Picture Association, lograron superar un billón de suscripciones.</p>
+<p>A raíz de lo anterior, fueron que páginas como Internet Movie Database (IMBD) servían como principal fuente de búsqueda de películas o series para pasar nuestro aburrimiento encerrados en la casa, pero primero que todo ¿Qué es IMBD?</p>
+<p>En este proyecto se analizarán las mejores mil películas según IMBD, donde algunas variables de interés serán el género, ganancias, año de lanzamiento, número de votos, calificación, entre otros.</p>
 <p>El análisis tiene como enfoque resolver principalmente las siguientes preguntas:</p>
 <ul>
 <li><p>¿Cómo han ido variando las ganancias a través de las décadas?</p></li>
-<li><p>¿Cómo han ido variando la duración a través de las décadas?</p></li>
+<li><p>¿Cómo a ido variando la duración a través de las décadas?</p></li>
 <li><p>¿Son las películas más antiguas las que tienen mejor calificación?</p></li>
 <li><p>¿Qué géneros son los más populares a través de las décadas?</p></li>
 </ul>
-<p>Las preguntas anteriores tienen el objetivo principal de darnos a entender de mejor forma como han ido variando ciertos elementos de las películas a través de las décadas, ver si existe algún patrón que se mantiene durante el tiempo y obtener interesantes conclusiones a tráves de estas.</p>
-<p>Se comenzará con una descripción de las variables a utilizar en el proyecto para ya luego ir resolviendo las preguntas establecidas a través del análisis de gráficos y variables, y así presentar los resultados y conclusiones obtenidas correspondientes. Se finalizará con una conclusión resumiendo a grandes rasgos los resultados obtenidos durante el reporte.</p>
+<p>Las preguntas anteriores tienen el objetivo principal de darnos a entender de mejor forma cómo han ido variando ciertos elementos de las películas a través de las décadas, ver si existe algún patrón que se mantiene durante el tiempo y obtener interesantes conclusiones a través de las décadas.</p>
+<p>Se comenzará con una descripción de las variables a utilizar en el proyecto para ya luego ir resolviendo las preguntas establecidas a través del análisis de gráficos y tablas, y así presentar los resultados obtenidos. Se finalizará con una conclusión destacando los principales patrones encontrados.</p>
 </section>
-<section id="descripción-de-las-variables" class="level2">
-<h2 class="anchored" data-anchor-id="descripción-de-las-variables">Descripción de las variables</h2>
+<section id="la-base-de-datos-de-imbd" class="level2">
+<h2 class="anchored" data-anchor-id="la-base-de-datos-de-imbd">La base de datos de IMBD</h2>
+<p>IMBD corresponde a una página web principalmente de películas y series, donde la principal característica de es poder ver la calificación de estas, donde tanto los críticos profesionales como cualquier persona le pueden dar una nota del 1 al 10 para luego obtener el promedio de las calificaciones. También existen otros apartados como poder ver la trama, el elenco, reseñas de los usuarios y críticos, el equipo de producción, entre otros.</p>
+<p>La base de datos a utilizar corresponde a las mejores mil películas de IMBD, la cual fue obtenida del sitio web Kaggle <a href="https://www.kaggle.com/datasets/harshitshankhdhar/imdb-dataset-of-top-1000-movies-and-tv-shows">[Base de datos]</a> e incluye datos hasta el 2020. Antes de comenzar con el análisis exploratorio es importante hacer un preprocesamiento a la base de datos, para trabajar con las variables de nuestro interés y ver si existen datos extraños, NAs, hacer cambios a la base para nuestra comodidad, etc.</p>
+<section id="preprocesamiento" class="level3">
+<h3 class="anchored" data-anchor-id="preprocesamiento">Preprocesamiento</h3>
+<p>Lo primero que vamos a hacer es eliminar todas las variables que no son de nuestro interés, en nuestro caso serían: <code>Poster_Link</code>, <code>Certificate</code>, <code>Overview</code> y <code>Metascore</code> . Luego la variable <code>Runtime</code> es de tipo caracter ya que en la base de datos viene de la forma “89 min”, “100 min”,“120 min”, etc, por lo que eliminamos la palabra “min” para ya luego transformar la variable a numérica. Lo siguiente es cambiar el nombre de las variables del inglés al español para facilitar la comprensión de las variables.</p>
+<p>Existe también una película que esta etiquetada como “PG” en su año de lanzamiento, por lo que buscamos el año de lanzamiento en Google de la película y reemplazamos “PG” por 1995. Por último para la variable <code>Genero</code> tenemos películas que se agrupan de la forma “Action, Drama, Crime” o “Drama, Action”. Para estos casos, donde existen mas de dos géneros que identifican a una película, tomamos el primer género del lado izquierdo es decir en el caso de “Action, Drama, Crime” tomamos solo “Action” y en el caso de “Drama, Action” tomamos solo “Drama”.</p>
 <p>Las variables a utilizar en el reporte son las siguientes:</p>
 <table class="table">
 <colgroup>
-<col style="width: 21%">
-<col style="width: 21%">
-<col style="width: 56%">
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -106,7 +114,7 @@ ul.task-list li input[type="checkbox"] {
 </thead>
 <tbody>
 <tr class="odd">
-<td><code>Nombre_serie</code></td>
+<td><code>Nombre_pelicula</code></td>
 <td>caracter</td>
 <td>Nombre de la película</td>
 </tr>
@@ -128,7 +136,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td><code>IMBD_Rating</code></td>
 <td>numérica</td>
-<td>Calificación o “rating” de la película recibida en el sitio web IMBD</td>
+<td>Calificación o “rating” de la película recibida en el sitio web IMBD (nota del 1 al 10)</td>
 </tr>
 <tr class="even">
 <td><code>Director</code></td>
@@ -148,31 +156,1992 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td><code>Ganancias</code></td>
 <td>numérica</td>
-<td>Dinero recaudado por la película en dólares</td>
+<td>Dinero recaudado por la película en dólares sin ajustar por inflación</td>
 </tr>
 </tbody>
 </table>
+</section>
 </section>
 <section id="análisis-exploratorio" class="level2">
 <h2 class="anchored" data-anchor-id="análisis-exploratorio">Análisis Exploratorio</h2>
 <section id="análisis-a-través-de-las-décadas" class="level3">
 <h3 class="anchored" data-anchor-id="análisis-a-través-de-las-décadas">Análisis a través de las décadas</h3>
-<p>Ya que contamos con los años de lanzamiento de las películas, un buen punto de partida para este análisis exploratorio es ver como han variado las ganancias, duración y rating promedio a través del tiempo. Empezaremos con las ganancias, la cual se muestra en la figura 1. Hay que tener en consideración que para este gráfico en específico no se tomo en cuenta el año 2020 ya que en la base de datos las ganancias no se registraron.</p>
+<p>Ya que contamos con los años de lanzamiento de las películas, un buen punto de partida para este análisis exploratorio es ver cómo han variado las ganancias, la duración y el rating promedio a través del tiempo agrupando los años en décadas. Empezaremos con las ganancias, que se muestra en la <a href="#fig-ganancia-decada">Figura&nbsp;1</a>. Hay que tener en consideración que para este gráfico en específico se toma en consideración solo hasta la década del 2010 (es decir de 2010 a 2019) ya que para las películas del año 2020 no se registraron sus ganancias.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="introducción-proyecto_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
+<div id="fig-ganancia-decada" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="introducción-proyecto_files/figure-html/fig-ganancia-decada-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figura&nbsp;1: Ganancia media por década (1920-2010)</figcaption><p></p>
+</figure>
 </div>
 </div>
-<p>Tal y como vemos en la figura 1, notamos que en general a medida que han pasado las décadas las ganancias han aumentado considerablemente, especialmente si notamos que de la década del 1920 al 2010 las ganancias han aumentado casi 100 veces mas. También podemos ver que de 1920 a 1930 existe un gran salto en las ganancias, para luego en 1940 decaer nuevamente. Cabe mencionar que las ganancias de estos años pueden estar mal representadas ya que estamos hablando de películas de hace bastante tiempo por lo cual no se tienen sus ganancias exactas o simplemente no se registraron en la base de datos.</p>
+</div>
+<p>Tal y como vemos en la <a href="#fig-ganancia-decada">Figura&nbsp;1</a>, notamos que en general a medida que han pasado las décadas las ganancias han aumentado considerablemente, especialmente si notamos que de la década del 1920 al 2010 las ganancias han aumentado casi 100 veces mas. También podemos ver que de 1920 a 1930 existe un gran salto en las ganancias, para luego en 1940 decaer nuevamente. Cabe mencionar que las ganancias de estos años pueden estar mal representadas ya que estamos hablando de películas de hace bastante tiempo por lo cual no se tienen sus ganancias exactas o simplemente no se registraron en la base de datos. Otra posibilidad es que durante estas décadas ocurrieron dos guerras mundiales lo cual pudo haber afectado a la producción de películas y las ganancias obtenidas.</p>
 <p><em>*Los siguientes gráficos están en progreso de ser comentados:</em></p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="introducción-proyecto_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+<div id="fig-duracion-decada" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="introducción-proyecto_files/figure-html/fig-duracion-decada-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figura&nbsp;2: Duración media por década (1920-2020)</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Como vemos en la <a href="#fig-duracion-decada">Figura&nbsp;2</a></p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-rating-decada" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="introducción-proyecto_files/figure-html/fig-rating-decada-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figura&nbsp;3: Rating medio por década (1920-2020)</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Como vemos en la <a href="#fig-rating-decada">Figura&nbsp;3</a></p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="introducción-proyecto_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="introducción-proyecto_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+
+<div id="iaozkrjrja" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+:where(#iaozkrjrja) .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #FFFFFF;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #121212;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+:where(#iaozkrjrja) .gt_heading {
+  background-color: #121212;
+  text-align: center;
+  border-bottom-color: #121212;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+:where(#iaozkrjrja) .gt_title {
+  color: #FFFFFF;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #121212;
+  border-bottom-width: 0;
+}
+
+:where(#iaozkrjrja) .gt_subtitle {
+  color: #FFFFFF;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #121212;
+  border-top-width: 0;
+}
+
+:where(#iaozkrjrja) .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+:where(#iaozkrjrja) .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+:where(#iaozkrjrja) .gt_col_heading {
+  color: #FFFFFF;
+  background-color: #121212;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+:where(#iaozkrjrja) .gt_column_spanner_outer {
+  color: #FFFFFF;
+  background-color: #121212;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+:where(#iaozkrjrja) .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+:where(#iaozkrjrja) .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+:where(#iaozkrjrja) .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+:where(#iaozkrjrja) .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #FFFFFF;
+  background-color: #121212;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+:where(#iaozkrjrja) .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #FFFFFF;
+  background-color: #121212;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+:where(#iaozkrjrja) .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+:where(#iaozkrjrja) .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+:where(#iaozkrjrja) .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+:where(#iaozkrjrja) .gt_stub {
+  color: #FFFFFF;
+  background-color: #121212;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#iaozkrjrja) .gt_stub_row_group {
+  color: #FFFFFF;
+  background-color: #121212;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+:where(#iaozkrjrja) .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+:where(#iaozkrjrja) .gt_summary_row {
+  color: #FFFFFF;
+  background-color: #121212;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#iaozkrjrja) .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+:where(#iaozkrjrja) .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+:where(#iaozkrjrja) .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+:where(#iaozkrjrja) .gt_grand_summary_row {
+  color: #FFFFFF;
+  background-color: #121212;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#iaozkrjrja) .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+:where(#iaozkrjrja) .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+:where(#iaozkrjrja) .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+:where(#iaozkrjrja) .gt_footnotes {
+  color: #FFFFFF;
+  background-color: #121212;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+:where(#iaozkrjrja) .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#iaozkrjrja) .gt_sourcenotes {
+  color: #FFFFFF;
+  background-color: #121212;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+:where(#iaozkrjrja) .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#iaozkrjrja) .gt_left {
+  text-align: left;
+}
+
+:where(#iaozkrjrja) .gt_center {
+  text-align: center;
+}
+
+:where(#iaozkrjrja) .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+:where(#iaozkrjrja) .gt_font_normal {
+  font-weight: normal;
+}
+
+:where(#iaozkrjrja) .gt_font_bold {
+  font-weight: bold;
+}
+
+:where(#iaozkrjrja) .gt_font_italic {
+  font-style: italic;
+}
+
+:where(#iaozkrjrja) .gt_super {
+  font-size: 65%;
+}
+
+:where(#iaozkrjrja) .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+:where(#iaozkrjrja) .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+:where(#iaozkrjrja) .gt_indent_1 {
+  text-indent: 5px;
+}
+
+:where(#iaozkrjrja) .gt_indent_2 {
+  text-indent: 10px;
+}
+
+:where(#iaozkrjrja) .gt_indent_3 {
+  text-indent: 15px;
+}
+
+:where(#iaozkrjrja) .gt_indent_4 {
+  text-indent: 20px;
+}
+
+:where(#iaozkrjrja) .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table">
+  <thead class="gt_header">
+    <tr>
+      <td colspan="3" class="gt_heading gt_title gt_font_normal" style="">Géneros más repetidos por década</td>
+    </tr>
+    <tr>
+      <td colspan="3" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="">(1920 - 2020)</td>
+    </tr>
+  </thead>
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">Década</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col">Género</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">Conteo</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_right">1920</td>
+<td class="gt_row gt_left">Drama</td>
+<td class="gt_row gt_right">3</td></tr>
+    <tr><td class="gt_row gt_right">1930</td>
+<td class="gt_row gt_left">Comedy</td>
+<td class="gt_row gt_right">9</td></tr>
+    <tr><td class="gt_row gt_right">1940</td>
+<td class="gt_row gt_left">Drama</td>
+<td class="gt_row gt_right">14</td></tr>
+    <tr><td class="gt_row gt_right">1950</td>
+<td class="gt_row gt_left">Drama</td>
+<td class="gt_row gt_right">23</td></tr>
+    <tr><td class="gt_row gt_right">1960</td>
+<td class="gt_row gt_left">Drama</td>
+<td class="gt_row gt_right">27</td></tr>
+    <tr><td class="gt_row gt_right">1970</td>
+<td class="gt_row gt_left">Drama</td>
+<td class="gt_row gt_right">22</td></tr>
+    <tr><td class="gt_row gt_right">1980</td>
+<td class="gt_row gt_left">Action</td>
+<td class="gt_row gt_right">19</td></tr>
+    <tr><td class="gt_row gt_right">1980</td>
+<td class="gt_row gt_left">Comedy</td>
+<td class="gt_row gt_right">19</td></tr>
+    <tr><td class="gt_row gt_right">1990</td>
+<td class="gt_row gt_left">Drama</td>
+<td class="gt_row gt_right">43</td></tr>
+    <tr><td class="gt_row gt_right">2000</td>
+<td class="gt_row gt_left">Drama</td>
+<td class="gt_row gt_right">67</td></tr>
+    <tr><td class="gt_row gt_right">2010</td>
+<td class="gt_row gt_left">Drama</td>
+<td class="gt_row gt_right">64</td></tr>
+    <tr><td class="gt_row gt_right">2020</td>
+<td class="gt_row gt_left">Comedy<sup class="gt_footnote_marks">1</sup></td>
+<td class="gt_row gt_right">2</td></tr>
+    <tr><td class="gt_row gt_right">2020</td>
+<td class="gt_row gt_left">Drama<sup class="gt_footnote_marks">1</sup></td>
+<td class="gt_row gt_right">2</td></tr>
+  </tbody>
+  
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="3"><sup class="gt_footnote_marks">1</sup> Notar que la poca cantidad de géneros contados en 2020 es debido
+               a la pandemia que afectó a la producción de películas</td>
+    </tr>
+  </tfoot>
+</table>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+
+<div id="orjlfxzrmo" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+:where(#orjlfxzrmo) .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #FFFFFF;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #121212;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+:where(#orjlfxzrmo) .gt_heading {
+  background-color: #121212;
+  text-align: center;
+  border-bottom-color: #121212;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+:where(#orjlfxzrmo) .gt_title {
+  color: #FFFFFF;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #121212;
+  border-bottom-width: 0;
+}
+
+:where(#orjlfxzrmo) .gt_subtitle {
+  color: #FFFFFF;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #121212;
+  border-top-width: 0;
+}
+
+:where(#orjlfxzrmo) .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+:where(#orjlfxzrmo) .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+:where(#orjlfxzrmo) .gt_col_heading {
+  color: #FFFFFF;
+  background-color: #121212;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+:where(#orjlfxzrmo) .gt_column_spanner_outer {
+  color: #FFFFFF;
+  background-color: #121212;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+:where(#orjlfxzrmo) .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+:where(#orjlfxzrmo) .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+:where(#orjlfxzrmo) .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+:where(#orjlfxzrmo) .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #FFFFFF;
+  background-color: #121212;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+:where(#orjlfxzrmo) .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #FFFFFF;
+  background-color: #121212;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+:where(#orjlfxzrmo) .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+:where(#orjlfxzrmo) .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+:where(#orjlfxzrmo) .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+:where(#orjlfxzrmo) .gt_stub {
+  color: #FFFFFF;
+  background-color: #121212;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#orjlfxzrmo) .gt_stub_row_group {
+  color: #FFFFFF;
+  background-color: #121212;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+:where(#orjlfxzrmo) .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+:where(#orjlfxzrmo) .gt_summary_row {
+  color: #FFFFFF;
+  background-color: #121212;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#orjlfxzrmo) .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+:where(#orjlfxzrmo) .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+:where(#orjlfxzrmo) .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+:where(#orjlfxzrmo) .gt_grand_summary_row {
+  color: #FFFFFF;
+  background-color: #121212;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#orjlfxzrmo) .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+:where(#orjlfxzrmo) .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+:where(#orjlfxzrmo) .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+:where(#orjlfxzrmo) .gt_footnotes {
+  color: #FFFFFF;
+  background-color: #121212;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+:where(#orjlfxzrmo) .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#orjlfxzrmo) .gt_sourcenotes {
+  color: #FFFFFF;
+  background-color: #121212;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+:where(#orjlfxzrmo) .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#orjlfxzrmo) .gt_left {
+  text-align: left;
+}
+
+:where(#orjlfxzrmo) .gt_center {
+  text-align: center;
+}
+
+:where(#orjlfxzrmo) .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+:where(#orjlfxzrmo) .gt_font_normal {
+  font-weight: normal;
+}
+
+:where(#orjlfxzrmo) .gt_font_bold {
+  font-weight: bold;
+}
+
+:where(#orjlfxzrmo) .gt_font_italic {
+  font-style: italic;
+}
+
+:where(#orjlfxzrmo) .gt_super {
+  font-size: 65%;
+}
+
+:where(#orjlfxzrmo) .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+:where(#orjlfxzrmo) .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+:where(#orjlfxzrmo) .gt_indent_1 {
+  text-indent: 5px;
+}
+
+:where(#orjlfxzrmo) .gt_indent_2 {
+  text-indent: 10px;
+}
+
+:where(#orjlfxzrmo) .gt_indent_3 {
+  text-indent: 15px;
+}
+
+:where(#orjlfxzrmo) .gt_indent_4 {
+  text-indent: 20px;
+}
+
+:where(#orjlfxzrmo) .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table">
+  <thead class="gt_header">
+    <tr>
+      <td colspan="6" class="gt_heading gt_title gt_font_normal gt_bottom_border" style="">Top 10 películas según sus ganancias</td>
+    </tr>
+    
+  </thead>
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col">Película</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">Año lanzamiento</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col">Género</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">Rating</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">Número de votos</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">Ganancias</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_left">Star Wars: Episode VII - The Force Awakens</td>
+<td class="gt_row gt_right">2015</td>
+<td class="gt_row gt_left">Action</td>
+<td class="gt_row gt_right">7.9</td>
+<td class="gt_row gt_right">860823</td>
+<td class="gt_row gt_right">936662225</td></tr>
+    <tr><td class="gt_row gt_left">Avengers: Endgame</td>
+<td class="gt_row gt_right">2019</td>
+<td class="gt_row gt_left">Action</td>
+<td class="gt_row gt_right">8.4</td>
+<td class="gt_row gt_right">809955</td>
+<td class="gt_row gt_right">858373000</td></tr>
+    <tr><td class="gt_row gt_left">Avatar</td>
+<td class="gt_row gt_right">2009</td>
+<td class="gt_row gt_left">Action</td>
+<td class="gt_row gt_right">7.8</td>
+<td class="gt_row gt_right">1118998</td>
+<td class="gt_row gt_right">760507625</td></tr>
+    <tr><td class="gt_row gt_left">Avengers: Infinity War</td>
+<td class="gt_row gt_right">2018</td>
+<td class="gt_row gt_left">Action</td>
+<td class="gt_row gt_right">8.4</td>
+<td class="gt_row gt_right">834477</td>
+<td class="gt_row gt_right">678815482</td></tr>
+    <tr><td class="gt_row gt_left">Titanic</td>
+<td class="gt_row gt_right">1997</td>
+<td class="gt_row gt_left">Drama</td>
+<td class="gt_row gt_right">7.8</td>
+<td class="gt_row gt_right">1046089</td>
+<td class="gt_row gt_right">659325379</td></tr>
+    <tr><td class="gt_row gt_left">The Avengers</td>
+<td class="gt_row gt_right">2012</td>
+<td class="gt_row gt_left">Action</td>
+<td class="gt_row gt_right">8.0</td>
+<td class="gt_row gt_right">1260806</td>
+<td class="gt_row gt_right">623279547</td></tr>
+    <tr><td class="gt_row gt_left">Incredibles 2</td>
+<td class="gt_row gt_right">2018</td>
+<td class="gt_row gt_left">Animation</td>
+<td class="gt_row gt_right">7.6</td>
+<td class="gt_row gt_right">250057</td>
+<td class="gt_row gt_right">608581744</td></tr>
+    <tr><td class="gt_row gt_left">The Dark Knight</td>
+<td class="gt_row gt_right">2008</td>
+<td class="gt_row gt_left">Action</td>
+<td class="gt_row gt_right">9.0</td>
+<td class="gt_row gt_right">2303232</td>
+<td class="gt_row gt_right">534858444</td></tr>
+    <tr><td class="gt_row gt_left">Rogue One</td>
+<td class="gt_row gt_right">2016</td>
+<td class="gt_row gt_left">Action</td>
+<td class="gt_row gt_right">7.8</td>
+<td class="gt_row gt_right">556608</td>
+<td class="gt_row gt_right">532177324</td></tr>
+    <tr><td class="gt_row gt_left">The Dark Knight Rises</td>
+<td class="gt_row gt_right">2012</td>
+<td class="gt_row gt_left">Action</td>
+<td class="gt_row gt_right">8.4</td>
+<td class="gt_row gt_right">1516346</td>
+<td class="gt_row gt_right">448139099</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+
+<div id="pdivrfcwtd" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+:where(#pdivrfcwtd) .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #FFFFFF;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #121212;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+:where(#pdivrfcwtd) .gt_heading {
+  background-color: #121212;
+  text-align: center;
+  border-bottom-color: #121212;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+:where(#pdivrfcwtd) .gt_title {
+  color: #FFFFFF;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #121212;
+  border-bottom-width: 0;
+}
+
+:where(#pdivrfcwtd) .gt_subtitle {
+  color: #FFFFFF;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #121212;
+  border-top-width: 0;
+}
+
+:where(#pdivrfcwtd) .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+:where(#pdivrfcwtd) .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+:where(#pdivrfcwtd) .gt_col_heading {
+  color: #FFFFFF;
+  background-color: #121212;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+:where(#pdivrfcwtd) .gt_column_spanner_outer {
+  color: #FFFFFF;
+  background-color: #121212;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+:where(#pdivrfcwtd) .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+:where(#pdivrfcwtd) .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+:where(#pdivrfcwtd) .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+:where(#pdivrfcwtd) .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #FFFFFF;
+  background-color: #121212;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+:where(#pdivrfcwtd) .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #FFFFFF;
+  background-color: #121212;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+:where(#pdivrfcwtd) .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+:where(#pdivrfcwtd) .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+:where(#pdivrfcwtd) .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+:where(#pdivrfcwtd) .gt_stub {
+  color: #FFFFFF;
+  background-color: #121212;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#pdivrfcwtd) .gt_stub_row_group {
+  color: #FFFFFF;
+  background-color: #121212;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+:where(#pdivrfcwtd) .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+:where(#pdivrfcwtd) .gt_summary_row {
+  color: #FFFFFF;
+  background-color: #121212;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#pdivrfcwtd) .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+:where(#pdivrfcwtd) .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+:where(#pdivrfcwtd) .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+:where(#pdivrfcwtd) .gt_grand_summary_row {
+  color: #FFFFFF;
+  background-color: #121212;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#pdivrfcwtd) .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+:where(#pdivrfcwtd) .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+:where(#pdivrfcwtd) .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+:where(#pdivrfcwtd) .gt_footnotes {
+  color: #FFFFFF;
+  background-color: #121212;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+:where(#pdivrfcwtd) .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#pdivrfcwtd) .gt_sourcenotes {
+  color: #FFFFFF;
+  background-color: #121212;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+:where(#pdivrfcwtd) .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#pdivrfcwtd) .gt_left {
+  text-align: left;
+}
+
+:where(#pdivrfcwtd) .gt_center {
+  text-align: center;
+}
+
+:where(#pdivrfcwtd) .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+:where(#pdivrfcwtd) .gt_font_normal {
+  font-weight: normal;
+}
+
+:where(#pdivrfcwtd) .gt_font_bold {
+  font-weight: bold;
+}
+
+:where(#pdivrfcwtd) .gt_font_italic {
+  font-style: italic;
+}
+
+:where(#pdivrfcwtd) .gt_super {
+  font-size: 65%;
+}
+
+:where(#pdivrfcwtd) .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+:where(#pdivrfcwtd) .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+:where(#pdivrfcwtd) .gt_indent_1 {
+  text-indent: 5px;
+}
+
+:where(#pdivrfcwtd) .gt_indent_2 {
+  text-indent: 10px;
+}
+
+:where(#pdivrfcwtd) .gt_indent_3 {
+  text-indent: 15px;
+}
+
+:where(#pdivrfcwtd) .gt_indent_4 {
+  text-indent: 20px;
+}
+
+:where(#pdivrfcwtd) .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table">
+  <thead class="gt_header">
+    <tr>
+      <td colspan="3" class="gt_heading gt_title gt_font_normal gt_bottom_border" style="">Ganancias y rating medio según su género</td>
+    </tr>
+    
+  </thead>
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col">Género</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">Ganancias</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">Rating</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_left">Action</td>
+<td class="gt_row gt_right">141963092</td>
+<td class="gt_row gt_right">7.95</td></tr>
+    <tr><td class="gt_row gt_left">Adventure</td>
+<td class="gt_row gt_right">86454990</td>
+<td class="gt_row gt_right">7.94</td></tr>
+    <tr><td class="gt_row gt_left">Animation</td>
+<td class="gt_row gt_right">127967528</td>
+<td class="gt_row gt_right">7.93</td></tr>
+    <tr><td class="gt_row gt_left">Biography</td>
+<td class="gt_row gt_right">60128732</td>
+<td class="gt_row gt_right">7.94</td></tr>
+    <tr><td class="gt_row gt_left">Comedy</td>
+<td class="gt_row gt_right">32537590</td>
+<td class="gt_row gt_right">7.90</td></tr>
+    <tr><td class="gt_row gt_left">Crime</td>
+<td class="gt_row gt_right">34191231</td>
+<td class="gt_row gt_right">8.02</td></tr>
+    <tr><td class="gt_row gt_left">Drama</td>
+<td class="gt_row gt_right">38677281</td>
+<td class="gt_row gt_right">7.96</td></tr>
+    <tr><td class="gt_row gt_left">Family</td>
+<td class="gt_row gt_right">219555277</td>
+<td class="gt_row gt_right">7.80</td></tr>
+    <tr><td class="gt_row gt_left">Fantasy</td>
+<td class="gt_row gt_right"><sup class="gt_footnote_marks">1</sup> NaN</td>
+<td class="gt_row gt_right">8.00</td></tr>
+    <tr><td class="gt_row gt_left">Film-Noir</td>
+<td class="gt_row gt_right">1278626</td>
+<td class="gt_row gt_right">7.97</td></tr>
+    <tr><td class="gt_row gt_left">Horror</td>
+<td class="gt_row gt_right">73585773</td>
+<td class="gt_row gt_right">7.91</td></tr>
+    <tr><td class="gt_row gt_left">Mystery</td>
+<td class="gt_row gt_right">30439534</td>
+<td class="gt_row gt_right">7.97</td></tr>
+    <tr><td class="gt_row gt_left">Thriller</td>
+<td class="gt_row gt_right">17550741</td>
+<td class="gt_row gt_right">7.80</td></tr>
+    <tr><td class="gt_row gt_left">Western</td>
+<td class="gt_row gt_right">14555377</td>
+<td class="gt_row gt_right">8.35</td></tr>
+  </tbody>
+  
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="3"><sup class="gt_footnote_marks">1</sup> Los datos faltantes corresponden a dos películas
+               de los años 1920 y 1922</td>
+    </tr>
+  </tfoot>
+</table>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+
+<div id="mpcstwuioi" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+:where(#mpcstwuioi) .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #FFFFFF;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #121212;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+:where(#mpcstwuioi) .gt_heading {
+  background-color: #121212;
+  text-align: center;
+  border-bottom-color: #121212;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+:where(#mpcstwuioi) .gt_title {
+  color: #FFFFFF;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #121212;
+  border-bottom-width: 0;
+}
+
+:where(#mpcstwuioi) .gt_subtitle {
+  color: #FFFFFF;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #121212;
+  border-top-width: 0;
+}
+
+:where(#mpcstwuioi) .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+:where(#mpcstwuioi) .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+:where(#mpcstwuioi) .gt_col_heading {
+  color: #FFFFFF;
+  background-color: #121212;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+:where(#mpcstwuioi) .gt_column_spanner_outer {
+  color: #FFFFFF;
+  background-color: #121212;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+:where(#mpcstwuioi) .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+:where(#mpcstwuioi) .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+:where(#mpcstwuioi) .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+:where(#mpcstwuioi) .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #FFFFFF;
+  background-color: #121212;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+:where(#mpcstwuioi) .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #FFFFFF;
+  background-color: #121212;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+:where(#mpcstwuioi) .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+:where(#mpcstwuioi) .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+:where(#mpcstwuioi) .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+:where(#mpcstwuioi) .gt_stub {
+  color: #FFFFFF;
+  background-color: #121212;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#mpcstwuioi) .gt_stub_row_group {
+  color: #FFFFFF;
+  background-color: #121212;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+:where(#mpcstwuioi) .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+:where(#mpcstwuioi) .gt_summary_row {
+  color: #FFFFFF;
+  background-color: #121212;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#mpcstwuioi) .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+:where(#mpcstwuioi) .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+:where(#mpcstwuioi) .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+:where(#mpcstwuioi) .gt_grand_summary_row {
+  color: #FFFFFF;
+  background-color: #121212;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#mpcstwuioi) .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+:where(#mpcstwuioi) .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+:where(#mpcstwuioi) .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+:where(#mpcstwuioi) .gt_footnotes {
+  color: #FFFFFF;
+  background-color: #121212;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+:where(#mpcstwuioi) .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#mpcstwuioi) .gt_sourcenotes {
+  color: #FFFFFF;
+  background-color: #121212;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+:where(#mpcstwuioi) .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#mpcstwuioi) .gt_left {
+  text-align: left;
+}
+
+:where(#mpcstwuioi) .gt_center {
+  text-align: center;
+}
+
+:where(#mpcstwuioi) .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+:where(#mpcstwuioi) .gt_font_normal {
+  font-weight: normal;
+}
+
+:where(#mpcstwuioi) .gt_font_bold {
+  font-weight: bold;
+}
+
+:where(#mpcstwuioi) .gt_font_italic {
+  font-style: italic;
+}
+
+:where(#mpcstwuioi) .gt_super {
+  font-size: 65%;
+}
+
+:where(#mpcstwuioi) .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+:where(#mpcstwuioi) .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+:where(#mpcstwuioi) .gt_indent_1 {
+  text-indent: 5px;
+}
+
+:where(#mpcstwuioi) .gt_indent_2 {
+  text-indent: 10px;
+}
+
+:where(#mpcstwuioi) .gt_indent_3 {
+  text-indent: 15px;
+}
+
+:where(#mpcstwuioi) .gt_indent_4 {
+  text-indent: 20px;
+}
+
+:where(#mpcstwuioi) .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table">
+  <thead class="gt_header">
+    <tr>
+      <td colspan="4" class="gt_heading gt_title gt_font_normal gt_bottom_border" style="">Ganancias,rating y número de votos medio según su género</td>
+    </tr>
+    
+  </thead>
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col">Género</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">Ganancias</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">Rating</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">Número de votos</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_left">Action</td>
+<td class="gt_row gt_right">141963092</td>
+<td class="gt_row gt_right">7.95</td>
+<td class="gt_row gt_right">420247</td></tr>
+    <tr><td class="gt_row gt_left">Adventure</td>
+<td class="gt_row gt_right">86454990</td>
+<td class="gt_row gt_right">7.94</td>
+<td class="gt_row gt_right">313558</td></tr>
+    <tr><td class="gt_row gt_left">Animation</td>
+<td class="gt_row gt_right">127967528</td>
+<td class="gt_row gt_right">7.93</td>
+<td class="gt_row gt_right">268032</td></tr>
+    <tr><td class="gt_row gt_left">Biography</td>
+<td class="gt_row gt_right">60128732</td>
+<td class="gt_row gt_right">7.94</td>
+<td class="gt_row gt_right">272805</td></tr>
+    <tr><td class="gt_row gt_left">Comedy</td>
+<td class="gt_row gt_right">32537590</td>
+<td class="gt_row gt_right">7.90</td>
+<td class="gt_row gt_right">178196</td></tr>
+    <tr><td class="gt_row gt_left">Crime</td>
+<td class="gt_row gt_right">34191231</td>
+<td class="gt_row gt_right">8.02</td>
+<td class="gt_row gt_right">313398</td></tr>
+    <tr><td class="gt_row gt_left">Drama</td>
+<td class="gt_row gt_right">38677281</td>
+<td class="gt_row gt_right">7.96</td>
+<td class="gt_row gt_right">212344</td></tr>
+    <tr><td class="gt_row gt_left">Family</td>
+<td class="gt_row gt_right">219555277</td>
+<td class="gt_row gt_right">7.80</td>
+<td class="gt_row gt_right">275610</td></tr>
+    <tr><td class="gt_row gt_left">Fantasy</td>
+<td class="gt_row gt_right"><sup class="gt_footnote_marks">1</sup> NaN</td>
+<td class="gt_row gt_right">8.00</td>
+<td class="gt_row gt_right">73111</td></tr>
+    <tr><td class="gt_row gt_left">Film-Noir</td>
+<td class="gt_row gt_right">1278626</td>
+<td class="gt_row gt_right">7.97</td>
+<td class="gt_row gt_right">122405</td></tr>
+    <tr><td class="gt_row gt_left">Horror</td>
+<td class="gt_row gt_right">73585773</td>
+<td class="gt_row gt_right">7.91</td>
+<td class="gt_row gt_right">340232</td></tr>
+    <tr><td class="gt_row gt_left">Mystery</td>
+<td class="gt_row gt_right">30439534</td>
+<td class="gt_row gt_right">7.97</td>
+<td class="gt_row gt_right">350250</td></tr>
+    <tr><td class="gt_row gt_left">Thriller</td>
+<td class="gt_row gt_right">17550741</td>
+<td class="gt_row gt_right">7.80</td>
+<td class="gt_row gt_right">27733</td></tr>
+    <tr><td class="gt_row gt_left">Western</td>
+<td class="gt_row gt_right">14555377</td>
+<td class="gt_row gt_right">8.35</td>
+<td class="gt_row gt_right">322416</td></tr>
+  </tbody>
+  
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="4"><sup class="gt_footnote_marks">1</sup> Los datos faltantes corresponden a dos películas
+               de los años 1920 y 1922</td>
+    </tr>
+  </tfoot>
+</table>
+</div>
 </div>
 </div>
 </section>
@@ -220,7 +2189,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // flash "checked"
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
+    button.setAttribute("title", "Copiada");
     setTimeout(function() {
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
