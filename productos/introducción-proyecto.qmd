@@ -13,7 +13,7 @@ En tiempos de pandemia, debido a que todo el mundo se encontraba bajo confinamie
 
 A raíz de lo anterior, fueron que páginas como Internet Movie Database (IMBD) servían como principal fuente de búsqueda de películas o series para pasar nuestro aburrimiento encerrados en la casa, pero primero que todo ¿Qué es IMBD?
 
-En este proyecto se analizarán las mejores mil películas según IMBD, donde algunas variables de interés serán el género, ganancias, año de lanzamiento, número de votos, calificación, entre otros.
+En este proyecto se analizarán las mejores mil películas según IMBD, tomando en cuenta algunas de las variables de interés disponibles en el sitio como género, ganancias, año de lanzamiento, número de votos, calificación, entre otros.
 
 El análisis tiene como enfoque resolver principalmente las siguientes preguntas:
 
@@ -31,43 +31,16 @@ Se comenzará con una descripción de las variables a utilizar en el proyecto pa
 
 ## La base de datos de IMBD
 
-IMBD corresponde a una página web principalmente de películas y series, donde la principal característica de es poder ver la calificación de estas, donde tanto los críticos profesionales como cualquier persona le pueden dar una nota del 1 al 10 para luego obtener el promedio de las calificaciones. También existen otros apartados como poder ver la trama, el elenco, reseñas de los usuarios y críticos, el equipo de producción, entre otros.
+IMBD corresponde a una página web principalmente de películas y series, donde la principal característica es poder ver la calificación de estas, donde tanto los críticos profesionales como cualquier persona le pueden dar una nota del 1 al 10 para luego obtener el promedio de las calificaciones. También existen otros apartados como poder ver la trama, el elenco, reseñas de los usuarios y críticos, el equipo de producción, entre otros.
 
 La base de datos a utilizar corresponde a las mejores mil películas de IMBD, la cual fue obtenida del sitio web Kaggle [\[Base de datos\]](https://www.kaggle.com/datasets/harshitshankhdhar/imdb-dataset-of-top-1000-movies-and-tv-shows) e incluye datos hasta el 2020. Antes de comenzar con el análisis exploratorio es importante hacer un preprocesamiento a la base de datos, para trabajar con las variables de nuestro interés y ver si existen datos extraños, NAs, hacer cambios a la base para nuestra comodidad, etc.
 
 ### Preprocesamiento
 
-Lo primero que vamos a hacer es eliminar todas las variables que no son de nuestro interés, en nuestro caso serían: `Poster_Link`, `Certificate`, `Overview` y `Metascore` . Luego la variable `Runtime` es de tipo caracter ya que en la base de datos viene de la forma "89 min", "100 min","120 min", etc, por lo que eliminamos la palabra "min" para ya luego transformar la variable a numérica. Lo siguiente es cambiar el nombre de las variables del inglés al español para facilitar la comprensión de las variables.
-
-Existe también una película que esta etiquetada como "PG" en su año de lanzamiento, por lo que buscamos el año de lanzamiento en Google de la película y reemplazamos "PG" por 1995. Por último para la variable `Genero` tenemos películas que se agrupan de la forma "Action, Drama, Crime" o "Drama, Action". Para estos casos, donde existen mas de dos géneros que identifican a una película, tomamos el primer género del lado izquierdo es decir en el caso de "Action, Drama, Crime" tomamos solo "Action" y en el caso de "Drama, Action" tomamos solo "Drama".
-
-Las variables a utilizar en el reporte son las siguientes:
-
-| Variable          | Tipo     | Descripción                                                                             |
-|-------------|---------|-----------------------------------------------|
-| `Nombre_pelicula` | caracter | Nombre de la película                                                                   |
-| `Año_lanzamiento` | numérica | Año de lanzamiento de la película                                                       |
-| `Duracion`        | numérica | Duración en minutos de la película                                                      |
-| `Genero`          | caracter | Género de la película                                                                   |
-| `IMBD_Rating`     | numérica | Calificación o "rating" de la película recibida en el sitio web IMBD (nota del 1 al 10) |
-| `Director`        | caracter | Director de la película                                                                 |
-| `Actor_1`         | caracter | Actor principal de la película                                                          |
-| `Numero_de_votos` | numérica | Número de personas que calificaron la película                                          |
-| `Ganancias`       | numérica | Dinero recaudado por la película en dólares sin ajustar por inflación                   |
-
-## Análisis Exploratorio
-
-### Análisis a través de las décadas
-
-Ya que contamos con los años de lanzamiento de las películas, un buen punto de partida para este análisis exploratorio es ver cómo han variado las ganancias, la duración y el rating promedio a través del tiempo agrupando los años en décadas. Empezaremos con las ganancias, que se muestra en la @fig-ganancia-decada. Hay que tener en consideración que para este gráfico en específico se toma en cuenta solo hasta la década del 2010 (es decir de 2010 a 2019) ya que para las películas del año 2020 no se registraron sus ganancias.
-
 ```{r}
 #| echo: false
 #| message: false
 #| warning: false
-#| fig-cap: "Ganancia media por década (1920-2010)"
-#| label: fig-ganancia-decada
-
 library(readr)
 library(dplyr)
 library(ggplot2)
@@ -102,7 +75,34 @@ for(i in 1:1000){
 }
 
 data$Genero = d # Ahora tenemos un género por película en vez de varios géneros
+```
 
+Lo primero que vamos a hacer es eliminar todas las variables que no son de nuestro interés, en nuestro caso serían: `Poster_Link`, `Certificate`, `Overview` y `Metascore` . Luego la variable `Runtime` es de tipo caracter ya que en la base de datos viene de la forma "89 min", "100 min","120 min", etc, por lo que eliminamos la palabra "min" para ya luego transformar la variable a numérica. Lo siguiente es cambiar el nombre de las variables del inglés al español para facilitar la comprensión de las variables.
+
+Existe también una película que esta etiquetada como "PG" en su año de lanzamiento, por lo que buscamos el año de lanzamiento en Google de la película y reemplazamos "PG" por 1995. Por último para la variable `Genero` tenemos películas que se agrupan de la forma "Action, Drama, Crime" o "Drama, Action". Para estos casos, donde existen mas de dos géneros que identifican a una película, tomamos el primer género del lado izquierdo es decir en el caso de "Action, Drama, Crime" tomamos solo "Action" y en el caso de "Drama, Action" tomamos solo "Drama".
+
+Las variables a utilizar en el reporte son las siguientes:
+
+| Variable          | Tipo     | Descripción                                                                             |
+|------------------|------------------|------------------------------------|
+| `Nombre_pelicula` | caracter | Nombre de la película                                                                   |
+| `Año_lanzamiento` | numérica | Año de lanzamiento de la película                                                       |
+| `Duracion`        | numérica | Duración en minutos de la película                                                      |
+| `Genero`          | caracter | Género de la película                                                                   |
+| `IMBD_Rating`     | numérica | Calificación o "rating" de la película recibida en el sitio web IMBD (nota del 1 al 10) |
+| `Numero_de_votos` | numérica | Número de personas que calificaron la película                                          |
+| `Ganancias`       | numérica | Dinero recaudado por la película en dólares sin ajustar por inflación                   |
+
+## Análisis Exploratorio
+
+Ya que contamos con los años de lanzamiento de las películas, un buen punto de partida para este análisis exploratorio es ver cómo han variado las ganancias, la duración y el rating promedio a través del tiempo agrupando los años en décadas. Empezaremos con las ganancias, que se muestra en la @fig-ganancia-decada. Hay que tener en consideración que para este gráfico en específico se toma en cuenta solo hasta la década del 2010 (es decir de 2010 a 2019) ya que para las películas del año 2020 no se registraron sus ganancias.
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| fig-cap: "Ganancia media por década (1920-2010)"
+#| label: fig-ganancia-decada
 
  data_decada_grossmean = data %>% 
   mutate(decada = floor(Año_lanzamiento/10)*10) %>% 
@@ -139,7 +139,7 @@ ggplot(data_decada_grossmean,aes(decada,
 
 Tal y como vemos en la @fig-ganancia-decada, notamos que en general a medida que han pasado las décadas las ganancias han aumentado considerablemente, especialmente si notamos que de la década del 1920 al 2010 las ganancias han aumentado casi 100 veces mas. También podemos ver que de 1920 a 1930 existe un gran salto en las ganancias, para luego en 1940 decaer nuevamente. Cabe mencionar que las ganancias de estos años pueden estar mal representadas ya que estamos hablando de películas de hace bastante tiempo por lo cual no se tienen sus ganancias exactas o simplemente no se registraron en la base de datos. Otra posibilidad es que durante estas décadas ocurrieron dos guerras mundiales lo cual pudo haber afectado a la producción de películas y las ganancias obtenidas.
 
-*\*Los siguientes gráficos están en progreso de ser comentados:*
+Veamos ahora como han ido variando la duración de las películas a lo largo de los años.
 
 ```{r}
 #| echo: false
@@ -147,6 +147,7 @@ Tal y como vemos en la @fig-ganancia-decada, notamos que en general a medida que
 #| warning: false
 #| fig-cap: "Duración media por década (1920-2020)"
 #| label: fig-duracion-decada
+
 # Esto crea duración media por décadas.
 data_decada_duracion = data %>% 
   mutate(decada = floor(Año_lanzamiento/10)*10) %>% 
@@ -166,7 +167,9 @@ ggplot(data_decada_duracion,aes(x = decada ,y = duracion ))+
   my_theme
 ```
 
-De la @fig-duracion-decada
+De la @fig-duracion-decada lo más relevante es que en la década de 1920 se encuentran las películas de menor duración y en los siguientes años comenzaron a aumentar hasta llegar a la década de los 60. Desde ese entonces en adelante la tendencia es bastante uniforme, donde la duración varía entre 121 y 128 minutos, es decir, durante los últimos 60 años no han ocurrido cambios notorios en cuanto a la extensión de las películas se refiere.
+
+Ya vimos la variación de las ganancias (@fig-ganancia-decada) y de la duración (@fig-duracion-decada) media a través del tiempo, por lo que nos queda el rating que se presenta en la siguiente figura:
 
 ```{r}
 #| echo: false
@@ -190,16 +193,20 @@ ggplot(data_decada_rating,aes(x = decada ,y = rating ))+
   scale_x_continuous(breaks = seq(1920,2020,10))+
   ylim(7.3,8.5)+
   labs(title = "Rating medio por década", subtitle = "(1920 - 2020)",
-       x = NULL, y = "Rating medio")+
+       x = NULL, y = "Rating medio (1 al 10)")+
   my_theme
 ```
 
-Como vemos en la @fig-rating-decada
+Notamos de la @fig-rating-decada que si bien los ratings son bastante parecidos entre sí, las notas mas altas se alcanzan en la década de 1920 y 2020. Esto es interesante ya que si contrastamos esta información con la @fig-ganancia-decada y @fig-duracion-decada vemos que a pesar de que la década de 1920 tiene la menor duración y las ganancias más bajas aun así tiene el rating más alto junto a 2020, en cambio la década de 2010, el cual tiene las ganancias más altas y mayor duración, tiene uno de los ratings más bajos en comparación a las otras décadas. Vemos también que de la década del 60 al 90 se mantuvo el rating medio para luego decaer en el 2000, siendo esta la peor década en cuanto a rating para ya luego aumentar en las siguientes dos décadas.
+
+A simple vista pareciera ser que las ganancias y la duración de las películas no tienen ninguna influencia en el rating según el análisis hecho anteriormente, pero surge otra posibilidad, quizás el número de votos puede estar afectando al rating por lo que es interesante ver la cantidad de votos por década.
 
 ```{r}
 #| echo: false
 #| message: false
 #| warning: false
+#| fig-cap: "Número de votos medio por década (1920 - 2020)"
+#| label: fig-votos-decada
 
 # Esto crea número de votos medio por décadas
 
@@ -222,10 +229,21 @@ ggplot(data_decada_votos,aes(x = decada ,y = numero_de_votos))+
   my_theme
 ```
 
+Vemos de la @fig-votos-decada que la popularidad de las películas han ido en aumento desde 1920 hasta 1990, donde en la década del 2000 y 2010 disminuye levemente respecto a 1990 para luego caer de forma abrupta en el año 2020. Esto puede estar sucediendo ya que comenzó la pandemia por lo que tanto la producción de películas como el marketing que se le realiza a las películas previo a su estreno se vieron afectadas. A raíz de lo anterior se realizaron muy pocas películas en 2020 y al no haber un marketing en condiciones normales afectó al número de votos ya que, las personas no sabían que cierta película había sido estrenada o las películas fueron estrenadas en cines antes de comenzar la pandemia y no la publicaron luego en plataformas de streaming.
+
+Aún así como vimos en la @fig-rating-decada las películas realizadas en este año obtuvieron los mejores ratings junto a 1920 que también tiene un cantidad de votos similar al 2020. Esto nos habla sobre la población nicho que existe para cierto tipo de películas, donde a pesar que en la década de 1920 tenga la popularidad más baja, tiene el rating más alto. Lo que es interesante es que la popularidad parece coincidir con las ganancias vistas en la @fig-ganancia-decada donde las décadas más populares (1990, 2000 y 2010) tienen las ganancias más altas. Más adelante hablaremos sobre si existe una correlación entre estas dos variables, número de votos y ganancias.
+
+Una variable que hemos pasado por alto es el género de la película y con esta variable pueden surgir algunas preguntas tales como ¿Cuál es el género más repetido por década? ¿Cuánto es la ganancia y rating medio de las películas según su género? ¿Qué tan populares son los diversos géneros?
+
+Veamos primero qué género es el que más se repite por década.
+
 ```{r}
 #| echo: false
 #| message: false
 #| warning: false
+#| label: fig-repetido-decada
+#| fig-cap: "Tabla de géneros más repetidos por década"
+ 
 
 ### Creación Tabla de Géneros más repetidos por década 
 
@@ -247,11 +265,16 @@ data_decada_genero
 
 ```
 
+Notamos por la @fig-repetido-decada que el género que más se repite a través del tiempo es drama donde si contamos las décadas de 1990, 2000 y 2010 existen 174 películas que son del género drama. Pareciera entonces que las películas que mejor les va en cuanto a rating son drama pero ¿Será también que el género de drama es el que más ganancias obtiene? Antes de contestar esta pregunta veamos primero el top 10 de películas según su ganancia.
+
 ```{r}
 #| echo: false
 #| message: false
 #| warning: false
+#| label: fig-top10-ganancias
+#| fig-cap: "Top 10 películas según su ganancia"
 
+# Creación tabla top 10 películas según su ganancia
 data |> 
   slice_max(Ganancias, n = 10) |> 
   select(-c(Duracion,Director,Actor_1)) |> 
@@ -263,10 +286,16 @@ data |>
 
 ```
 
+Vemos de la @fig-top10-ganancias que solo existe una película de drama que está en el top 10, donde 8 de las 10 películas son de acción. Nótese que las películas con mejores ganancias pertenecen a sagas muy conocidas como lo son "Star Wars" y las famosas películas de Marvel "Avengers", las cuales al ser sagas que llevan mucho tiempo en el mundo del entretenimiento tienen una gran cantidad de fanáticos que se han ido acumulando a lo largo del tiempo lo que lleva a ganancias altísimas.
+
+Una vez dicho esto, veamos entonces las ganancias y el rating medio según el género.
+
 ```{r}
 #| echo: false
 #| message: false
 #| warning: false
+#| label: fig-tabla-gananciasyrating
+#| fig-cap: "Tabla de ganancias y rating medio por género"
 
 # Tabla de Ganancia media por Género y Rating medio
 
@@ -287,12 +316,39 @@ gt(gan_rating_por_genero) |>
 
 ```
 
+Si nos fijamos en la @fig-tabla-gananciasyrating vemos que el género de acción tiene una ventaja absoulta en cuanto a ganancias se refiere, sin embargo si nos fijamos en el género de drama vemos que, a pesar de tener menos ganancias, aun así tiene prácticamente el mismo rating que las películas de acción por lo que una cosa es clara, que tan bien le vaya a una película en cuanto a sus ganancias no tiene nada que ver con que tan bien su rating final es y esto queda aún mas claro si nos fijamos en el género "western" que tiene un rating de 8.4 aproximadamente y tiene casi 10 veces menos ganancias con respecto al género de acción que tiene 8 de rating aproximadamente.
+
+Dijimos con anterioridad que íbamos a ver si existe alguna correlación entre el número de votos y las ganancias, por lo que realizamos el gráfico de correlación que se ve en la @fig-cor-gananciasyvotos
+
 ```{r}
 #| echo: false
 #| message: false
 #| warning: false
+#| label: fig-cor-gananciasyvotos
+#| fig-cap: "Gráfico de correlación entre ganancias y número de votos"
 
+# Creación de gráfico de correlación con ganancias y votos
 
+ggplot(data = data, aes(data$Ganancias,data$Numero_de_votos))+
+  geom_point(color = "#f5c518")+
+  scale_x_continuous(labels = label_number_si())+
+  labs(title = "Correlación entre ganancias y número de votos",
+         x = "Ganancias en millones de dólares", y = "Número de votos")+
+  my_theme
+```
+
+Como muestra la @fig-cor-gananciasyvotos pareciera existir una leve correlación positiva entre estas dos variables, sin embargo, existen películas que obtienen muchas ganancias pero menos de 500 mil votos y películas que tienen más de 1 millón de votos pero que obtienen pocas ganancias. Existe una relación entre el número de votos y las ganancias, pensando en que si una película tiene muchas ganancias claramente tendrá más votos pero lo contrario puede no suceder ya que si una película tiene muchos votos no significa que tendrá muchas ganancias ya que, ahora mas que nunca con los servicios de streaming, existe la posibilidad de ver películas de años anteriores y al ser justamente un servicio de streaming el dinero recaudado va para la empresa que ofrece el servicio, o al menos un gran porcentaje, y no va directamente a la productora de la película.
+
+Por último, veamos la tabla de la @fig-tabla-gananciasyrating y agreguemos la columna de número de votos.
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| label: fig-tabla-gananciasyvotos
+#| fig-cap: "Tabla de ganancias, rating y número de votos según su género"
+
+# Agrega número de votos a la tabla anterior
 gan_rating_voto_por_genero = data |> 
   group_by(Genero) |> 
   summarise(mean(Ganancias,na.rm = TRUE),round(mean(IMBD_Rating,na.rm = TRUE),2),round(mean(Numero_de_votos,na.rm = TRUE)))
@@ -307,3 +363,5 @@ gt(gan_rating_voto_por_genero) |>
                locations = cells_body(columns = ganancia_media,rows = 9)) |> 
   tab_options(table.background.color = "#121212")
 ```
+
+De la @fig-tabla-gananciasyvotos vemos que el género de acción es el que mayor número de votos tiene y esto no es sorprendente, pues justamente hablabamos de que sagas como "Star Wars" y "Avengers" tienen una gran cantidad de fanáticos lo que se ve claramente reflejado en la tabla. Lo que si es curioso de esta tabla es que el género de animación tiene unas ganancias similares a las de acción pero tienen menos votos comparada con este, por lo que puede estar ocurriendo lo que mencionábamos antes de las poblaciones nicho, donde hay películas que tienen buena valoración pero poco número de votos y ganancias, y películas con ganancias altísimas y en consecuencia un gran número de votos donde al tomar el promedio nos puede generar que el género de animación tenga ganancias muy altas pero poco número de votos en comparación a las películas de acción.

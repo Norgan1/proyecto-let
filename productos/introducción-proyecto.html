@@ -50,10 +50,7 @@ ul.task-list li input[type="checkbox"] {
   <ul class="collapse">
   <li><a href="#preprocesamiento" id="toc-preprocesamiento" class="nav-link" data-scroll-target="#preprocesamiento">Preprocesamiento</a></li>
   </ul></li>
-  <li><a href="#análisis-exploratorio" id="toc-análisis-exploratorio" class="nav-link" data-scroll-target="#análisis-exploratorio">Análisis Exploratorio</a>
-  <ul class="collapse">
-  <li><a href="#análisis-a-través-de-las-décadas" id="toc-análisis-a-través-de-las-décadas" class="nav-link" data-scroll-target="#análisis-a-través-de-las-décadas">Análisis a través de las décadas</a></li>
-  </ul></li>
+  <li><a href="#análisis-exploratorio" id="toc-análisis-exploratorio" class="nav-link" data-scroll-target="#análisis-exploratorio">Análisis Exploratorio</a></li>
   </ul>
 </nav>
 </div>
@@ -79,7 +76,7 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="introducción">Introducción</h2>
 <p>En tiempos de pandemia, debido a que todo el mundo se encontraba bajo confinamiento para prevenir contagios, muchas empresas sufrieron pérdidas masivas debido a la imposibilidad de trabajar con normalidad. Sin embargo existieron rubros que lograron generar ganancias récord, sobre todo aquellas que se convirtieron en las principales fuentes de entretenimiento durante el covid-19 como lo fueron los servicios de streaming. Según datos de Motion Picture Association en el año 2020 lograron superar un billón de suscripciones llegando a alcanzar $68.8 billones de dólares en ganancias globales, un aumento del 23% con respecto al año 2019. <a href="https://www.motionpictures.org/press/global-subscriptions-to-online-video-services-exceeds-one-billion-for-first-time-ever-new-mpa-report-finds/">[Ver artículo]</a></p>
 <p>A raíz de lo anterior, fueron que páginas como Internet Movie Database (IMBD) servían como principal fuente de búsqueda de películas o series para pasar nuestro aburrimiento encerrados en la casa, pero primero que todo ¿Qué es IMBD?</p>
-<p>En este proyecto se analizarán las mejores mil películas según IMBD, donde algunas variables de interés serán el género, ganancias, año de lanzamiento, número de votos, calificación, entre otros.</p>
+<p>En este proyecto se analizarán las mejores mil películas según IMBD, tomando en cuenta algunas de las variables de interés disponibles en el sitio como género, ganancias, año de lanzamiento, número de votos, calificación, entre otros.</p>
 <p>El análisis tiene como enfoque resolver principalmente las siguientes preguntas:</p>
 <ul>
 <li><p>¿Cómo han ido variando las ganancias a través de las décadas?</p></li>
@@ -92,18 +89,21 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="la-base-de-datos-de-imbd" class="level2">
 <h2 class="anchored" data-anchor-id="la-base-de-datos-de-imbd">La base de datos de IMBD</h2>
-<p>IMBD corresponde a una página web principalmente de películas y series, donde la principal característica de es poder ver la calificación de estas, donde tanto los críticos profesionales como cualquier persona le pueden dar una nota del 1 al 10 para luego obtener el promedio de las calificaciones. También existen otros apartados como poder ver la trama, el elenco, reseñas de los usuarios y críticos, el equipo de producción, entre otros.</p>
+<p>IMBD corresponde a una página web principalmente de películas y series, donde la principal característica es poder ver la calificación de estas, donde tanto los críticos profesionales como cualquier persona le pueden dar una nota del 1 al 10 para luego obtener el promedio de las calificaciones. También existen otros apartados como poder ver la trama, el elenco, reseñas de los usuarios y críticos, el equipo de producción, entre otros.</p>
 <p>La base de datos a utilizar corresponde a las mejores mil películas de IMBD, la cual fue obtenida del sitio web Kaggle <a href="https://www.kaggle.com/datasets/harshitshankhdhar/imdb-dataset-of-top-1000-movies-and-tv-shows">[Base de datos]</a> e incluye datos hasta el 2020. Antes de comenzar con el análisis exploratorio es importante hacer un preprocesamiento a la base de datos, para trabajar con las variables de nuestro interés y ver si existen datos extraños, NAs, hacer cambios a la base para nuestra comodidad, etc.</p>
 <section id="preprocesamiento" class="level3">
 <h3 class="anchored" data-anchor-id="preprocesamiento">Preprocesamiento</h3>
+<div class="cell">
+
+</div>
 <p>Lo primero que vamos a hacer es eliminar todas las variables que no son de nuestro interés, en nuestro caso serían: <code>Poster_Link</code>, <code>Certificate</code>, <code>Overview</code> y <code>Metascore</code> . Luego la variable <code>Runtime</code> es de tipo caracter ya que en la base de datos viene de la forma “89 min”, “100 min”,“120 min”, etc, por lo que eliminamos la palabra “min” para ya luego transformar la variable a numérica. Lo siguiente es cambiar el nombre de las variables del inglés al español para facilitar la comprensión de las variables.</p>
 <p>Existe también una película que esta etiquetada como “PG” en su año de lanzamiento, por lo que buscamos el año de lanzamiento en Google de la película y reemplazamos “PG” por 1995. Por último para la variable <code>Genero</code> tenemos películas que se agrupan de la forma “Action, Drama, Crime” o “Drama, Action”. Para estos casos, donde existen mas de dos géneros que identifican a una película, tomamos el primer género del lado izquierdo es decir en el caso de “Action, Drama, Crime” tomamos solo “Action” y en el caso de “Drama, Action” tomamos solo “Drama”.</p>
 <p>Las variables a utilizar en el reporte son las siguientes:</p>
 <table class="table">
 <colgroup>
-<col style="width: 18%">
-<col style="width: 13%">
-<col style="width: 68%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 50%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -139,16 +139,6 @@ ul.task-list li input[type="checkbox"] {
 <td>Calificación o “rating” de la película recibida en el sitio web IMBD (nota del 1 al 10)</td>
 </tr>
 <tr class="even">
-<td><code>Director</code></td>
-<td>caracter</td>
-<td>Director de la película</td>
-</tr>
-<tr class="odd">
-<td><code>Actor_1</code></td>
-<td>caracter</td>
-<td>Actor principal de la película</td>
-</tr>
-<tr class="even">
 <td><code>Numero_de_votos</code></td>
 <td>numérica</td>
 <td>Número de personas que calificaron la película</td>
@@ -164,8 +154,6 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="análisis-exploratorio" class="level2">
 <h2 class="anchored" data-anchor-id="análisis-exploratorio">Análisis Exploratorio</h2>
-<section id="análisis-a-través-de-las-décadas" class="level3">
-<h3 class="anchored" data-anchor-id="análisis-a-través-de-las-décadas">Análisis a través de las décadas</h3>
 <p>Ya que contamos con los años de lanzamiento de las películas, un buen punto de partida para este análisis exploratorio es ver cómo han variado las ganancias, la duración y el rating promedio a través del tiempo agrupando los años en décadas. Empezaremos con las ganancias, que se muestra en la <a href="#fig-ganancia-decada">Figura&nbsp;1</a>. Hay que tener en consideración que para este gráfico en específico se toma en cuenta solo hasta la década del 2010 (es decir de 2010 a 2019) ya que para las películas del año 2020 no se registraron sus ganancias.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -178,7 +166,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <p>Tal y como vemos en la <a href="#fig-ganancia-decada">Figura&nbsp;1</a>, notamos que en general a medida que han pasado las décadas las ganancias han aumentado considerablemente, especialmente si notamos que de la década del 1920 al 2010 las ganancias han aumentado casi 100 veces mas. También podemos ver que de 1920 a 1930 existe un gran salto en las ganancias, para luego en 1940 decaer nuevamente. Cabe mencionar que las ganancias de estos años pueden estar mal representadas ya que estamos hablando de películas de hace bastante tiempo por lo cual no se tienen sus ganancias exactas o simplemente no se registraron en la base de datos. Otra posibilidad es que durante estas décadas ocurrieron dos guerras mundiales lo cual pudo haber afectado a la producción de películas y las ganancias obtenidas.</p>
-<p><em>*Los siguientes gráficos están en progreso de ser comentados:</em></p>
+<p>Veamos ahora como han ido variando la duración de las películas a lo largo de los años.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-duracion-decada" class="quarto-figure quarto-figure-center anchored">
@@ -189,7 +177,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
-<p>De la <a href="#fig-duracion-decada">Figura&nbsp;2</a></p>
+<p>De la <a href="#fig-duracion-decada">Figura&nbsp;2</a> lo más relevante es que en la década de 1920 se encuentran las películas de menor duración y en los siguientes años comenzaron a aumentar hasta llegar a la década de los 60. Desde ese entonces en adelante la tendencia es bastante uniforme, donde la duración varía entre 121 y 128 minutos, es decir, durante los últimos 60 años no han ocurrido cambios notorios en cuanto a la extensión de las películas se refiere.</p>
+<p>Ya vimos la variación de las ganancias (<a href="#fig-ganancia-decada">Figura&nbsp;1</a>) y de la duración (<a href="#fig-duracion-decada">Figura&nbsp;2</a>) media a través del tiempo, por lo que nos queda el rating que se presenta en la siguiente figura:</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-rating-decada" class="quarto-figure quarto-figure-center anchored">
@@ -200,21 +189,32 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
-<p>Como vemos en la <a href="#fig-rating-decada">Figura&nbsp;3</a></p>
+<p>Notamos de la <a href="#fig-rating-decada">Figura&nbsp;3</a> que si bien los ratings son bastante parecidos entre sí, las notas mas altas se alcanzan en la década de 1920 y 2020. Esto es interesante ya que si contrastamos esta información con la <a href="#fig-ganancia-decada">Figura&nbsp;1</a> y <a href="#fig-duracion-decada">Figura&nbsp;2</a> vemos que a pesar de que la década de 1920 tiene la menor duración y las ganancias más bajas aun así tiene el rating más alto junto a 2020, en cambio la década de 2010, el cual tiene las ganancias más altas y mayor duración, tiene uno de los ratings más bajos en comparación a las otras décadas. Vemos también que de la década del 60 al 90 se mantuvo el rating medio para luego decaer en el 2000, siendo esta la peor década en cuanto a rating para ya luego aumentar en las siguientes dos décadas.</p>
+<p>A simple vista pareciera ser que las ganancias y la duración de las películas no tienen ninguna influencia en el rating según el análisis hecho anteriormente, pero surge otra posibilidad, quizás el número de votos puede estar afectando al rating por lo que es interesante ver la cantidad de votos por década.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="introducción-proyecto_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+<div id="fig-votos-decada" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="introducción-proyecto_files/figure-html/fig-votos-decada-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figura&nbsp;4: Número de votos medio por década (1920 - 2020)</figcaption><p></p>
+</figure>
 </div>
 </div>
+</div>
+<p>Vemos de la <a href="#fig-votos-decada">Figura&nbsp;4</a> que la popularidad de las películas han ido en aumento desde 1920 hasta 1990, donde en la década del 2000 y 2010 disminuye levemente respecto a 1990 para luego caer de forma abrupta en el año 2020. Esto puede estar sucediendo ya que comenzó la pandemia por lo que tanto la producción de películas como el marketing que se le realiza a las películas previo a su estreno se vieron afectadas. A raíz de lo anterior se realizaron muy pocas películas en 2020 y al no haber un marketing en condiciones normales afectó al número de votos ya que, las personas no sabían que cierta película había sido estrenada o las películas fueron estrenadas en cines antes de comenzar la pandemia y no la publicaron luego en plataformas de streaming.</p>
+<p>Aún así como vimos en la <a href="#fig-rating-decada">Figura&nbsp;3</a> las películas realizadas en este año obtuvieron los mejores ratings junto a 1920 que también tiene un cantidad de votos similar al 2020. Esto nos habla sobre la población nicho que existe para cierto tipo de películas, donde a pesar que en la década de 1920 tenga la popularidad más baja, tiene el rating más alto. Lo que es interesante es que la popularidad parece coincidir con las ganancias vistas en la <a href="#fig-ganancia-decada">Figura&nbsp;1</a> donde las décadas más populares (1990, 2000 y 2010) tienen las ganancias más altas. Más adelante hablaremos sobre si existe una correlación entre estas dos variables, número de votos y ganancias.</p>
+<p>Una variable que hemos pasado por alto es el género de la película y con esta variable pueden surgir algunas preguntas tales como ¿Cuál es el género más repetido por década? ¿Cuánto es la ganancia y rating medio de las películas según su género? ¿Qué tan populares son los diversos géneros?</p>
+<p>Veamos primero qué género es el que más se repite por década.</p>
 <div class="cell">
-<div class="cell-output-display">
+<div id="fig-repetido-decada" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
 
-<div id="hhuhfmemuz" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="emrkymjtxk" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-:where(#hhuhfmemuz) .gt_table {
+:where(#emrkymjtxk) .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -239,7 +239,7 @@ ul.task-list li input[type="checkbox"] {
   border-left-color: #D3D3D3;
 }
 
-:where(#hhuhfmemuz) .gt_heading {
+:where(#emrkymjtxk) .gt_heading {
   background-color: #121212;
   text-align: center;
   border-bottom-color: #121212;
@@ -251,7 +251,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-:where(#hhuhfmemuz) .gt_title {
+:where(#emrkymjtxk) .gt_title {
   color: #FFFFFF;
   font-size: 125%;
   font-weight: initial;
@@ -263,7 +263,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-width: 0;
 }
 
-:where(#hhuhfmemuz) .gt_subtitle {
+:where(#emrkymjtxk) .gt_subtitle {
   color: #FFFFFF;
   font-size: 85%;
   font-weight: initial;
@@ -275,13 +275,13 @@ ul.task-list li input[type="checkbox"] {
   border-top-width: 0;
 }
 
-:where(#hhuhfmemuz) .gt_bottom_border {
+:where(#emrkymjtxk) .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-:where(#hhuhfmemuz) .gt_col_headings {
+:where(#emrkymjtxk) .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -296,7 +296,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-:where(#hhuhfmemuz) .gt_col_heading {
+:where(#emrkymjtxk) .gt_col_heading {
   color: #FFFFFF;
   background-color: #121212;
   font-size: 100%;
@@ -316,7 +316,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-:where(#hhuhfmemuz) .gt_column_spanner_outer {
+:where(#emrkymjtxk) .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #121212;
   font-size: 100%;
@@ -328,15 +328,15 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 4px;
 }
 
-:where(#hhuhfmemuz) .gt_column_spanner_outer:first-child {
+:where(#emrkymjtxk) .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-:where(#hhuhfmemuz) .gt_column_spanner_outer:last-child {
+:where(#emrkymjtxk) .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-:where(#hhuhfmemuz) .gt_column_spanner {
+:where(#emrkymjtxk) .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -348,7 +348,7 @@ ul.task-list li input[type="checkbox"] {
   width: 100%;
 }
 
-:where(#hhuhfmemuz) .gt_group_heading {
+:where(#emrkymjtxk) .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -373,7 +373,7 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 
-:where(#hhuhfmemuz) .gt_empty_group_heading {
+:where(#emrkymjtxk) .gt_empty_group_heading {
   padding: 0.5px;
   color: #FFFFFF;
   background-color: #121212;
@@ -388,15 +388,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 
-:where(#hhuhfmemuz) .gt_from_md > :first-child {
+:where(#emrkymjtxk) .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-:where(#hhuhfmemuz) .gt_from_md > :last-child {
+:where(#emrkymjtxk) .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-:where(#hhuhfmemuz) .gt_row {
+:where(#emrkymjtxk) .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -415,7 +415,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-:where(#hhuhfmemuz) .gt_stub {
+:where(#emrkymjtxk) .gt_stub {
   color: #FFFFFF;
   background-color: #121212;
   font-size: 100%;
@@ -428,7 +428,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-:where(#hhuhfmemuz) .gt_stub_row_group {
+:where(#emrkymjtxk) .gt_stub_row_group {
   color: #FFFFFF;
   background-color: #121212;
   font-size: 100%;
@@ -442,11 +442,11 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: top;
 }
 
-:where(#hhuhfmemuz) .gt_row_group_first td {
+:where(#emrkymjtxk) .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-:where(#hhuhfmemuz) .gt_summary_row {
+:where(#emrkymjtxk) .gt_summary_row {
   color: #FFFFFF;
   background-color: #121212;
   text-transform: inherit;
@@ -456,16 +456,16 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-:where(#hhuhfmemuz) .gt_first_summary_row {
+:where(#emrkymjtxk) .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-:where(#hhuhfmemuz) .gt_first_summary_row.thick {
+:where(#emrkymjtxk) .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-:where(#hhuhfmemuz) .gt_last_summary_row {
+:where(#emrkymjtxk) .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -475,7 +475,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-:where(#hhuhfmemuz) .gt_grand_summary_row {
+:where(#emrkymjtxk) .gt_grand_summary_row {
   color: #FFFFFF;
   background-color: #121212;
   text-transform: inherit;
@@ -485,7 +485,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-:where(#hhuhfmemuz) .gt_first_grand_summary_row {
+:where(#emrkymjtxk) .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -495,11 +495,11 @@ ul.task-list li input[type="checkbox"] {
   border-top-color: #D3D3D3;
 }
 
-:where(#hhuhfmemuz) .gt_striped {
+:where(#emrkymjtxk) .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-:where(#hhuhfmemuz) .gt_table_body {
+:where(#emrkymjtxk) .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -508,7 +508,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-:where(#hhuhfmemuz) .gt_footnotes {
+:where(#emrkymjtxk) .gt_footnotes {
   color: #FFFFFF;
   background-color: #121212;
   border-bottom-style: none;
@@ -522,7 +522,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-:where(#hhuhfmemuz) .gt_footnote {
+:where(#emrkymjtxk) .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -531,7 +531,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-:where(#hhuhfmemuz) .gt_sourcenotes {
+:where(#emrkymjtxk) .gt_sourcenotes {
   color: #FFFFFF;
   background-color: #121212;
   border-bottom-style: none;
@@ -545,7 +545,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-:where(#hhuhfmemuz) .gt_sourcenote {
+:where(#emrkymjtxk) .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -553,64 +553,64 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-:where(#hhuhfmemuz) .gt_left {
+:where(#emrkymjtxk) .gt_left {
   text-align: left;
 }
 
-:where(#hhuhfmemuz) .gt_center {
+:where(#emrkymjtxk) .gt_center {
   text-align: center;
 }
 
-:where(#hhuhfmemuz) .gt_right {
+:where(#emrkymjtxk) .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-:where(#hhuhfmemuz) .gt_font_normal {
+:where(#emrkymjtxk) .gt_font_normal {
   font-weight: normal;
 }
 
-:where(#hhuhfmemuz) .gt_font_bold {
+:where(#emrkymjtxk) .gt_font_bold {
   font-weight: bold;
 }
 
-:where(#hhuhfmemuz) .gt_font_italic {
+:where(#emrkymjtxk) .gt_font_italic {
   font-style: italic;
 }
 
-:where(#hhuhfmemuz) .gt_super {
+:where(#emrkymjtxk) .gt_super {
   font-size: 65%;
 }
 
-:where(#hhuhfmemuz) .gt_footnote_marks {
+:where(#emrkymjtxk) .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-:where(#hhuhfmemuz) .gt_asterisk {
+:where(#emrkymjtxk) .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-:where(#hhuhfmemuz) .gt_indent_1 {
+:where(#emrkymjtxk) .gt_indent_1 {
   text-indent: 5px;
 }
 
-:where(#hhuhfmemuz) .gt_indent_2 {
+:where(#emrkymjtxk) .gt_indent_2 {
   text-indent: 10px;
 }
 
-:where(#hhuhfmemuz) .gt_indent_3 {
+:where(#emrkymjtxk) .gt_indent_3 {
   text-indent: 15px;
 }
 
-:where(#hhuhfmemuz) .gt_indent_4 {
+:where(#emrkymjtxk) .gt_indent_4 {
   text-indent: 20px;
 }
 
-:where(#hhuhfmemuz) .gt_indent_5 {
+:where(#emrkymjtxk) .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -680,17 +680,21 @@ ul.task-list li input[type="checkbox"] {
   </tfoot>
 </table>
 </div>
+<p></p><figcaption class="figure-caption">Figura&nbsp;5: Tabla de géneros más repetidos por década</figcaption><p></p>
+</figure>
 </div>
 </div>
+<p>Notamos por la <a href="#fig-repetido-decada">Figura&nbsp;5</a> que el género que más se repite a través del tiempo es drama donde si contamos las décadas de 1990, 2000 y 2010 existen 174 películas que son del género drama. Pareciera entonces que las películas que mejor les va en cuanto a rating son drama pero ¿Será también que el género de drama es el que más ganancias obtiene? Antes de contestar esta pregunta veamos primero el top 10 de películas según su ganancia.</p>
 <div class="cell">
-<div class="cell-output-display">
+<div id="fig-top10-ganancias" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
 
-<div id="cywuwsumrk" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="nmetfylyyj" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-:where(#cywuwsumrk) .gt_table {
+:where(#nmetfylyyj) .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -715,7 +719,7 @@ ul.task-list li input[type="checkbox"] {
   border-left-color: #D3D3D3;
 }
 
-:where(#cywuwsumrk) .gt_heading {
+:where(#nmetfylyyj) .gt_heading {
   background-color: #121212;
   text-align: center;
   border-bottom-color: #121212;
@@ -727,7 +731,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-:where(#cywuwsumrk) .gt_title {
+:where(#nmetfylyyj) .gt_title {
   color: #FFFFFF;
   font-size: 125%;
   font-weight: initial;
@@ -739,7 +743,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-width: 0;
 }
 
-:where(#cywuwsumrk) .gt_subtitle {
+:where(#nmetfylyyj) .gt_subtitle {
   color: #FFFFFF;
   font-size: 85%;
   font-weight: initial;
@@ -751,13 +755,13 @@ ul.task-list li input[type="checkbox"] {
   border-top-width: 0;
 }
 
-:where(#cywuwsumrk) .gt_bottom_border {
+:where(#nmetfylyyj) .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-:where(#cywuwsumrk) .gt_col_headings {
+:where(#nmetfylyyj) .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -772,7 +776,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-:where(#cywuwsumrk) .gt_col_heading {
+:where(#nmetfylyyj) .gt_col_heading {
   color: #FFFFFF;
   background-color: #121212;
   font-size: 100%;
@@ -792,7 +796,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-:where(#cywuwsumrk) .gt_column_spanner_outer {
+:where(#nmetfylyyj) .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #121212;
   font-size: 100%;
@@ -804,15 +808,15 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 4px;
 }
 
-:where(#cywuwsumrk) .gt_column_spanner_outer:first-child {
+:where(#nmetfylyyj) .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-:where(#cywuwsumrk) .gt_column_spanner_outer:last-child {
+:where(#nmetfylyyj) .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-:where(#cywuwsumrk) .gt_column_spanner {
+:where(#nmetfylyyj) .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -824,7 +828,7 @@ ul.task-list li input[type="checkbox"] {
   width: 100%;
 }
 
-:where(#cywuwsumrk) .gt_group_heading {
+:where(#nmetfylyyj) .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -849,7 +853,7 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 
-:where(#cywuwsumrk) .gt_empty_group_heading {
+:where(#nmetfylyyj) .gt_empty_group_heading {
   padding: 0.5px;
   color: #FFFFFF;
   background-color: #121212;
@@ -864,15 +868,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 
-:where(#cywuwsumrk) .gt_from_md > :first-child {
+:where(#nmetfylyyj) .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-:where(#cywuwsumrk) .gt_from_md > :last-child {
+:where(#nmetfylyyj) .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-:where(#cywuwsumrk) .gt_row {
+:where(#nmetfylyyj) .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -891,7 +895,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-:where(#cywuwsumrk) .gt_stub {
+:where(#nmetfylyyj) .gt_stub {
   color: #FFFFFF;
   background-color: #121212;
   font-size: 100%;
@@ -904,7 +908,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-:where(#cywuwsumrk) .gt_stub_row_group {
+:where(#nmetfylyyj) .gt_stub_row_group {
   color: #FFFFFF;
   background-color: #121212;
   font-size: 100%;
@@ -918,11 +922,11 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: top;
 }
 
-:where(#cywuwsumrk) .gt_row_group_first td {
+:where(#nmetfylyyj) .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-:where(#cywuwsumrk) .gt_summary_row {
+:where(#nmetfylyyj) .gt_summary_row {
   color: #FFFFFF;
   background-color: #121212;
   text-transform: inherit;
@@ -932,16 +936,16 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-:where(#cywuwsumrk) .gt_first_summary_row {
+:where(#nmetfylyyj) .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-:where(#cywuwsumrk) .gt_first_summary_row.thick {
+:where(#nmetfylyyj) .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-:where(#cywuwsumrk) .gt_last_summary_row {
+:where(#nmetfylyyj) .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -951,7 +955,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-:where(#cywuwsumrk) .gt_grand_summary_row {
+:where(#nmetfylyyj) .gt_grand_summary_row {
   color: #FFFFFF;
   background-color: #121212;
   text-transform: inherit;
@@ -961,7 +965,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-:where(#cywuwsumrk) .gt_first_grand_summary_row {
+:where(#nmetfylyyj) .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -971,11 +975,11 @@ ul.task-list li input[type="checkbox"] {
   border-top-color: #D3D3D3;
 }
 
-:where(#cywuwsumrk) .gt_striped {
+:where(#nmetfylyyj) .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-:where(#cywuwsumrk) .gt_table_body {
+:where(#nmetfylyyj) .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -984,7 +988,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-:where(#cywuwsumrk) .gt_footnotes {
+:where(#nmetfylyyj) .gt_footnotes {
   color: #FFFFFF;
   background-color: #121212;
   border-bottom-style: none;
@@ -998,7 +1002,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-:where(#cywuwsumrk) .gt_footnote {
+:where(#nmetfylyyj) .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -1007,7 +1011,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-:where(#cywuwsumrk) .gt_sourcenotes {
+:where(#nmetfylyyj) .gt_sourcenotes {
   color: #FFFFFF;
   background-color: #121212;
   border-bottom-style: none;
@@ -1021,7 +1025,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-:where(#cywuwsumrk) .gt_sourcenote {
+:where(#nmetfylyyj) .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1029,64 +1033,64 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-:where(#cywuwsumrk) .gt_left {
+:where(#nmetfylyyj) .gt_left {
   text-align: left;
 }
 
-:where(#cywuwsumrk) .gt_center {
+:where(#nmetfylyyj) .gt_center {
   text-align: center;
 }
 
-:where(#cywuwsumrk) .gt_right {
+:where(#nmetfylyyj) .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-:where(#cywuwsumrk) .gt_font_normal {
+:where(#nmetfylyyj) .gt_font_normal {
   font-weight: normal;
 }
 
-:where(#cywuwsumrk) .gt_font_bold {
+:where(#nmetfylyyj) .gt_font_bold {
   font-weight: bold;
 }
 
-:where(#cywuwsumrk) .gt_font_italic {
+:where(#nmetfylyyj) .gt_font_italic {
   font-style: italic;
 }
 
-:where(#cywuwsumrk) .gt_super {
+:where(#nmetfylyyj) .gt_super {
   font-size: 65%;
 }
 
-:where(#cywuwsumrk) .gt_footnote_marks {
+:where(#nmetfylyyj) .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-:where(#cywuwsumrk) .gt_asterisk {
+:where(#nmetfylyyj) .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-:where(#cywuwsumrk) .gt_indent_1 {
+:where(#nmetfylyyj) .gt_indent_1 {
   text-indent: 5px;
 }
 
-:where(#cywuwsumrk) .gt_indent_2 {
+:where(#nmetfylyyj) .gt_indent_2 {
   text-indent: 10px;
 }
 
-:where(#cywuwsumrk) .gt_indent_3 {
+:where(#nmetfylyyj) .gt_indent_3 {
   text-indent: 15px;
 }
 
-:where(#cywuwsumrk) .gt_indent_4 {
+:where(#nmetfylyyj) .gt_indent_4 {
   text-indent: 20px;
 }
 
-:where(#cywuwsumrk) .gt_indent_5 {
+:where(#nmetfylyyj) .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1173,17 +1177,22 @@ ul.task-list li input[type="checkbox"] {
   
 </table>
 </div>
+<p></p><figcaption class="figure-caption">Figura&nbsp;6: Top 10 películas según su ganancia</figcaption><p></p>
+</figure>
 </div>
 </div>
+<p>Vemos de la <a href="#fig-top10-ganancias">Figura&nbsp;6</a> que solo existe una película de drama que está en el top 10, donde 8 de las 10 películas son de acción. Nótese que las películas con mejores ganancias pertenecen a sagas muy conocidas como lo son “Star Wars” y las famosas películas de Marvel “Avengers”, las cuales al ser sagas que llevan mucho tiempo en el mundo del entretenimiento tienen una gran cantidad de fanáticos que se han ido acumulando a lo largo del tiempo lo que lleva a ganancias altísimas.</p>
+<p>Una vez dicho esto, veamos entonces las ganancias y el rating medio según el género.</p>
 <div class="cell">
-<div class="cell-output-display">
+<div id="fig-tabla-gananciasyrating" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
 
-<div id="xmvdoleqvc" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="eqotmcdtls" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-:where(#xmvdoleqvc) .gt_table {
+:where(#eqotmcdtls) .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1208,7 +1217,7 @@ ul.task-list li input[type="checkbox"] {
   border-left-color: #D3D3D3;
 }
 
-:where(#xmvdoleqvc) .gt_heading {
+:where(#eqotmcdtls) .gt_heading {
   background-color: #121212;
   text-align: center;
   border-bottom-color: #121212;
@@ -1220,7 +1229,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-:where(#xmvdoleqvc) .gt_title {
+:where(#eqotmcdtls) .gt_title {
   color: #FFFFFF;
   font-size: 125%;
   font-weight: initial;
@@ -1232,7 +1241,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-width: 0;
 }
 
-:where(#xmvdoleqvc) .gt_subtitle {
+:where(#eqotmcdtls) .gt_subtitle {
   color: #FFFFFF;
   font-size: 85%;
   font-weight: initial;
@@ -1244,13 +1253,13 @@ ul.task-list li input[type="checkbox"] {
   border-top-width: 0;
 }
 
-:where(#xmvdoleqvc) .gt_bottom_border {
+:where(#eqotmcdtls) .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-:where(#xmvdoleqvc) .gt_col_headings {
+:where(#eqotmcdtls) .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1265,7 +1274,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-:where(#xmvdoleqvc) .gt_col_heading {
+:where(#eqotmcdtls) .gt_col_heading {
   color: #FFFFFF;
   background-color: #121212;
   font-size: 100%;
@@ -1285,7 +1294,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-:where(#xmvdoleqvc) .gt_column_spanner_outer {
+:where(#eqotmcdtls) .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #121212;
   font-size: 100%;
@@ -1297,15 +1306,15 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 4px;
 }
 
-:where(#xmvdoleqvc) .gt_column_spanner_outer:first-child {
+:where(#eqotmcdtls) .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-:where(#xmvdoleqvc) .gt_column_spanner_outer:last-child {
+:where(#eqotmcdtls) .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-:where(#xmvdoleqvc) .gt_column_spanner {
+:where(#eqotmcdtls) .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1317,7 +1326,7 @@ ul.task-list li input[type="checkbox"] {
   width: 100%;
 }
 
-:where(#xmvdoleqvc) .gt_group_heading {
+:where(#eqotmcdtls) .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1342,7 +1351,7 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 
-:where(#xmvdoleqvc) .gt_empty_group_heading {
+:where(#eqotmcdtls) .gt_empty_group_heading {
   padding: 0.5px;
   color: #FFFFFF;
   background-color: #121212;
@@ -1357,15 +1366,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 
-:where(#xmvdoleqvc) .gt_from_md > :first-child {
+:where(#eqotmcdtls) .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-:where(#xmvdoleqvc) .gt_from_md > :last-child {
+:where(#eqotmcdtls) .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-:where(#xmvdoleqvc) .gt_row {
+:where(#eqotmcdtls) .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1384,7 +1393,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-:where(#xmvdoleqvc) .gt_stub {
+:where(#eqotmcdtls) .gt_stub {
   color: #FFFFFF;
   background-color: #121212;
   font-size: 100%;
@@ -1397,7 +1406,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-:where(#xmvdoleqvc) .gt_stub_row_group {
+:where(#eqotmcdtls) .gt_stub_row_group {
   color: #FFFFFF;
   background-color: #121212;
   font-size: 100%;
@@ -1411,11 +1420,11 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: top;
 }
 
-:where(#xmvdoleqvc) .gt_row_group_first td {
+:where(#eqotmcdtls) .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-:where(#xmvdoleqvc) .gt_summary_row {
+:where(#eqotmcdtls) .gt_summary_row {
   color: #FFFFFF;
   background-color: #121212;
   text-transform: inherit;
@@ -1425,16 +1434,16 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-:where(#xmvdoleqvc) .gt_first_summary_row {
+:where(#eqotmcdtls) .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-:where(#xmvdoleqvc) .gt_first_summary_row.thick {
+:where(#eqotmcdtls) .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-:where(#xmvdoleqvc) .gt_last_summary_row {
+:where(#eqotmcdtls) .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1444,7 +1453,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-:where(#xmvdoleqvc) .gt_grand_summary_row {
+:where(#eqotmcdtls) .gt_grand_summary_row {
   color: #FFFFFF;
   background-color: #121212;
   text-transform: inherit;
@@ -1454,7 +1463,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-:where(#xmvdoleqvc) .gt_first_grand_summary_row {
+:where(#eqotmcdtls) .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1464,11 +1473,11 @@ ul.task-list li input[type="checkbox"] {
   border-top-color: #D3D3D3;
 }
 
-:where(#xmvdoleqvc) .gt_striped {
+:where(#eqotmcdtls) .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-:where(#xmvdoleqvc) .gt_table_body {
+:where(#eqotmcdtls) .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1477,7 +1486,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-:where(#xmvdoleqvc) .gt_footnotes {
+:where(#eqotmcdtls) .gt_footnotes {
   color: #FFFFFF;
   background-color: #121212;
   border-bottom-style: none;
@@ -1491,7 +1500,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-:where(#xmvdoleqvc) .gt_footnote {
+:where(#eqotmcdtls) .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -1500,7 +1509,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-:where(#xmvdoleqvc) .gt_sourcenotes {
+:where(#eqotmcdtls) .gt_sourcenotes {
   color: #FFFFFF;
   background-color: #121212;
   border-bottom-style: none;
@@ -1514,7 +1523,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-:where(#xmvdoleqvc) .gt_sourcenote {
+:where(#eqotmcdtls) .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1522,64 +1531,64 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-:where(#xmvdoleqvc) .gt_left {
+:where(#eqotmcdtls) .gt_left {
   text-align: left;
 }
 
-:where(#xmvdoleqvc) .gt_center {
+:where(#eqotmcdtls) .gt_center {
   text-align: center;
 }
 
-:where(#xmvdoleqvc) .gt_right {
+:where(#eqotmcdtls) .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-:where(#xmvdoleqvc) .gt_font_normal {
+:where(#eqotmcdtls) .gt_font_normal {
   font-weight: normal;
 }
 
-:where(#xmvdoleqvc) .gt_font_bold {
+:where(#eqotmcdtls) .gt_font_bold {
   font-weight: bold;
 }
 
-:where(#xmvdoleqvc) .gt_font_italic {
+:where(#eqotmcdtls) .gt_font_italic {
   font-style: italic;
 }
 
-:where(#xmvdoleqvc) .gt_super {
+:where(#eqotmcdtls) .gt_super {
   font-size: 65%;
 }
 
-:where(#xmvdoleqvc) .gt_footnote_marks {
+:where(#eqotmcdtls) .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-:where(#xmvdoleqvc) .gt_asterisk {
+:where(#eqotmcdtls) .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-:where(#xmvdoleqvc) .gt_indent_1 {
+:where(#eqotmcdtls) .gt_indent_1 {
   text-indent: 5px;
 }
 
-:where(#xmvdoleqvc) .gt_indent_2 {
+:where(#eqotmcdtls) .gt_indent_2 {
   text-indent: 10px;
 }
 
-:where(#xmvdoleqvc) .gt_indent_3 {
+:where(#eqotmcdtls) .gt_indent_3 {
   text-indent: 15px;
 }
 
-:where(#xmvdoleqvc) .gt_indent_4 {
+:where(#eqotmcdtls) .gt_indent_4 {
   text-indent: 20px;
 }
 
-:where(#xmvdoleqvc) .gt_indent_5 {
+:where(#eqotmcdtls) .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1650,17 +1659,34 @@ ul.task-list li input[type="checkbox"] {
   </tfoot>
 </table>
 </div>
+<p></p><figcaption class="figure-caption">Figura&nbsp;7: Tabla de ganancias y rating medio por género</figcaption><p></p>
+</figure>
 </div>
 </div>
+<p>Si nos fijamos en la <a href="#fig-tabla-gananciasyrating">Figura&nbsp;7</a> vemos que el género de acción tiene una ventaja absoulta en cuanto a ganancias se refiere, sin embargo si nos fijamos en el género de drama vemos que, a pesar de tener menos ganancias, aun así tiene prácticamente el mismo rating que las películas de acción por lo que una cosa es clara, que tan bien le vaya a una película en cuanto a sus ganancias no tiene nada que ver con que tan bien su rating final es y esto queda aún mas claro si nos fijamos en el género “western” que tiene un rating de 8.4 aproximadamente y tiene casi 10 veces menos ganancias con respecto al género de acción que tiene 8 de rating aproximadamente.</p>
+<p>Dijimos con anterioridad que íbamos a ver si existe alguna correlación entre el número de votos y las ganancias, por lo que realizamos el gráfico de correlación que se ve en la <a href="#fig-cor-gananciasyvotos">Figura&nbsp;8</a></p>
 <div class="cell">
 <div class="cell-output-display">
+<div id="fig-cor-gananciasyvotos" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="introducción-proyecto_files/figure-html/fig-cor-gananciasyvotos-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figura&nbsp;8: Gráfico de correlación entre ganancias y número de votos</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Como muestra la <a href="#fig-cor-gananciasyvotos">Figura&nbsp;8</a> pareciera existir una leve correlación positiva entre estas dos variables, sin embargo, existen películas que obtienen muchas ganancias pero menos de 500 mil votos y películas que tienen más de 1 millón de votos pero que obtienen pocas ganancias. Existe una relación entre el número de votos y las ganancias, pensando en que si una película tiene muchas ganancias claramente tendrá más votos pero lo contrario puede no suceder ya que si una película tiene muchos votos no significa que tendrá muchas ganancias ya que, ahora mas que nunca con los servicios de streaming, existe la posibilidad de ver películas de años anteriores y al ser justamente un servicio de streaming el dinero recaudado va para la empresa que ofrece el servicio, o al menos un gran porcentaje, y no va directamente a la productora de la película.</p>
+<p>Por último, veamos la tabla de la <a href="#fig-tabla-gananciasyrating">Figura&nbsp;7</a> y agreguemos la columna de número de votos.</p>
+<div class="cell">
+<div id="fig-tabla-gananciasyvotos" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
 
-<div id="sgblfvtasv" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="errjjpudyv" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-:where(#sgblfvtasv) .gt_table {
+:where(#errjjpudyv) .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1685,7 +1711,7 @@ ul.task-list li input[type="checkbox"] {
   border-left-color: #D3D3D3;
 }
 
-:where(#sgblfvtasv) .gt_heading {
+:where(#errjjpudyv) .gt_heading {
   background-color: #121212;
   text-align: center;
   border-bottom-color: #121212;
@@ -1697,7 +1723,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-:where(#sgblfvtasv) .gt_title {
+:where(#errjjpudyv) .gt_title {
   color: #FFFFFF;
   font-size: 125%;
   font-weight: initial;
@@ -1709,7 +1735,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-width: 0;
 }
 
-:where(#sgblfvtasv) .gt_subtitle {
+:where(#errjjpudyv) .gt_subtitle {
   color: #FFFFFF;
   font-size: 85%;
   font-weight: initial;
@@ -1721,13 +1747,13 @@ ul.task-list li input[type="checkbox"] {
   border-top-width: 0;
 }
 
-:where(#sgblfvtasv) .gt_bottom_border {
+:where(#errjjpudyv) .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-:where(#sgblfvtasv) .gt_col_headings {
+:where(#errjjpudyv) .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1742,7 +1768,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-:where(#sgblfvtasv) .gt_col_heading {
+:where(#errjjpudyv) .gt_col_heading {
   color: #FFFFFF;
   background-color: #121212;
   font-size: 100%;
@@ -1762,7 +1788,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-:where(#sgblfvtasv) .gt_column_spanner_outer {
+:where(#errjjpudyv) .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #121212;
   font-size: 100%;
@@ -1774,15 +1800,15 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 4px;
 }
 
-:where(#sgblfvtasv) .gt_column_spanner_outer:first-child {
+:where(#errjjpudyv) .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-:where(#sgblfvtasv) .gt_column_spanner_outer:last-child {
+:where(#errjjpudyv) .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-:where(#sgblfvtasv) .gt_column_spanner {
+:where(#errjjpudyv) .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1794,7 +1820,7 @@ ul.task-list li input[type="checkbox"] {
   width: 100%;
 }
 
-:where(#sgblfvtasv) .gt_group_heading {
+:where(#errjjpudyv) .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1819,7 +1845,7 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 
-:where(#sgblfvtasv) .gt_empty_group_heading {
+:where(#errjjpudyv) .gt_empty_group_heading {
   padding: 0.5px;
   color: #FFFFFF;
   background-color: #121212;
@@ -1834,15 +1860,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 
-:where(#sgblfvtasv) .gt_from_md > :first-child {
+:where(#errjjpudyv) .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-:where(#sgblfvtasv) .gt_from_md > :last-child {
+:where(#errjjpudyv) .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-:where(#sgblfvtasv) .gt_row {
+:where(#errjjpudyv) .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1861,7 +1887,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-:where(#sgblfvtasv) .gt_stub {
+:where(#errjjpudyv) .gt_stub {
   color: #FFFFFF;
   background-color: #121212;
   font-size: 100%;
@@ -1874,7 +1900,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-:where(#sgblfvtasv) .gt_stub_row_group {
+:where(#errjjpudyv) .gt_stub_row_group {
   color: #FFFFFF;
   background-color: #121212;
   font-size: 100%;
@@ -1888,11 +1914,11 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: top;
 }
 
-:where(#sgblfvtasv) .gt_row_group_first td {
+:where(#errjjpudyv) .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-:where(#sgblfvtasv) .gt_summary_row {
+:where(#errjjpudyv) .gt_summary_row {
   color: #FFFFFF;
   background-color: #121212;
   text-transform: inherit;
@@ -1902,16 +1928,16 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-:where(#sgblfvtasv) .gt_first_summary_row {
+:where(#errjjpudyv) .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-:where(#sgblfvtasv) .gt_first_summary_row.thick {
+:where(#errjjpudyv) .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-:where(#sgblfvtasv) .gt_last_summary_row {
+:where(#errjjpudyv) .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1921,7 +1947,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-:where(#sgblfvtasv) .gt_grand_summary_row {
+:where(#errjjpudyv) .gt_grand_summary_row {
   color: #FFFFFF;
   background-color: #121212;
   text-transform: inherit;
@@ -1931,7 +1957,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-:where(#sgblfvtasv) .gt_first_grand_summary_row {
+:where(#errjjpudyv) .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1941,11 +1967,11 @@ ul.task-list li input[type="checkbox"] {
   border-top-color: #D3D3D3;
 }
 
-:where(#sgblfvtasv) .gt_striped {
+:where(#errjjpudyv) .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-:where(#sgblfvtasv) .gt_table_body {
+:where(#errjjpudyv) .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1954,7 +1980,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-:where(#sgblfvtasv) .gt_footnotes {
+:where(#errjjpudyv) .gt_footnotes {
   color: #FFFFFF;
   background-color: #121212;
   border-bottom-style: none;
@@ -1968,7 +1994,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-:where(#sgblfvtasv) .gt_footnote {
+:where(#errjjpudyv) .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -1977,7 +2003,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-:where(#sgblfvtasv) .gt_sourcenotes {
+:where(#errjjpudyv) .gt_sourcenotes {
   color: #FFFFFF;
   background-color: #121212;
   border-bottom-style: none;
@@ -1991,7 +2017,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-:where(#sgblfvtasv) .gt_sourcenote {
+:where(#errjjpudyv) .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1999,64 +2025,64 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-:where(#sgblfvtasv) .gt_left {
+:where(#errjjpudyv) .gt_left {
   text-align: left;
 }
 
-:where(#sgblfvtasv) .gt_center {
+:where(#errjjpudyv) .gt_center {
   text-align: center;
 }
 
-:where(#sgblfvtasv) .gt_right {
+:where(#errjjpudyv) .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-:where(#sgblfvtasv) .gt_font_normal {
+:where(#errjjpudyv) .gt_font_normal {
   font-weight: normal;
 }
 
-:where(#sgblfvtasv) .gt_font_bold {
+:where(#errjjpudyv) .gt_font_bold {
   font-weight: bold;
 }
 
-:where(#sgblfvtasv) .gt_font_italic {
+:where(#errjjpudyv) .gt_font_italic {
   font-style: italic;
 }
 
-:where(#sgblfvtasv) .gt_super {
+:where(#errjjpudyv) .gt_super {
   font-size: 65%;
 }
 
-:where(#sgblfvtasv) .gt_footnote_marks {
+:where(#errjjpudyv) .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-:where(#sgblfvtasv) .gt_asterisk {
+:where(#errjjpudyv) .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-:where(#sgblfvtasv) .gt_indent_1 {
+:where(#errjjpudyv) .gt_indent_1 {
   text-indent: 5px;
 }
 
-:where(#sgblfvtasv) .gt_indent_2 {
+:where(#errjjpudyv) .gt_indent_2 {
   text-indent: 10px;
 }
 
-:where(#sgblfvtasv) .gt_indent_3 {
+:where(#errjjpudyv) .gt_indent_3 {
   text-indent: 15px;
 }
 
-:where(#sgblfvtasv) .gt_indent_4 {
+:where(#errjjpudyv) .gt_indent_4 {
   text-indent: 20px;
 }
 
-:where(#sgblfvtasv) .gt_indent_5 {
+:where(#errjjpudyv) .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2142,9 +2168,11 @@ ul.task-list li input[type="checkbox"] {
   </tfoot>
 </table>
 </div>
+<p></p><figcaption class="figure-caption">Figura&nbsp;9: Tabla de ganancias, rating y número de votos según su género</figcaption><p></p>
+</figure>
 </div>
 </div>
-</section>
+<p>De la <a href="#fig-tabla-gananciasyvotos">Figura&nbsp;9</a> vemos que el género de acción es el que mayor número de votos tiene y esto no es sorprendente, pues justamente hablabamos de que sagas como “Star Wars” y “Avengers” tienen una gran cantidad de fanáticos lo que se ve claramente reflejado en la tabla. Lo que si es curioso de esta tabla es que el género de animación tiene unas ganancias similares a las de acción pero tienen menos votos comparada con este, por lo que puede estar ocurriendo lo que mencionábamos antes de las poblaciones nicho, donde hay películas que tienen buena valoración pero poco número de votos y ganancias, y películas con ganancias altísimas y en consecuencia un gran número de votos donde al tomar el promedio nos puede generar que el género de animación tenga ganancias muy altas pero poco número de votos en comparación a las películas de acción.</p>
 </section>
 
 </main>
