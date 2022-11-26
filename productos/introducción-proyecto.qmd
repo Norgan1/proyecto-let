@@ -84,7 +84,7 @@ Existe también una película que esta etiquetada como "PG" en su año de lanzam
 Las variables a utilizar en el reporte son las siguientes:
 
 | Variable          | Tipo     | Descripción                                                                             |
-|------------------|------------------|------------------------------------|
+|------------------|------------------|-----------------------------------|
 | `Nombre_pelicula` | caracter | Nombre de la película                                                                   |
 | `Año_lanzamiento` | numérica | Año de lanzamiento de la película                                                       |
 | `Duracion`        | numérica | Duración en minutos de la película                                                      |
@@ -367,3 +367,5 @@ gt(gan_rating_voto_por_genero) |>
 ```
 
 De la @fig-tabla-gananciasyvotos vemos que el género de acción es el que mayor número de votos tiene y esto no es sorprendente, pues justamente hablabamos de que sagas como "Star Wars" y "Avengers" tienen una gran cantidad de fanáticos lo que se ve claramente reflejado en la tabla. Lo que si es curioso de esta tabla es que el género de animación tiene unas ganancias similares a las de acción pero tienen menos votos comparada con este, por lo que puede estar ocurriendo lo que mencionábamos antes de las poblaciones nicho, donde hay películas que tienen buena valoración pero poco número de votos y ganancias, y películas con ganancias altísimas y en consecuencia un gran número de votos donde al tomar el promedio nos puede generar que el género de animación tenga ganancias muy altas pero poco número de votos en comparación a las películas de acción.
+
+## Conclusión
