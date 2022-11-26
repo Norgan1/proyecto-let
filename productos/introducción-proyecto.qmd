@@ -316,7 +316,9 @@ gt(gan_rating_por_genero) |>
 
 ```
 
-Si nos fijamos en la @fig-tabla-gananciasyrating vemos que el género de acción tiene una ventaja absoulta en cuanto a ganancias se refiere, sin embargo si nos fijamos en el género de drama vemos que, a pesar de tener menos ganancias, aun así tiene prácticamente el mismo rating que las películas de acción por lo que una cosa es clara, que tan bien le vaya a una película en cuanto a sus ganancias no tiene nada que ver con que tan bien su rating final es y esto queda aún mas claro si nos fijamos en el género "western" que tiene un rating de 8.4 aproximadamente y tiene casi 10 veces menos ganancias con respecto al género de acción que tiene 8 de rating aproximadamente.
+Si nos fijamos en la @fig-tabla-gananciasyrating vemos que el género de acción tiene una ventaja absoulta si lo comparamos con el género de drama en cuanto a ganancias se refiere, sin embargo vemos que, a pesar de tener menos ganancias drama, aun así tiene prácticamente el mismo rating que las películas de acción por lo que una cosa es clara, que tan bien le vaya a una película en cuanto a sus ganancias no tiene nada que ver con que tan bien su rating final es y esto queda aún mas claro si nos fijamos en el género "western" que tiene un rating de 8.4 aproximadamente y tiene casi 10 veces menos ganancias con respecto al género de acción que tiene 8 de rating aproximadamente.
+
+Aquí el género "family" es el que tiene las mayores ganancias ya que corresponde a dos películas que son "ET" y "Charlie en la fábrica de chocolate". A pesar de las ganancias gigantescas que tienen estas dos películas, tienen el peor rating de todos los géneros lo que deja en evidencia la poca influencia que tiene las ganancias en el rating.
 
 Dijimos con anterioridad que íbamos a ver si existe alguna correlación entre el número de votos y las ganancias, por lo que realizamos el gráfico de correlación que se ve en la @fig-cor-gananciasyvotos
 
