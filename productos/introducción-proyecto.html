@@ -45,7 +45,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Indice de contenidos</h2>
    
   <ul>
-  <li><a href="#introducción" id="toc-introducción" class="nav-link active" data-scroll-target="#introducción">Introducción</a></li>
+  <li><a href="#abstract" id="toc-abstract" class="nav-link active" data-scroll-target="#abstract">Abstract</a></li>
+  <li><a href="#introducción" id="toc-introducción" class="nav-link" data-scroll-target="#introducción">Introducción</a></li>
   <li><a href="#la-base-de-datos-de-imbd" id="toc-la-base-de-datos-de-imbd" class="nav-link" data-scroll-target="#la-base-de-datos-de-imbd">La base de datos de IMBD</a>
   <ul class="collapse">
   <li><a href="#preprocesamiento" id="toc-preprocesamiento" class="nav-link" data-scroll-target="#preprocesamiento">Preprocesamiento</a></li>
@@ -73,10 +74,14 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<section id="abstract" class="level2">
+<h2 class="anchored" data-anchor-id="abstract">Abstract</h2>
+<p>En pandemia uno de los servicios más solicitados fueron las plataformas de streaming y en consecuencia sitios webs como Internet movie data base (IMBD) se transformaron en la principal fuente de sugerencias al momento de elegir qué película ver. Se analizaron las mejores mil películas del sitio IMBD con datos hasta el 2020 teniendo el fin de hallar algún patrón que se mantiene durante las décadas y qué variables son las que afectan al rating. Se concluye que, a pesar que tanto la duración de las películas como las ganancias han ido aumentando a través de las décadas, estas no tienen ninguna influencia sobre el rating, a excepción del número de votos donde existe una correlación tanto con el rating como con las ganancias.</p>
+</section>
 <section id="introducción" class="level2">
 <h2 class="anchored" data-anchor-id="introducción">Introducción</h2>
 <p>En tiempos de pandemia, debido a que todo el mundo se encontraba bajo confinamiento para prevenir contagios, muchas empresas sufrieron pérdidas masivas debido a la imposibilidad de trabajar con normalidad. Sin embargo existieron rubros que lograron generar ganancias récord, sobre todo aquellas que se convirtieron en las principales fuentes de entretenimiento durante el covid-19 como lo fueron los servicios de streaming. Según datos de Motion Picture Association en el año 2020 lograron superar un billón de suscripciones llegando a alcanzar $68.8 billones de dólares en ganancias globales, un aumento del 23% con respecto al año 2019. <a href="https://www.motionpictures.org/press/global-subscriptions-to-online-video-services-exceeds-one-billion-for-first-time-ever-new-mpa-report-finds/">[Ver artículo]</a></p>
-<p>A raíz de lo anterior, fueron que páginas como Internet Movie Database (IMBD) servían como principal fuente de búsqueda de películas o series para pasar nuestro aburrimiento encerrados en la casa, pero primero que todo ¿Qué es IMBD?</p>
+<p>A raíz de lo anterior, fueron que páginas como Internet Movie Database (IMBD) servían como principal fuente de búsqueda de películas o series para pasar nuestro aburrimiento encerrados en la casa, pero primero que todo ¿Qué es IMBD? <strong>ARREGLAR ESTE PÁRRAFO</strong></p>
 <p>En este proyecto se analizarán las mejores mil películas según IMBD, tomando en cuenta algunas de las variables de interés disponibles en el sitio como género, ganancias, año de lanzamiento, número de votos, calificación, entre otros.</p>
 <p>El análisis tiene como enfoque resolver principalmente las siguientes preguntas:</p>
 <ul>
@@ -102,9 +107,9 @@ ul.task-list li input[type="checkbox"] {
 <p>Las variables a utilizar en el reporte son las siguientes:</p>
 <table class="table">
 <colgroup>
-<col style="width: 26%">
-<col style="width: 26%">
-<col style="width: 47%">
+<col style="width: 17%">
+<col style="width: 17%">
+<col style="width: 64%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -210,12 +215,12 @@ ul.task-list li input[type="checkbox"] {
 <div id="fig-repetido-decada" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 
-<div id="jiywaphlrx" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="gzapafypiq" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-:where(#jiywaphlrx) .gt_table {
+:where(#gzapafypiq) .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -240,7 +245,7 @@ ul.task-list li input[type="checkbox"] {
   border-left-color: #D3D3D3;
 }
 
-:where(#jiywaphlrx) .gt_heading {
+:where(#gzapafypiq) .gt_heading {
   background-color: #121212;
   text-align: center;
   border-bottom-color: #121212;
@@ -252,7 +257,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-:where(#jiywaphlrx) .gt_title {
+:where(#gzapafypiq) .gt_title {
   color: #FFFFFF;
   font-size: 125%;
   font-weight: initial;
@@ -264,7 +269,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-width: 0;
 }
 
-:where(#jiywaphlrx) .gt_subtitle {
+:where(#gzapafypiq) .gt_subtitle {
   color: #FFFFFF;
   font-size: 85%;
   font-weight: initial;
@@ -276,13 +281,13 @@ ul.task-list li input[type="checkbox"] {
   border-top-width: 0;
 }
 
-:where(#jiywaphlrx) .gt_bottom_border {
+:where(#gzapafypiq) .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-:where(#jiywaphlrx) .gt_col_headings {
+:where(#gzapafypiq) .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -297,7 +302,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-:where(#jiywaphlrx) .gt_col_heading {
+:where(#gzapafypiq) .gt_col_heading {
   color: #FFFFFF;
   background-color: #121212;
   font-size: 100%;
@@ -317,7 +322,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-:where(#jiywaphlrx) .gt_column_spanner_outer {
+:where(#gzapafypiq) .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #121212;
   font-size: 100%;
@@ -329,15 +334,15 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 4px;
 }
 
-:where(#jiywaphlrx) .gt_column_spanner_outer:first-child {
+:where(#gzapafypiq) .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-:where(#jiywaphlrx) .gt_column_spanner_outer:last-child {
+:where(#gzapafypiq) .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-:where(#jiywaphlrx) .gt_column_spanner {
+:where(#gzapafypiq) .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -349,7 +354,7 @@ ul.task-list li input[type="checkbox"] {
   width: 100%;
 }
 
-:where(#jiywaphlrx) .gt_group_heading {
+:where(#gzapafypiq) .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -374,7 +379,7 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 
-:where(#jiywaphlrx) .gt_empty_group_heading {
+:where(#gzapafypiq) .gt_empty_group_heading {
   padding: 0.5px;
   color: #FFFFFF;
   background-color: #121212;
@@ -389,15 +394,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 
-:where(#jiywaphlrx) .gt_from_md > :first-child {
+:where(#gzapafypiq) .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-:where(#jiywaphlrx) .gt_from_md > :last-child {
+:where(#gzapafypiq) .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-:where(#jiywaphlrx) .gt_row {
+:where(#gzapafypiq) .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -416,7 +421,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-:where(#jiywaphlrx) .gt_stub {
+:where(#gzapafypiq) .gt_stub {
   color: #FFFFFF;
   background-color: #121212;
   font-size: 100%;
@@ -429,7 +434,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-:where(#jiywaphlrx) .gt_stub_row_group {
+:where(#gzapafypiq) .gt_stub_row_group {
   color: #FFFFFF;
   background-color: #121212;
   font-size: 100%;
@@ -443,11 +448,11 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: top;
 }
 
-:where(#jiywaphlrx) .gt_row_group_first td {
+:where(#gzapafypiq) .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-:where(#jiywaphlrx) .gt_summary_row {
+:where(#gzapafypiq) .gt_summary_row {
   color: #FFFFFF;
   background-color: #121212;
   text-transform: inherit;
@@ -457,16 +462,16 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-:where(#jiywaphlrx) .gt_first_summary_row {
+:where(#gzapafypiq) .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-:where(#jiywaphlrx) .gt_first_summary_row.thick {
+:where(#gzapafypiq) .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-:where(#jiywaphlrx) .gt_last_summary_row {
+:where(#gzapafypiq) .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -476,7 +481,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-:where(#jiywaphlrx) .gt_grand_summary_row {
+:where(#gzapafypiq) .gt_grand_summary_row {
   color: #FFFFFF;
   background-color: #121212;
   text-transform: inherit;
@@ -486,7 +491,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-:where(#jiywaphlrx) .gt_first_grand_summary_row {
+:where(#gzapafypiq) .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -496,11 +501,11 @@ ul.task-list li input[type="checkbox"] {
   border-top-color: #D3D3D3;
 }
 
-:where(#jiywaphlrx) .gt_striped {
+:where(#gzapafypiq) .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-:where(#jiywaphlrx) .gt_table_body {
+:where(#gzapafypiq) .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -509,7 +514,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-:where(#jiywaphlrx) .gt_footnotes {
+:where(#gzapafypiq) .gt_footnotes {
   color: #FFFFFF;
   background-color: #121212;
   border-bottom-style: none;
@@ -523,7 +528,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-:where(#jiywaphlrx) .gt_footnote {
+:where(#gzapafypiq) .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -532,7 +537,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-:where(#jiywaphlrx) .gt_sourcenotes {
+:where(#gzapafypiq) .gt_sourcenotes {
   color: #FFFFFF;
   background-color: #121212;
   border-bottom-style: none;
@@ -546,7 +551,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-:where(#jiywaphlrx) .gt_sourcenote {
+:where(#gzapafypiq) .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -554,64 +559,64 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-:where(#jiywaphlrx) .gt_left {
+:where(#gzapafypiq) .gt_left {
   text-align: left;
 }
 
-:where(#jiywaphlrx) .gt_center {
+:where(#gzapafypiq) .gt_center {
   text-align: center;
 }
 
-:where(#jiywaphlrx) .gt_right {
+:where(#gzapafypiq) .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-:where(#jiywaphlrx) .gt_font_normal {
+:where(#gzapafypiq) .gt_font_normal {
   font-weight: normal;
 }
 
-:where(#jiywaphlrx) .gt_font_bold {
+:where(#gzapafypiq) .gt_font_bold {
   font-weight: bold;
 }
 
-:where(#jiywaphlrx) .gt_font_italic {
+:where(#gzapafypiq) .gt_font_italic {
   font-style: italic;
 }
 
-:where(#jiywaphlrx) .gt_super {
+:where(#gzapafypiq) .gt_super {
   font-size: 65%;
 }
 
-:where(#jiywaphlrx) .gt_footnote_marks {
+:where(#gzapafypiq) .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-:where(#jiywaphlrx) .gt_asterisk {
+:where(#gzapafypiq) .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-:where(#jiywaphlrx) .gt_indent_1 {
+:where(#gzapafypiq) .gt_indent_1 {
   text-indent: 5px;
 }
 
-:where(#jiywaphlrx) .gt_indent_2 {
+:where(#gzapafypiq) .gt_indent_2 {
   text-indent: 10px;
 }
 
-:where(#jiywaphlrx) .gt_indent_3 {
+:where(#gzapafypiq) .gt_indent_3 {
   text-indent: 15px;
 }
 
-:where(#jiywaphlrx) .gt_indent_4 {
+:where(#gzapafypiq) .gt_indent_4 {
   text-indent: 20px;
 }
 
-:where(#jiywaphlrx) .gt_indent_5 {
+:where(#gzapafypiq) .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -690,12 +695,12 @@ ul.task-list li input[type="checkbox"] {
 <div id="fig-top10-ganancias" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 
-<div id="caqyfuevfk" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="twufibkpvk" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-:where(#caqyfuevfk) .gt_table {
+:where(#twufibkpvk) .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -720,7 +725,7 @@ ul.task-list li input[type="checkbox"] {
   border-left-color: #D3D3D3;
 }
 
-:where(#caqyfuevfk) .gt_heading {
+:where(#twufibkpvk) .gt_heading {
   background-color: #121212;
   text-align: center;
   border-bottom-color: #121212;
@@ -732,7 +737,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-:where(#caqyfuevfk) .gt_title {
+:where(#twufibkpvk) .gt_title {
   color: #FFFFFF;
   font-size: 125%;
   font-weight: initial;
@@ -744,7 +749,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-width: 0;
 }
 
-:where(#caqyfuevfk) .gt_subtitle {
+:where(#twufibkpvk) .gt_subtitle {
   color: #FFFFFF;
   font-size: 85%;
   font-weight: initial;
@@ -756,13 +761,13 @@ ul.task-list li input[type="checkbox"] {
   border-top-width: 0;
 }
 
-:where(#caqyfuevfk) .gt_bottom_border {
+:where(#twufibkpvk) .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-:where(#caqyfuevfk) .gt_col_headings {
+:where(#twufibkpvk) .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -777,7 +782,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-:where(#caqyfuevfk) .gt_col_heading {
+:where(#twufibkpvk) .gt_col_heading {
   color: #FFFFFF;
   background-color: #121212;
   font-size: 100%;
@@ -797,7 +802,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-:where(#caqyfuevfk) .gt_column_spanner_outer {
+:where(#twufibkpvk) .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #121212;
   font-size: 100%;
@@ -809,15 +814,15 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 4px;
 }
 
-:where(#caqyfuevfk) .gt_column_spanner_outer:first-child {
+:where(#twufibkpvk) .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-:where(#caqyfuevfk) .gt_column_spanner_outer:last-child {
+:where(#twufibkpvk) .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-:where(#caqyfuevfk) .gt_column_spanner {
+:where(#twufibkpvk) .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -829,7 +834,7 @@ ul.task-list li input[type="checkbox"] {
   width: 100%;
 }
 
-:where(#caqyfuevfk) .gt_group_heading {
+:where(#twufibkpvk) .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -854,7 +859,7 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 
-:where(#caqyfuevfk) .gt_empty_group_heading {
+:where(#twufibkpvk) .gt_empty_group_heading {
   padding: 0.5px;
   color: #FFFFFF;
   background-color: #121212;
@@ -869,15 +874,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 
-:where(#caqyfuevfk) .gt_from_md > :first-child {
+:where(#twufibkpvk) .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-:where(#caqyfuevfk) .gt_from_md > :last-child {
+:where(#twufibkpvk) .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-:where(#caqyfuevfk) .gt_row {
+:where(#twufibkpvk) .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -896,7 +901,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-:where(#caqyfuevfk) .gt_stub {
+:where(#twufibkpvk) .gt_stub {
   color: #FFFFFF;
   background-color: #121212;
   font-size: 100%;
@@ -909,7 +914,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-:where(#caqyfuevfk) .gt_stub_row_group {
+:where(#twufibkpvk) .gt_stub_row_group {
   color: #FFFFFF;
   background-color: #121212;
   font-size: 100%;
@@ -923,11 +928,11 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: top;
 }
 
-:where(#caqyfuevfk) .gt_row_group_first td {
+:where(#twufibkpvk) .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-:where(#caqyfuevfk) .gt_summary_row {
+:where(#twufibkpvk) .gt_summary_row {
   color: #FFFFFF;
   background-color: #121212;
   text-transform: inherit;
@@ -937,16 +942,16 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-:where(#caqyfuevfk) .gt_first_summary_row {
+:where(#twufibkpvk) .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-:where(#caqyfuevfk) .gt_first_summary_row.thick {
+:where(#twufibkpvk) .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-:where(#caqyfuevfk) .gt_last_summary_row {
+:where(#twufibkpvk) .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -956,7 +961,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-:where(#caqyfuevfk) .gt_grand_summary_row {
+:where(#twufibkpvk) .gt_grand_summary_row {
   color: #FFFFFF;
   background-color: #121212;
   text-transform: inherit;
@@ -966,7 +971,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-:where(#caqyfuevfk) .gt_first_grand_summary_row {
+:where(#twufibkpvk) .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -976,11 +981,11 @@ ul.task-list li input[type="checkbox"] {
   border-top-color: #D3D3D3;
 }
 
-:where(#caqyfuevfk) .gt_striped {
+:where(#twufibkpvk) .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-:where(#caqyfuevfk) .gt_table_body {
+:where(#twufibkpvk) .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -989,7 +994,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-:where(#caqyfuevfk) .gt_footnotes {
+:where(#twufibkpvk) .gt_footnotes {
   color: #FFFFFF;
   background-color: #121212;
   border-bottom-style: none;
@@ -1003,7 +1008,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-:where(#caqyfuevfk) .gt_footnote {
+:where(#twufibkpvk) .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -1012,7 +1017,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-:where(#caqyfuevfk) .gt_sourcenotes {
+:where(#twufibkpvk) .gt_sourcenotes {
   color: #FFFFFF;
   background-color: #121212;
   border-bottom-style: none;
@@ -1026,7 +1031,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-:where(#caqyfuevfk) .gt_sourcenote {
+:where(#twufibkpvk) .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1034,64 +1039,64 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-:where(#caqyfuevfk) .gt_left {
+:where(#twufibkpvk) .gt_left {
   text-align: left;
 }
 
-:where(#caqyfuevfk) .gt_center {
+:where(#twufibkpvk) .gt_center {
   text-align: center;
 }
 
-:where(#caqyfuevfk) .gt_right {
+:where(#twufibkpvk) .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-:where(#caqyfuevfk) .gt_font_normal {
+:where(#twufibkpvk) .gt_font_normal {
   font-weight: normal;
 }
 
-:where(#caqyfuevfk) .gt_font_bold {
+:where(#twufibkpvk) .gt_font_bold {
   font-weight: bold;
 }
 
-:where(#caqyfuevfk) .gt_font_italic {
+:where(#twufibkpvk) .gt_font_italic {
   font-style: italic;
 }
 
-:where(#caqyfuevfk) .gt_super {
+:where(#twufibkpvk) .gt_super {
   font-size: 65%;
 }
 
-:where(#caqyfuevfk) .gt_footnote_marks {
+:where(#twufibkpvk) .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-:where(#caqyfuevfk) .gt_asterisk {
+:where(#twufibkpvk) .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-:where(#caqyfuevfk) .gt_indent_1 {
+:where(#twufibkpvk) .gt_indent_1 {
   text-indent: 5px;
 }
 
-:where(#caqyfuevfk) .gt_indent_2 {
+:where(#twufibkpvk) .gt_indent_2 {
   text-indent: 10px;
 }
 
-:where(#caqyfuevfk) .gt_indent_3 {
+:where(#twufibkpvk) .gt_indent_3 {
   text-indent: 15px;
 }
 
-:where(#caqyfuevfk) .gt_indent_4 {
+:where(#twufibkpvk) .gt_indent_4 {
   text-indent: 20px;
 }
 
-:where(#caqyfuevfk) .gt_indent_5 {
+:where(#twufibkpvk) .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1188,12 +1193,12 @@ ul.task-list li input[type="checkbox"] {
 <div id="fig-tabla-gananciasyrating" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 
-<div id="ucgxqzrhqr" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="zirwupjeit" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-:where(#ucgxqzrhqr) .gt_table {
+:where(#zirwupjeit) .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1218,7 +1223,7 @@ ul.task-list li input[type="checkbox"] {
   border-left-color: #D3D3D3;
 }
 
-:where(#ucgxqzrhqr) .gt_heading {
+:where(#zirwupjeit) .gt_heading {
   background-color: #121212;
   text-align: center;
   border-bottom-color: #121212;
@@ -1230,7 +1235,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-:where(#ucgxqzrhqr) .gt_title {
+:where(#zirwupjeit) .gt_title {
   color: #FFFFFF;
   font-size: 125%;
   font-weight: initial;
@@ -1242,7 +1247,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-width: 0;
 }
 
-:where(#ucgxqzrhqr) .gt_subtitle {
+:where(#zirwupjeit) .gt_subtitle {
   color: #FFFFFF;
   font-size: 85%;
   font-weight: initial;
@@ -1254,13 +1259,13 @@ ul.task-list li input[type="checkbox"] {
   border-top-width: 0;
 }
 
-:where(#ucgxqzrhqr) .gt_bottom_border {
+:where(#zirwupjeit) .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-:where(#ucgxqzrhqr) .gt_col_headings {
+:where(#zirwupjeit) .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1275,7 +1280,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-:where(#ucgxqzrhqr) .gt_col_heading {
+:where(#zirwupjeit) .gt_col_heading {
   color: #FFFFFF;
   background-color: #121212;
   font-size: 100%;
@@ -1295,7 +1300,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-:where(#ucgxqzrhqr) .gt_column_spanner_outer {
+:where(#zirwupjeit) .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #121212;
   font-size: 100%;
@@ -1307,15 +1312,15 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 4px;
 }
 
-:where(#ucgxqzrhqr) .gt_column_spanner_outer:first-child {
+:where(#zirwupjeit) .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-:where(#ucgxqzrhqr) .gt_column_spanner_outer:last-child {
+:where(#zirwupjeit) .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-:where(#ucgxqzrhqr) .gt_column_spanner {
+:where(#zirwupjeit) .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1327,7 +1332,7 @@ ul.task-list li input[type="checkbox"] {
   width: 100%;
 }
 
-:where(#ucgxqzrhqr) .gt_group_heading {
+:where(#zirwupjeit) .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1352,7 +1357,7 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 
-:where(#ucgxqzrhqr) .gt_empty_group_heading {
+:where(#zirwupjeit) .gt_empty_group_heading {
   padding: 0.5px;
   color: #FFFFFF;
   background-color: #121212;
@@ -1367,15 +1372,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 
-:where(#ucgxqzrhqr) .gt_from_md > :first-child {
+:where(#zirwupjeit) .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-:where(#ucgxqzrhqr) .gt_from_md > :last-child {
+:where(#zirwupjeit) .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-:where(#ucgxqzrhqr) .gt_row {
+:where(#zirwupjeit) .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1394,7 +1399,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-:where(#ucgxqzrhqr) .gt_stub {
+:where(#zirwupjeit) .gt_stub {
   color: #FFFFFF;
   background-color: #121212;
   font-size: 100%;
@@ -1407,7 +1412,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-:where(#ucgxqzrhqr) .gt_stub_row_group {
+:where(#zirwupjeit) .gt_stub_row_group {
   color: #FFFFFF;
   background-color: #121212;
   font-size: 100%;
@@ -1421,11 +1426,11 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: top;
 }
 
-:where(#ucgxqzrhqr) .gt_row_group_first td {
+:where(#zirwupjeit) .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-:where(#ucgxqzrhqr) .gt_summary_row {
+:where(#zirwupjeit) .gt_summary_row {
   color: #FFFFFF;
   background-color: #121212;
   text-transform: inherit;
@@ -1435,16 +1440,16 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-:where(#ucgxqzrhqr) .gt_first_summary_row {
+:where(#zirwupjeit) .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-:where(#ucgxqzrhqr) .gt_first_summary_row.thick {
+:where(#zirwupjeit) .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-:where(#ucgxqzrhqr) .gt_last_summary_row {
+:where(#zirwupjeit) .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1454,7 +1459,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-:where(#ucgxqzrhqr) .gt_grand_summary_row {
+:where(#zirwupjeit) .gt_grand_summary_row {
   color: #FFFFFF;
   background-color: #121212;
   text-transform: inherit;
@@ -1464,7 +1469,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-:where(#ucgxqzrhqr) .gt_first_grand_summary_row {
+:where(#zirwupjeit) .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1474,11 +1479,11 @@ ul.task-list li input[type="checkbox"] {
   border-top-color: #D3D3D3;
 }
 
-:where(#ucgxqzrhqr) .gt_striped {
+:where(#zirwupjeit) .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-:where(#ucgxqzrhqr) .gt_table_body {
+:where(#zirwupjeit) .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1487,7 +1492,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-:where(#ucgxqzrhqr) .gt_footnotes {
+:where(#zirwupjeit) .gt_footnotes {
   color: #FFFFFF;
   background-color: #121212;
   border-bottom-style: none;
@@ -1501,7 +1506,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-:where(#ucgxqzrhqr) .gt_footnote {
+:where(#zirwupjeit) .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -1510,7 +1515,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-:where(#ucgxqzrhqr) .gt_sourcenotes {
+:where(#zirwupjeit) .gt_sourcenotes {
   color: #FFFFFF;
   background-color: #121212;
   border-bottom-style: none;
@@ -1524,7 +1529,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-:where(#ucgxqzrhqr) .gt_sourcenote {
+:where(#zirwupjeit) .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1532,64 +1537,64 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-:where(#ucgxqzrhqr) .gt_left {
+:where(#zirwupjeit) .gt_left {
   text-align: left;
 }
 
-:where(#ucgxqzrhqr) .gt_center {
+:where(#zirwupjeit) .gt_center {
   text-align: center;
 }
 
-:where(#ucgxqzrhqr) .gt_right {
+:where(#zirwupjeit) .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-:where(#ucgxqzrhqr) .gt_font_normal {
+:where(#zirwupjeit) .gt_font_normal {
   font-weight: normal;
 }
 
-:where(#ucgxqzrhqr) .gt_font_bold {
+:where(#zirwupjeit) .gt_font_bold {
   font-weight: bold;
 }
 
-:where(#ucgxqzrhqr) .gt_font_italic {
+:where(#zirwupjeit) .gt_font_italic {
   font-style: italic;
 }
 
-:where(#ucgxqzrhqr) .gt_super {
+:where(#zirwupjeit) .gt_super {
   font-size: 65%;
 }
 
-:where(#ucgxqzrhqr) .gt_footnote_marks {
+:where(#zirwupjeit) .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-:where(#ucgxqzrhqr) .gt_asterisk {
+:where(#zirwupjeit) .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-:where(#ucgxqzrhqr) .gt_indent_1 {
+:where(#zirwupjeit) .gt_indent_1 {
   text-indent: 5px;
 }
 
-:where(#ucgxqzrhqr) .gt_indent_2 {
+:where(#zirwupjeit) .gt_indent_2 {
   text-indent: 10px;
 }
 
-:where(#ucgxqzrhqr) .gt_indent_3 {
+:where(#zirwupjeit) .gt_indent_3 {
   text-indent: 15px;
 }
 
-:where(#ucgxqzrhqr) .gt_indent_4 {
+:where(#zirwupjeit) .gt_indent_4 {
   text-indent: 20px;
 }
 
-:where(#ucgxqzrhqr) .gt_indent_5 {
+:where(#zirwupjeit) .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1665,7 +1670,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <p>Si nos fijamos en la <a href="#fig-tabla-gananciasyrating">Figura&nbsp;7</a> vemos que el género de acción tiene una ventaja absoulta si lo comparamos con el género de drama en cuanto a ganancias se refiere, sin embargo vemos que, a pesar de tener menos ganancias drama, aun así tiene prácticamente el mismo rating que las películas de acción por lo que una cosa es clara, que tan bien le vaya a una película en cuanto a sus ganancias no tiene nada que ver con que tan bien su rating final es y esto queda aún mas claro si nos fijamos en el género “western” que tiene un rating de 8.4 aproximadamente y tiene casi 10 veces menos ganancias con respecto al género de acción que tiene 8 de rating aproximadamente.</p>
-<p>Aquí el género “family” es el que tiene las mayores ganancias ya que corresponde a dos películas que son “ET” y “Charlie en la fábrica de chocolate”. A pesar de las ganancias gigantescas que tienen estas dos películas, tienen el peor rating de todos los géneros lo que deja en evidencia la poca influencia que tiene las ganancias en el rating.</p>
+<p>Aquí el género “family” es el que tiene las mayores ganancias ya que corresponde a dos películas que son “ET” y “Charlie en la fábrica de chocolate”. A pesar de las ganancias gigantescas que tienen estas dos películas, tienen el peor rating de todos los géneros lo que deja en evidencia la poca influencia que tiene las ganancias en las calificaciones.</p>
 <p>Dijimos con anterioridad que íbamos a ver si existe alguna correlación entre el número de votos y las ganancias, por lo que realizamos el gráfico de correlación que se ve en la <a href="#fig-cor-gananciasyvotos">Figura&nbsp;8</a></p>
 <div class="cell">
 <div class="cell-output-display">
@@ -1677,18 +1682,18 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
-<p>Como muestra la <a href="#fig-cor-gananciasyvotos">Figura&nbsp;8</a> pareciera existir una leve correlación positiva entre estas dos variables, sin embargo, existen películas que obtienen muchas ganancias pero menos de 500 mil votos y películas que tienen más de 1 millón de votos pero que obtienen pocas ganancias. Existe una relación entre el número de votos y las ganancias, pensando en que si una película tiene muchas ganancias claramente tendrá más votos pero lo contrario puede no suceder ya que si una película tiene muchos votos no significa que tendrá muchas ganancias ya que, ahora mas que nunca con los servicios de streaming, existe la posibilidad de ver películas de años anteriores y al ser justamente un servicio de streaming el dinero recaudado va para la empresa que ofrece el servicio y no va directamente a la productora de la película.</p>
+<p>Como muestra la <a href="#fig-cor-gananciasyvotos">Figura&nbsp;8</a> pareciera existir una leve correlación positiva entre estas dos variables, sin embargo, existen películas que obtienen muchas ganancias pero menos de 500 mil votos y películas que tienen más de 1 millón de votos pero que obtienen pocas ganancias. Existe una relación entre el número de votos y las ganancias, pensando en que si una película tiene muchas ganancias claramente tendrá más votos pero lo contrario puede no suceder ya que si una película tiene muchos votos no significa que tendrá muchas ganancias. Ahora mas que nunca con los servicios de streaming existe la posibilidad de ver películas de años anteriores y al ser justamente un servicio de streaming el dinero recaudado va para la empresa que ofrece el servicio y no va directamente a la productora de la película.</p>
 <p>Por último, veamos la tabla de la <a href="#fig-tabla-gananciasyrating">Figura&nbsp;7</a> y agreguemos la columna de número de votos.</p>
 <div class="cell">
 <div id="fig-tabla-gananciasyvotos" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 
-<div id="jjsnjtzwuh" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="oxdefhzwzz" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-:where(#jjsnjtzwuh) .gt_table {
+:where(#oxdefhzwzz) .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1713,7 +1718,7 @@ ul.task-list li input[type="checkbox"] {
   border-left-color: #D3D3D3;
 }
 
-:where(#jjsnjtzwuh) .gt_heading {
+:where(#oxdefhzwzz) .gt_heading {
   background-color: #121212;
   text-align: center;
   border-bottom-color: #121212;
@@ -1725,7 +1730,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-:where(#jjsnjtzwuh) .gt_title {
+:where(#oxdefhzwzz) .gt_title {
   color: #FFFFFF;
   font-size: 125%;
   font-weight: initial;
@@ -1737,7 +1742,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-width: 0;
 }
 
-:where(#jjsnjtzwuh) .gt_subtitle {
+:where(#oxdefhzwzz) .gt_subtitle {
   color: #FFFFFF;
   font-size: 85%;
   font-weight: initial;
@@ -1749,13 +1754,13 @@ ul.task-list li input[type="checkbox"] {
   border-top-width: 0;
 }
 
-:where(#jjsnjtzwuh) .gt_bottom_border {
+:where(#oxdefhzwzz) .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-:where(#jjsnjtzwuh) .gt_col_headings {
+:where(#oxdefhzwzz) .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1770,7 +1775,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-:where(#jjsnjtzwuh) .gt_col_heading {
+:where(#oxdefhzwzz) .gt_col_heading {
   color: #FFFFFF;
   background-color: #121212;
   font-size: 100%;
@@ -1790,7 +1795,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-:where(#jjsnjtzwuh) .gt_column_spanner_outer {
+:where(#oxdefhzwzz) .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #121212;
   font-size: 100%;
@@ -1802,15 +1807,15 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 4px;
 }
 
-:where(#jjsnjtzwuh) .gt_column_spanner_outer:first-child {
+:where(#oxdefhzwzz) .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-:where(#jjsnjtzwuh) .gt_column_spanner_outer:last-child {
+:where(#oxdefhzwzz) .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-:where(#jjsnjtzwuh) .gt_column_spanner {
+:where(#oxdefhzwzz) .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1822,7 +1827,7 @@ ul.task-list li input[type="checkbox"] {
   width: 100%;
 }
 
-:where(#jjsnjtzwuh) .gt_group_heading {
+:where(#oxdefhzwzz) .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1847,7 +1852,7 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 
-:where(#jjsnjtzwuh) .gt_empty_group_heading {
+:where(#oxdefhzwzz) .gt_empty_group_heading {
   padding: 0.5px;
   color: #FFFFFF;
   background-color: #121212;
@@ -1862,15 +1867,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 
-:where(#jjsnjtzwuh) .gt_from_md > :first-child {
+:where(#oxdefhzwzz) .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-:where(#jjsnjtzwuh) .gt_from_md > :last-child {
+:where(#oxdefhzwzz) .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-:where(#jjsnjtzwuh) .gt_row {
+:where(#oxdefhzwzz) .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1889,7 +1894,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-:where(#jjsnjtzwuh) .gt_stub {
+:where(#oxdefhzwzz) .gt_stub {
   color: #FFFFFF;
   background-color: #121212;
   font-size: 100%;
@@ -1902,7 +1907,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-:where(#jjsnjtzwuh) .gt_stub_row_group {
+:where(#oxdefhzwzz) .gt_stub_row_group {
   color: #FFFFFF;
   background-color: #121212;
   font-size: 100%;
@@ -1916,11 +1921,11 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: top;
 }
 
-:where(#jjsnjtzwuh) .gt_row_group_first td {
+:where(#oxdefhzwzz) .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-:where(#jjsnjtzwuh) .gt_summary_row {
+:where(#oxdefhzwzz) .gt_summary_row {
   color: #FFFFFF;
   background-color: #121212;
   text-transform: inherit;
@@ -1930,16 +1935,16 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-:where(#jjsnjtzwuh) .gt_first_summary_row {
+:where(#oxdefhzwzz) .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-:where(#jjsnjtzwuh) .gt_first_summary_row.thick {
+:where(#oxdefhzwzz) .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-:where(#jjsnjtzwuh) .gt_last_summary_row {
+:where(#oxdefhzwzz) .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1949,7 +1954,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-:where(#jjsnjtzwuh) .gt_grand_summary_row {
+:where(#oxdefhzwzz) .gt_grand_summary_row {
   color: #FFFFFF;
   background-color: #121212;
   text-transform: inherit;
@@ -1959,7 +1964,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-:where(#jjsnjtzwuh) .gt_first_grand_summary_row {
+:where(#oxdefhzwzz) .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1969,11 +1974,11 @@ ul.task-list li input[type="checkbox"] {
   border-top-color: #D3D3D3;
 }
 
-:where(#jjsnjtzwuh) .gt_striped {
+:where(#oxdefhzwzz) .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-:where(#jjsnjtzwuh) .gt_table_body {
+:where(#oxdefhzwzz) .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1982,7 +1987,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-:where(#jjsnjtzwuh) .gt_footnotes {
+:where(#oxdefhzwzz) .gt_footnotes {
   color: #FFFFFF;
   background-color: #121212;
   border-bottom-style: none;
@@ -1996,7 +2001,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-:where(#jjsnjtzwuh) .gt_footnote {
+:where(#oxdefhzwzz) .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -2005,7 +2010,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-:where(#jjsnjtzwuh) .gt_sourcenotes {
+:where(#oxdefhzwzz) .gt_sourcenotes {
   color: #FFFFFF;
   background-color: #121212;
   border-bottom-style: none;
@@ -2019,7 +2024,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-:where(#jjsnjtzwuh) .gt_sourcenote {
+:where(#oxdefhzwzz) .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2027,64 +2032,64 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-:where(#jjsnjtzwuh) .gt_left {
+:where(#oxdefhzwzz) .gt_left {
   text-align: left;
 }
 
-:where(#jjsnjtzwuh) .gt_center {
+:where(#oxdefhzwzz) .gt_center {
   text-align: center;
 }
 
-:where(#jjsnjtzwuh) .gt_right {
+:where(#oxdefhzwzz) .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-:where(#jjsnjtzwuh) .gt_font_normal {
+:where(#oxdefhzwzz) .gt_font_normal {
   font-weight: normal;
 }
 
-:where(#jjsnjtzwuh) .gt_font_bold {
+:where(#oxdefhzwzz) .gt_font_bold {
   font-weight: bold;
 }
 
-:where(#jjsnjtzwuh) .gt_font_italic {
+:where(#oxdefhzwzz) .gt_font_italic {
   font-style: italic;
 }
 
-:where(#jjsnjtzwuh) .gt_super {
+:where(#oxdefhzwzz) .gt_super {
   font-size: 65%;
 }
 
-:where(#jjsnjtzwuh) .gt_footnote_marks {
+:where(#oxdefhzwzz) .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-:where(#jjsnjtzwuh) .gt_asterisk {
+:where(#oxdefhzwzz) .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-:where(#jjsnjtzwuh) .gt_indent_1 {
+:where(#oxdefhzwzz) .gt_indent_1 {
   text-indent: 5px;
 }
 
-:where(#jjsnjtzwuh) .gt_indent_2 {
+:where(#oxdefhzwzz) .gt_indent_2 {
   text-indent: 10px;
 }
 
-:where(#jjsnjtzwuh) .gt_indent_3 {
+:where(#oxdefhzwzz) .gt_indent_3 {
   text-indent: 15px;
 }
 
-:where(#jjsnjtzwuh) .gt_indent_4 {
+:where(#oxdefhzwzz) .gt_indent_4 {
   text-indent: 20px;
 }
 
-:where(#jjsnjtzwuh) .gt_indent_5 {
+:where(#oxdefhzwzz) .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2174,7 +2179,7 @@ ul.task-list li input[type="checkbox"] {
 </figure>
 </div>
 </div>
-<p>De la <a href="#fig-tabla-gananciasyvotos">Figura&nbsp;9</a> vemos que el género de acción es el que mayor número de votos tiene y esto no es sorprendente, pues justamente hablabamos de que sagas como “Star Wars” y “Avengers” tienen una gran cantidad de fanáticos lo que se ve claramente reflejado en la tabla. Lo que si es curioso de esta tabla es que el género de animación tiene unas ganancias similares a las de acción pero tienen menos votos comparada con este, por lo que puede estar ocurriendo lo que mencionábamos antes de las poblaciones nicho, donde hay películas que tienen buena valoración pero poco número de votos y ganancias, y películas con ganancias altísimas y en consecuencia un gran número de votos donde al tomar el promedio nos puede generar que el género de animación tenga ganancias muy altas pero poco número de votos en comparación a las películas de acción.</p>
+<p>De la <a href="#fig-tabla-gananciasyvotos">Figura&nbsp;9</a> vemos que el género de acción es el que mayor número de votos tiene y esto no es sorprendente, pues justamente hablábamos de que sagas como “Star Wars” y “Avengers” tienen una gran cantidad de fanáticos lo que se ve claramente reflejado en la tabla. Lo que si es curioso de esta tabla es que el género de animación tiene unas ganancias similares a las de acción pero tienen menos votos comparada con este, por lo que puede estar ocurriendo lo que mencionábamos antes de las poblaciones nicho, donde hay películas que tienen buena valoración pero poco número de votos y ganancias, y películas con ganancias altísimas y en consecuencia un gran número de votos donde al tomar el promedio nos puede generar que el género de animación tenga ganancias muy altas pero poco número de votos en comparación a las películas de acción.</p>
 </section>
 <section id="conclusión" class="level2">
 <h2 class="anchored" data-anchor-id="conclusión">Conclusión</h2>

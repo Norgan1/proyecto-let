@@ -7,11 +7,15 @@ toc: true
 lang: es
 ---
 
+## Abstract
+
+En pandemia uno de los servicios más solicitados fueron las plataformas de streaming y en consecuencia sitios webs como Internet movie data base (IMBD) se transformaron en la principal fuente de sugerencias al momento de elegir qué película ver. Se analizaron las mejores mil películas del sitio IMBD con datos hasta el 2020 teniendo el fin de hallar algún patrón que se mantiene durante las décadas y qué variables son las que afectan al rating. Se concluye que, a pesar que tanto la duración de las películas como las ganancias han ido aumentando a través de las décadas, estas no tienen ninguna influencia sobre el rating, a excepción del número de votos donde existe una correlación tanto con el rating como con las ganancias.
+
 ## Introducción
 
 En tiempos de pandemia, debido a que todo el mundo se encontraba bajo confinamiento para prevenir contagios, muchas empresas sufrieron pérdidas masivas debido a la imposibilidad de trabajar con normalidad. Sin embargo existieron rubros que lograron generar ganancias récord, sobre todo aquellas que se convirtieron en las principales fuentes de entretenimiento durante el covid-19 como lo fueron los servicios de streaming. Según datos de Motion Picture Association en el año 2020 lograron superar un billón de suscripciones llegando a alcanzar \$68.8 billones de dólares en ganancias globales, un aumento del 23% con respecto al año 2019. [\[Ver artículo\]](https://www.motionpictures.org/press/global-subscriptions-to-online-video-services-exceeds-one-billion-for-first-time-ever-new-mpa-report-finds/)
 
-A raíz de lo anterior, fueron que páginas como Internet Movie Database (IMBD) servían como principal fuente de búsqueda de películas o series para pasar nuestro aburrimiento encerrados en la casa, pero primero que todo ¿Qué es IMBD?
+A raíz de lo anterior, fueron que páginas como Internet Movie Database (IMBD) servían como principal fuente de búsqueda de películas o series para pasar nuestro aburrimiento encerrados en la casa, pero primero que todo ¿Qué es IMBD? **ARREGLAR ESTE PÁRRAFO**
 
 En este proyecto se analizarán las mejores mil películas según IMBD, tomando en cuenta algunas de las variables de interés disponibles en el sitio como género, ganancias, año de lanzamiento, número de votos, calificación, entre otros.
 
@@ -84,7 +88,7 @@ Existe también una película que esta etiquetada como "PG" en su año de lanzam
 Las variables a utilizar en el reporte son las siguientes:
 
 | Variable          | Tipo     | Descripción                                                                             |
-|-------------------|-------------------|----------------------------------|
+|-------------|-------------|-----------------------------------------------|
 | `Nombre_pelicula` | caracter | Nombre de la película                                                                   |
 | `Año_lanzamiento` | numérica | Año de lanzamiento de la película                                                       |
 | `Duracion`        | numérica | Duración en minutos de la película                                                      |
@@ -318,7 +322,7 @@ gt(gan_rating_por_genero) |>
 
 Si nos fijamos en la @fig-tabla-gananciasyrating vemos que el género de acción tiene una ventaja absoulta si lo comparamos con el género de drama en cuanto a ganancias se refiere, sin embargo vemos que, a pesar de tener menos ganancias drama, aun así tiene prácticamente el mismo rating que las películas de acción por lo que una cosa es clara, que tan bien le vaya a una película en cuanto a sus ganancias no tiene nada que ver con que tan bien su rating final es y esto queda aún mas claro si nos fijamos en el género "western" que tiene un rating de 8.4 aproximadamente y tiene casi 10 veces menos ganancias con respecto al género de acción que tiene 8 de rating aproximadamente.
 
-Aquí el género "family" es el que tiene las mayores ganancias ya que corresponde a dos películas que son "ET" y "Charlie en la fábrica de chocolate". A pesar de las ganancias gigantescas que tienen estas dos películas, tienen el peor rating de todos los géneros lo que deja en evidencia la poca influencia que tiene las ganancias en el rating.
+Aquí el género "family" es el que tiene las mayores ganancias ya que corresponde a dos películas que son "ET" y "Charlie en la fábrica de chocolate". A pesar de las ganancias gigantescas que tienen estas dos películas, tienen el peor rating de todos los géneros lo que deja en evidencia la poca influencia que tiene las ganancias en las calificaciones.
 
 Dijimos con anterioridad que íbamos a ver si existe alguna correlación entre el número de votos y las ganancias, por lo que realizamos el gráfico de correlación que se ve en la @fig-cor-gananciasyvotos
 
@@ -339,7 +343,7 @@ ggplot(data = data, aes(data$Ganancias,data$Numero_de_votos))+
   my_theme
 ```
 
-Como muestra la @fig-cor-gananciasyvotos pareciera existir una leve correlación positiva entre estas dos variables, sin embargo, existen películas que obtienen muchas ganancias pero menos de 500 mil votos y películas que tienen más de 1 millón de votos pero que obtienen pocas ganancias. Existe una relación entre el número de votos y las ganancias, pensando en que si una película tiene muchas ganancias claramente tendrá más votos pero lo contrario puede no suceder ya que si una película tiene muchos votos no significa que tendrá muchas ganancias ya que, ahora mas que nunca con los servicios de streaming, existe la posibilidad de ver películas de años anteriores y al ser justamente un servicio de streaming el dinero recaudado va para la empresa que ofrece el servicio y no va directamente a la productora de la película.
+Como muestra la @fig-cor-gananciasyvotos pareciera existir una leve correlación positiva entre estas dos variables, sin embargo, existen películas que obtienen muchas ganancias pero menos de 500 mil votos y películas que tienen más de 1 millón de votos pero que obtienen pocas ganancias. Existe una relación entre el número de votos y las ganancias, pensando en que si una película tiene muchas ganancias claramente tendrá más votos pero lo contrario puede no suceder ya que si una película tiene muchos votos no significa que tendrá muchas ganancias. Ahora mas que nunca con los servicios de streaming existe la posibilidad de ver películas de años anteriores y al ser justamente un servicio de streaming el dinero recaudado va para la empresa que ofrece el servicio y no va directamente a la productora de la película.
 
 Por último, veamos la tabla de la @fig-tabla-gananciasyrating y agreguemos la columna de número de votos.
 
@@ -366,7 +370,7 @@ gt(gan_rating_voto_por_genero) |>
   tab_options(table.background.color = "#121212")
 ```
 
-De la @fig-tabla-gananciasyvotos vemos que el género de acción es el que mayor número de votos tiene y esto no es sorprendente, pues justamente hablabamos de que sagas como "Star Wars" y "Avengers" tienen una gran cantidad de fanáticos lo que se ve claramente reflejado en la tabla. Lo que si es curioso de esta tabla es que el género de animación tiene unas ganancias similares a las de acción pero tienen menos votos comparada con este, por lo que puede estar ocurriendo lo que mencionábamos antes de las poblaciones nicho, donde hay películas que tienen buena valoración pero poco número de votos y ganancias, y películas con ganancias altísimas y en consecuencia un gran número de votos donde al tomar el promedio nos puede generar que el género de animación tenga ganancias muy altas pero poco número de votos en comparación a las películas de acción.
+De la @fig-tabla-gananciasyvotos vemos que el género de acción es el que mayor número de votos tiene y esto no es sorprendente, pues justamente hablábamos de que sagas como "Star Wars" y "Avengers" tienen una gran cantidad de fanáticos lo que se ve claramente reflejado en la tabla. Lo que si es curioso de esta tabla es que el género de animación tiene unas ganancias similares a las de acción pero tienen menos votos comparada con este, por lo que puede estar ocurriendo lo que mencionábamos antes de las poblaciones nicho, donde hay películas que tienen buena valoración pero poco número de votos y ganancias, y películas con ganancias altísimas y en consecuencia un gran número de votos donde al tomar el promedio nos puede generar que el género de animación tenga ganancias muy altas pero poco número de votos en comparación a las películas de acción.
 
 ## Conclusión
 
