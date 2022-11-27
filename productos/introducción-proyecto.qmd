@@ -84,7 +84,7 @@ Existe también una película que esta etiquetada como "PG" en su año de lanzam
 Las variables a utilizar en el reporte son las siguientes:
 
 | Variable          | Tipo     | Descripción                                                                             |
-|------------------|------------------|-----------------------------------|
+|-------------------|-------------------|----------------------------------|
 | `Nombre_pelicula` | caracter | Nombre de la película                                                                   |
 | `Año_lanzamiento` | numérica | Año de lanzamiento de la película                                                       |
 | `Duracion`        | numérica | Duración en minutos de la película                                                      |
@@ -265,7 +265,7 @@ data_decada_genero
 
 ```
 
-Notamos por la @fig-repetido-decada que el género que más se repite a través del tiempo es drama donde si contamos las décadas de 1990, 2000 y 2010 existen 174 películas que son del género drama. Pareciera entonces que las películas que mejor les va en cuanto a rating son drama pero ¿Será también que el género de drama es el que más ganancias obtiene? Antes de contestar esta pregunta veamos primero el top 10 de películas según su ganancia.
+Notamos por la @fig-repetido-decada que el género que más se repite a través del tiempo es drama donde si contamos las décadas de 1990, 2000 y 2010 existen 174 películas que son del género drama. Pareciera entonces que las películas que mejor les va en cuanto a rating son drama pero ¿Será también que el género de drama es el que más ganancias obtiene? Antes de contestar esta pregunta veamos primero el top 10 de películas según sus ganancias.
 
 ```{r}
 #| echo: false
@@ -339,7 +339,7 @@ ggplot(data = data, aes(data$Ganancias,data$Numero_de_votos))+
   my_theme
 ```
 
-Como muestra la @fig-cor-gananciasyvotos pareciera existir una leve correlación positiva entre estas dos variables, sin embargo, existen películas que obtienen muchas ganancias pero menos de 500 mil votos y películas que tienen más de 1 millón de votos pero que obtienen pocas ganancias. Existe una relación entre el número de votos y las ganancias, pensando en que si una película tiene muchas ganancias claramente tendrá más votos pero lo contrario puede no suceder ya que si una película tiene muchos votos no significa que tendrá muchas ganancias ya que, ahora mas que nunca con los servicios de streaming, existe la posibilidad de ver películas de años anteriores y al ser justamente un servicio de streaming el dinero recaudado va para la empresa que ofrece el servicio, o al menos un gran porcentaje, y no va directamente a la productora de la película.
+Como muestra la @fig-cor-gananciasyvotos pareciera existir una leve correlación positiva entre estas dos variables, sin embargo, existen películas que obtienen muchas ganancias pero menos de 500 mil votos y películas que tienen más de 1 millón de votos pero que obtienen pocas ganancias. Existe una relación entre el número de votos y las ganancias, pensando en que si una película tiene muchas ganancias claramente tendrá más votos pero lo contrario puede no suceder ya que si una película tiene muchos votos no significa que tendrá muchas ganancias ya que, ahora mas que nunca con los servicios de streaming, existe la posibilidad de ver películas de años anteriores y al ser justamente un servicio de streaming el dinero recaudado va para la empresa que ofrece el servicio y no va directamente a la productora de la película.
 
 Por último, veamos la tabla de la @fig-tabla-gananciasyrating y agreguemos la columna de número de votos.
 
@@ -369,3 +369,7 @@ gt(gan_rating_voto_por_genero) |>
 De la @fig-tabla-gananciasyvotos vemos que el género de acción es el que mayor número de votos tiene y esto no es sorprendente, pues justamente hablabamos de que sagas como "Star Wars" y "Avengers" tienen una gran cantidad de fanáticos lo que se ve claramente reflejado en la tabla. Lo que si es curioso de esta tabla es que el género de animación tiene unas ganancias similares a las de acción pero tienen menos votos comparada con este, por lo que puede estar ocurriendo lo que mencionábamos antes de las poblaciones nicho, donde hay películas que tienen buena valoración pero poco número de votos y ganancias, y películas con ganancias altísimas y en consecuencia un gran número de votos donde al tomar el promedio nos puede generar que el género de animación tenga ganancias muy altas pero poco número de votos en comparación a las películas de acción.
 
 ## Conclusión
+
+En síntesis, vimos primero como han ido variando las ganancias, la duración y el rating en las películas a través de las décadas donde obtuvimos como resultados principales que la década de 1920 es la que presenta menores ganancias y menor duración promedio pero que aún así tiene el rating más alto junto al año 2020. Luego vimos el número de votos promedio por década donde notamos que las décadas con mayor número de votos coincidían con las ganancias más altas y que han ido en aumento desde 1920 hasta 1990. Lo siguiente que analizamos fue la variable género donde vimos que el género más repetido por década en la mayoría de los casos era drama. En base a lo anterior queríamos ver si drama era también el género con mayores ganancias, pero al ver el top 10 de películas según sus ganancias y la tabla de ganancias, rating y número de votos promedio según su género, vimos que las películas de acción lideraban el top 10, sin embargo el género "family" era el que tenía mayores ganancias. El género drama, a pesar de tener mejor calificación que "family" y similar a acción, tenía menos ganancias y menor número de votos. En consecuencia hicimos un gráfico de correlación entre las ganancias y el número de votos, y obtuvimos que existen tanto películas que tienen más de 1 millón de votos pero ganancias menores a 250 millones de dólares como películas que tienen menos de 500 mil votos pero más de 300 millones de dólares.
+
+En conclusión, las ganancias no son un buen indicador de que tan bien le vaya a una película en términos de rating como tampoco lo es la duración. El número de votos puede afectar al rating, donde existen las denominadas poblaciones nichos y entonces películas "poco conocidas" obtienen calificaciones muy altas, como también películas "muy conocidas" obtienen ratings más equilibrados al haber personas que le gusta mucho la película o personas que simplemente ponen calificación baja por ser una película muy popular. La idea de a mayores ganancias mayor número de votos pareciera cumplirse en varios casos, pero esto puede no ocurrir al sentido contrario, es decir, no necesariamente una película con una gran cantidad de número de votos va a tener mayores ganancias.
