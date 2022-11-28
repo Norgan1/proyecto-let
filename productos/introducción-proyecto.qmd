@@ -25,13 +25,13 @@ El análisis tiene como enfoque resolver principalmente las siguientes preguntas
 
 -   ¿Cómo a ido variando la duración a través de las décadas?
 
--   ¿Son las películas más antiguas las que tienen mejor calificación?
+-   ¿Qué variables terminan influyendo a la calificación final de una película?
 
 -   ¿Qué géneros son los más populares a través de las décadas?
 
-Las preguntas anteriores tienen el objetivo principal de darnos a entender de mejor forma cómo han ido variando ciertos elementos de las películas a través de las décadas, ver si existe algún patrón que se mantiene durante el tiempo y obtener interesantes conclusiones a través de las décadas.
+Las preguntas anteriores tienen el objetivo principal de darnos a entender de mejor forma cómo han ido variando ciertos elementos de las películas a través de las décadas, ver si existe algún patrón que se mantiene durante el tiempo y obtener conclusiones sobre la correlación de diversas variables.
 
-Se comenzará con una descripción de las variables a utilizar en el proyecto para ya luego ir resolviendo las preguntas establecidas a través del análisis de gráficos y tablas, y así presentar los resultados obtenidos. Se finalizará con una conclusión destacando los principales patrones encontrados.
+Se comenzará con un preprocesamiento de la base de datos para luego dar una descripción de las variables a utilizar en el proyecto. Luego iremos resolviendo las preguntas establecidas a través del análisis de gráficos y tablas, y así presentar los resultados obtenidos. Se finalizará con una conclusión, donde sintetizaremos los resultados obtenidos al igual que responder las preguntas planteadas en el reporte.
 
 ## La base de datos de IMBD
 
@@ -83,12 +83,12 @@ data$Genero = d # Ahora tenemos un género por película en vez de varios géner
 
 Lo primero que vamos a hacer es eliminar todas las variables que no son de nuestro interés, en nuestro caso serían: `Poster_Link`, `Certificate`, `Overview` y `Metascore` . Luego la variable `Runtime` es de tipo caracter ya que en la base de datos viene de la forma "89 min", "100 min","120 min", etc, por lo que eliminamos la palabra "min" para ya luego transformar la variable a numérica. Lo siguiente es cambiar el nombre de las variables del inglés al español para facilitar la comprensión de las variables.
 
-Existe también una película que esta etiquetada como "PG" en su año de lanzamiento, por lo que buscamos el año de lanzamiento en Google de la película y reemplazamos "PG" por 1995. Por último para la variable `Genero` tenemos películas que se agrupan de la forma "Action, Drama, Crime" o "Drama, Action". Para estos casos, donde existen mas de dos géneros que identifican a una película, tomamos el primer género del lado izquierdo es decir en el caso de "Action, Drama, Crime" tomamos solo "Action" y en el caso de "Drama, Action" tomamos solo "Drama".
+Existe también una película que esta etiquetada como "PG" en su año de lanzamiento, por lo que buscamos el año de lanzamiento en Google de la película y reemplazamos "PG" por 1995. Por último para la variable `Genero` tenemos películas que se agrupan de la forma "Action, Drama, Crime" o "Drama, Action". Para estos casos, donde existe mas de un género que identifica a una película, tomamos el primer género del lado izquierdo es decir en el caso de "Action, Drama, Crime" tomamos solo "Action" y en el caso de "Drama, Action" tomamos solo "Drama".
 
 Las variables a utilizar en el reporte son las siguientes:
 
 | Variable          | Tipo     | Descripción                                                                             |
-|---------------|---------------|------------------------------------------|
+|-----------------|-----------------|---------------------------------------|
 | `Nombre_pelicula` | caracter | Nombre de la película                                                                   |
 | `Año_lanzamiento` | numérica | Año de lanzamiento de la película                                                       |
 | `Duracion`        | numérica | Duración en minutos de la película                                                      |
