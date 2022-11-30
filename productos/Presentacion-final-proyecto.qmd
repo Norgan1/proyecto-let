@@ -1,0 +1,276 @@
+---
+title: "Análisis exploratorio de las mejores 1000 películas según IMBD"
+author: "Lorenzo Belledonne"
+format: 
+ revealjs:
+   theme: dark
+editor: visual
+lang: es
+---
+
+## Motivación
+
+::: incremental
+-   La pandemia afectó a los servicios de streaming de manera positiva. Aumento del 23% con respecto al año 2019.(68.8 billones de dólares)
+
+-   Sitios como Rotten Tomatoes, IMBD o Letterboxd se hacen más relevantes que nunca.
+:::
+
+------------------------------------------------------------------------
+
+### ¿Qué es IMBD?
+
+-   Objetivo principal: Ver la calificación promedio y reseñas de una película/serie que le dan los usuarios o críticos de cine.
+
+### ¿Por qué elegir esta base?
+
+-   Buen tiempo para analizar películas en un período que se vieron muchas películas.
+
+## Base de datos
+
+Variables a utilizar son:
+
+-   Ganancias en dólares (sin ajustar por inflación)
+
+-   Género\*
+
+-   Número de votos
+
+-   Nombre de la película\*
+
+-   Año de lanzamiento (de 1920 a 2020)
+
+-   Duración (en minutos)
+
+-   Rating o calificación (1 - 10)
+
+Las variables con \* son utilizadas en el informe
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(scales)
+library(here)
+library(gt)
+data = read_csv(here("datos/datos-sin-procesar/imdb_top_1000.csv"))
+
+
+### Limpiamos la base de datos ###
+
+# Eliminamos columnas sin utilizar.
+data = data[c(-1,-4,-8,-9,-12,-13,-14)]
+
+# Runtime es caracter, lo cambiamos a numérico. 
+data$Runtime = as.numeric(strsplit(data$Runtime,split = " min"))
+
+# Cambio de nombre de las columnas a español.
+colnames(data) = c("Nombre_pelicula","Año_lanzamiento","Duracion","Genero","IMBD_Rating","Director",
+                   "Actor_1", "Numero_de_votos", "Ganancias")
+
+# Cambiamos "PG" por 1995, año de lanzamiento de la película. Hacemos numérica la variable.
+data$Año_lanzamiento[data$Año_lanzamiento=="PG"] = 1995
+data$Año_lanzamiento = as.numeric(data$Año_lanzamiento)
+
+# Género 
+a = strsplit(data$Genero,split = ",")
+d = c()
+for(i in 1:1000){
+  d = append(d,a[[i]][1])
+  
+}
+
+data$Genero = d # Ahora tenemos un género por película en vez de varios géneros
+```
+
+## Análisis exploratorio
+
+Agrupamos por década y vemos primero las ganancias
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| fig-cap: "Ganancia media por década (1920-2010)"
+#| label: fig-ganancia-decada
+
+ data_decada_grossmean = data %>% 
+  mutate(decada = floor(Año_lanzamiento/10)*10) %>% 
+  group_by(decada) %>% 
+  summarise(mean(Ganancias,na.rm = TRUE)) 
+
+data_decada_grossmean = data_decada_grossmean[-11,]
+
+# Creamos el gráfico y guardamos el tema personalizado
+my_theme = theme(panel.background = element_rect(fill = "#121212"),
+                 plot.background = element_rect(fill = "#121212"),
+                 panel.grid.major = element_blank(),panel.grid.minor = element_blank(),
+                 title = element_text(color = "white"), axis.line = element_line(color="white"),
+                 axis.text = element_text(color = "white"), axis.ticks = element_blank())
+
+ggplot(data_decada_grossmean,aes(decada,
+                                 round(`mean(Ganancias, na.rm = TRUE)`),4)) +
+  geom_bar(stat = "identity") + 
+  geom_col(fill = "#f5c518")+
+  geom_text(aes(label = label_number_si()(`mean(Ganancias, na.rm = TRUE)`)),
+            vjust = -0.5,
+            color = "white",
+            fontface = "bold")+
+  scale_x_continuous(breaks = seq(1920,2020,10))+
+  scale_y_continuous(labels = label_number_si())+
+  labs(title = "Ganancia media por década",
+         subtitle = "(1920-2010)",
+         x = NULL, y = "Ganancia media en millones de dólares")+
+  my_theme
+
+
+
+```
+
+## Análisis exploratorio
+
+### Duración
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| fig-cap: "Duración media por década (1920-2020)"
+#| label: fig-duracion-decada
+
+# Esto crea duración media por décadas.
+data_decada_duracion = data %>% 
+  mutate(decada = floor(Año_lanzamiento/10)*10) %>% 
+  group_by(decada) %>% 
+  summarise(mean(Duracion,na.rm = TRUE))
+
+colnames(data_decada_duracion) = c("decada","duracion") # Cambio de nombres a las columnas.
+
+# Creamos el gráfico.
+ggplot(data_decada_duracion,aes(x = decada ,y = duracion ))+
+  geom_bar(stat = "identity")+
+  geom_col(fill = "#f5c518")+
+  geom_text(aes(label = round(duracion)), vjust = -0.5, color = "white", fontface = "bold")+
+  scale_x_continuous(breaks = seq(1920,2020,10))+
+  labs(title = "Duración media por década", subtitle = "(1920 - 2020)",
+       x = NULL, y = "Duración media en minutos")+
+  my_theme
+```
+
+## Análisis exploratorio
+
+### Rating
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| fig-cap: "Rating medio por década (1920-2020)"
+#| label: fig-rating-decada
+# Esto crea rating medio por décadas.
+data_decada_rating = data %>% 
+  mutate(decada = floor(Año_lanzamiento/10)*10) %>% 
+  group_by(decada) %>% 
+  summarise(mean(IMBD_Rating,na.rm = TRUE)) 
+
+colnames(data_decada_rating) = c("decada","rating") # Cambio de nombres a las columnas.
+
+# Creamos el gráfico.
+ggplot(data_decada_rating,aes(x = decada ,y = rating ))+
+  geom_line(color = "#f5c518", size = 1.5 )+
+  geom_point(color = "white", size = 1.7)+
+  geom_text(aes(label = round(rating,2)), vjust = -1.5, color = "white", fontface = "bold")+
+  scale_x_continuous(breaks = seq(1920,2020,10))+
+  ylim(7.3,8.5)+
+  labs(title = "Rating medio por década", subtitle = "(1920 - 2020)",
+       x = NULL, y = "Rating medio (1 al 10)")+
+  my_theme
+```
+
+## Observaciones
+
+::: incremental
+-   1920 tiene la menor duración y peores ganancias, pero el rating más alto.
+
+-   2010 tiene las mayores ganancias y duración, pero de los peores ratings.
+
+-   A simple vista ganancias y duración no afectan al rating.
+
+-   ¿Qué pasa con el número de votos?
+:::
+
+## Análisis exploratorio
+
+### Número de votos
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| fig-cap: "Número de votos medio por década (1920 - 2020)"
+#| label: fig-votos-decada
+
+# Esto crea número de votos medio por décadas
+
+data_decada_votos = data |> 
+  mutate(decada = floor(Año_lanzamiento/10)*10) |> 
+  group_by(decada) |> 
+  summarise(mean(Numero_de_votos,na.rm = TRUE))
+
+colnames(data_decada_votos) = c("decada","numero_de_votos") # Cambio de nombres a las columnas
+
+# Graficamos
+ggplot(data_decada_votos,aes(x = decada ,y = numero_de_votos))+
+  geom_bar(stat = "identity")+
+  geom_col(fill = "#f5c518")+
+  geom_text(aes(label = label_number_si()(numero_de_votos)), vjust = -0.5, color = "white", fontface = "bold")+
+  scale_x_continuous(breaks = seq(1920,2020,10))+
+  scale_y_continuous(labels = label_number_si())+
+  labs(title = "Número de votos medio por década", subtitle = "(1920 - 2020)",
+       x = NULL, y = "Número de votos medio")+
+  my_theme
+```
+
+## Observaciones
+
+::: incremental
+-   Relación entre el número de votos y el rating (películas de nicho)
+
+-   Posible correlación entre número de votos y ganancias (mayor ganancia mayor número de votos)
+:::
+
+## Análisis exploratorio
+
+¿Existe alguna correlación entre las ganancias y el número de votos?
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| label: fig-cor-gananciasyvotos
+#| fig-cap: "Gráfico de correlación entre ganancias y número de votos"
+
+# Creación de gráfico de correlación con ganancias y votos
+
+ggplot(data = data, aes(data$Ganancias,data$Numero_de_votos))+
+  geom_point(color = "#f5c518")+
+  scale_x_continuous(labels = label_number_si())+
+  labs(title = "Correlación entre ganancias y número de votos",
+         x = "Ganancias en millones de dólares", y = "Número de votos")+
+  my_theme
+```
+
+## Conclusiones finales
+
+::: incremental
+-   Ganancias y duración de las películas han ido en aumento. No afectan al rating.
+
+-   Número de votos pareciera afectar al rating (películas de nicho)
+
+-   Idea de mayores ganancias, mayor número de votos ocurre en varios casos pero puede no ocurrir en sentido contrario
+:::
+
+# ¡Muchas Gracias!
